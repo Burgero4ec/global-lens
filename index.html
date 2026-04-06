@@ -717,7 +717,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 1.5rem;
-            max-width: 1200px;
+            max-width: 700px;
             margin: 0 auto;
         }
 
@@ -735,32 +735,6 @@
             border-color: rgba(67, 182, 57, 0.3);
             transform: translateY(-3px);
             box-shadow: var(--shadow);
-        }
-
-        .staff-card .remove-staff {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 28px;
-            height: 28px;
-            border-radius: 8px;
-            background: rgba(220, 38, 38, 0.15);
-            border: none;
-            color: #ef4444;
-            cursor: pointer;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .staff-card:hover .remove-staff {
-            display: flex;
-        }
-
-        .staff-card .remove-staff:hover {
-            background: rgba(220, 38, 38, 0.3);
         }
 
         .staff-avatar {
@@ -784,7 +758,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: white;
             background: var(--gradient-1);
@@ -806,158 +780,7 @@
         .staff-desc {
             font-size: 0.85rem;
             color: var(--text-secondary);
-        }
-
-        .add-staff-card {
-            background: transparent;
-            border: 2px dashed var(--border);
-            border-radius: 18px;
-            padding: 1.8rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 250px;
-        }
-
-        .add-staff-card:hover {
-            border-color: var(--primary);
-            background: rgba(67, 182, 57, 0.03);
-        }
-
-        .add-staff-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: rgba(67, 182, 57, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            color: var(--primary-light);
-            margin-bottom: 1rem;
-        }
-
-        .add-staff-text {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* Modal */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-        }
-
-        .modal-overlay.active {
-            display: flex;
-        }
-
-        .modal {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 2.5rem;
-            max-width: 480px;
-            width: 100%;
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-        }
-
-        .modal-close:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text-primary);
-        }
-
-        .modal h3 {
-            font-size: 1.4rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .modal .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .modal label {
-            display: block;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.4rem;
-            font-weight: 500;
-        }
-
-        .modal input,
-        .modal textarea,
-        .modal select {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            background: var(--bg-dark);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            color: var(--text-primary);
-            font-family: inherit;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            outline: none;
-        }
-
-        .modal input:focus,
-        .modal textarea:focus,
-        .modal select:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(67, 182, 57, 0.1);
-        }
-
-        .modal textarea {
-            resize: vertical;
-            min-height: 80px;
-        }
-
-        .modal-submit {
-            width: 100%;
-            padding: 0.9rem;
-            background: var(--gradient-1);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: inherit;
-            margin-top: 0.5rem;
-        }
-
-        .modal-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--glow-green);
+            line-height: 1.5;
         }
 
         /* CTA Section */
@@ -1167,6 +990,7 @@
 
             .staff-grid {
                 grid-template-columns: 1fr;
+                max-width: 350px;
             }
 
             .hero {
@@ -1209,7 +1033,6 @@
             .nav-discord-btn-mobile { display: none !important; }
         }
 
-        /* Tablet */
         @media (max-width: 1024px) {
             .nav-links a:not(.nav-discord-btn) {
                 padding: 0.5rem 0.6rem;
@@ -1488,11 +1311,23 @@
             <p class="section-subtitle">Люди, которые делают проект лучше каждый день</p>
         </div>
 
-        <div class="staff-grid reveal" id="staffGrid">
-            <!-- Staff cards will be rendered here by JS -->
-            <div class="add-staff-card" id="addStaffBtn">
-                <div class="add-staff-icon">+</div>
-                <div class="add-staff-text">Добавить сотрудника</div>
+        <div class="staff-grid reveal">
+            <div class="staff-card">
+                <div class="staff-avatar">
+                    <img src="sd" alt='Ашибка'>
+                </div>
+                <div class="staff-name">AytacOnan2</div>
+                <div class="staff-role">Основатель</div>
+                <div class="staff-desc">Всем любимый основатель сервера и создатель бота</div>
+            </div>
+
+            <div class="staff-card">
+                <div class="staff-avatar">
+                    <img src="images.jfif" alt='Ашибка'>
+                </div>
+                <div class="staff-name">Китаёзик</div>
+                <div class="staff-role">Администратор</div>
+                <div class="staff-desc">Участник команды</div>
             </div>
         </div>
     </section>
@@ -1549,148 +1384,7 @@
         </svg>
     </button>
 
-    <!-- Add Staff Modal -->
-    <div class="modal-overlay" id="staffModal">
-        <div class="modal">
-            <button class="modal-close" id="modalClose">✕</button>
-            <h3>Добавить сотрудника</h3>
-            <div class="form-group">
-                <label for="staffName">Имя</label>
-                <input type="text" id="staffName" placeholder="Введите имя сотрудника">
-            </div>
-            <div class="form-group">
-                <label for="staffRole">Роль</label>
-                <select id="staffRole">
-                    <option value="Основатель">Основатель</option>
-                    <option value="Администратор">Администратор</option>
-                    <option value="Модератор">Модератор</option>
-                    <option value="Разработчик">Разработчик</option>
-                    <option value="Гейм-мастер">Гейм-мастер</option>
-                    <option value="Аналитик">Аналитик</option>
-                    <option value="Контент-мейкер">Контент-мейкер</option>
-                    <option value="Дизайнер">Дизайнер</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="staffDesc">Описание</label>
-                <textarea id="staffDesc" placeholder="Краткое описание роли сотрудника"></textarea>
-            </div>
-            <button class="modal-submit" id="staffSubmit">Добавить</button>
-        </div>
-    </div>
-
     <script>
-        // Staff Management
-        const defaultStaff = [
-            { name: 'Админ', role: 'Основатель', desc: 'Создатель и главный администратор Global Lens', color: '#43b639' },
-        ];
-
-        function getStaff() {
-            const stored = localStorage.getItem('globalLensStaff');
-            if (stored) {
-                return JSON.parse(stored);
-            }
-            localStorage.setItem('globalLensStaff', JSON.stringify(defaultStaff));
-            return defaultStaff;
-        }
-
-        function saveStaff(staff) {
-            localStorage.setItem('globalLensStaff', JSON.stringify(staff));
-        }
-
-        function getInitials(name) {
-            return name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
-        }
-
-        function getRandomColor() {
-            const colors = ['#43b639', '#7c3aed', '#f59e0b', '#ef4444', '#06b6d4', '#ec4899', '#22c55e'];
-            return colors[Math.floor(Math.random() * colors.length)];
-        }
-
-        function renderStaff() {
-            const staff = getStaff();
-            const grid = document.getElementById('staffGrid');
-            const addBtn = document.getElementById('addStaffBtn');
-
-            // Remove all staff cards (keep add button)
-            const existingCards = grid.querySelectorAll('.staff-card');
-            existingCards.forEach(c => c.remove());
-
-            // Add staff cards before the add button
-            staff.forEach((member, index) => {
-                const card = document.createElement('div');
-                card.className = 'staff-card';
-                card.innerHTML = `
-                    <button class="remove-staff" data-index="${index}" title="Удалить">✕</button>
-                    <div class="staff-avatar">
-                        <div class="staff-avatar-placeholder" style="background: ${member.color || getRandomColor()}">${getInitials(member.name)}</div>
-                    </div>
-                    <div class="staff-name">${member.name}</div>
-                    <div class="staff-role">${member.role}</div>
-                    <div class="staff-desc">${member.desc}</div>
-                `;
-                grid.insertBefore(card, addBtn);
-            });
-
-            // Add remove handlers
-            document.querySelectorAll('.remove-staff').forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const idx = parseInt(btn.getAttribute('data-index'));
-                    const current = getStaff();
-                    current.splice(idx, 1);
-                    saveStaff(current);
-                    renderStaff();
-                });
-            });
-        }
-
-        // Modal
-        const modal = document.getElementById('staffModal');
-        const addStaffBtn = document.getElementById('addStaffBtn');
-        const modalClose = document.getElementById('modalClose');
-        const staffSubmit = document.getElementById('staffSubmit');
-
-        addStaffBtn.addEventListener('click', () => {
-            modal.classList.add('active');
-        });
-
-        modalClose.addEventListener('click', () => {
-            modal.classList.remove('active');
-        });
-
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-            }
-        });
-
-        staffSubmit.addEventListener('click', () => {
-            const name = document.getElementById('staffName').value.trim();
-            const role = document.getElementById('staffRole').value;
-            const desc = document.getElementById('staffDesc').value.trim();
-
-            if (!name) {
-                alert('Введите имя сотрудника');
-                return;
-            }
-
-            const staff = getStaff();
-            staff.push({
-                name,
-                role,
-                desc: desc || 'Участник команды',
-                color: getRandomColor()
-            });
-            saveStaff(staff);
-            renderStaff();
-
-            // Reset form
-            document.getElementById('staffName').value = '';
-            document.getElementById('staffDesc').value = '';
-            modal.classList.remove('active');
-        });
-
         // Navbar
         const navbar = document.getElementById('navbar');
         const backToTop = document.getElementById('backToTop');
@@ -1874,9 +1568,6 @@
                 }
             });
         });
-
-        // Initial render
-        renderStaff();
     </script>
 </body>
 </html>
