@@ -51,7 +51,7 @@
         ::-webkit-scrollbar-track { background: var(--bg-dark); }
         ::-webkit-scrollbar-thumb { background: var(--primary-dark); border-radius: 4px; }
 
-        /* Navigation - Fixed & Centered */
+        /* Navigation */
         .navbar {
             position: fixed;
             top: 0;
@@ -530,10 +530,19 @@
         }
 
         /* Features Section */
+        .features-wrapper {
+            border-radius: 40px;
+            margin: 0;
+            padding: 5rem 2rem;
+            background: rgba(18, 18, 26, 0.5);
+        }
+
         .features-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .feature-card {
@@ -697,6 +706,258 @@
 
         .season-cta {
             text-align: center;
+        }
+
+        /* Staff Section */
+        .staff-section {
+            position: relative;
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .staff-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.8rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .staff-card:hover {
+            border-color: rgba(67, 182, 57, 0.3);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .staff-card .remove-staff {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: rgba(220, 38, 38, 0.15);
+            border: none;
+            color: #ef4444;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .staff-card:hover .remove-staff {
+            display: flex;
+        }
+
+        .staff-card .remove-staff:hover {
+            background: rgba(220, 38, 38, 0.3);
+        }
+
+        .staff-avatar {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            overflow: hidden;
+            border: 3px solid var(--primary);
+        }
+
+        .staff-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .staff-avatar-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            background: var(--gradient-1);
+        }
+
+        .staff-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .staff-role {
+            font-size: 0.85rem;
+            color: var(--primary-light);
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 0.6rem;
+        }
+
+        .staff-desc {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .add-staff-card {
+            background: transparent;
+            border: 2px dashed var(--border);
+            border-radius: 18px;
+            padding: 1.8rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 250px;
+        }
+
+        .add-staff-card:hover {
+            border-color: var(--primary);
+            background: rgba(67, 182, 57, 0.03);
+        }
+
+        .add-staff-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: rgba(67, 182, 57, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--primary-light);
+            margin-bottom: 1rem;
+        }
+
+        .add-staff-text {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            max-width: 480px;
+            width: 100%;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-primary);
+        }
+
+        .modal h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .modal label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+            font-weight: 500;
+        }
+
+        .modal input,
+        .modal textarea,
+        .modal select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .modal input:focus,
+        .modal textarea:focus,
+        .modal select:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 182, 57, 0.1);
+        }
+
+        .modal textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .modal-submit {
+            width: 100%;
+            padding: 0.9rem;
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            margin-top: 0.5rem;
+        }
+
+        .modal-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--glow-green);
         }
 
         /* CTA Section */
@@ -904,6 +1165,10 @@
                 grid-template-columns: 1fr;
             }
 
+            .staff-grid {
+                grid-template-columns: 1fr;
+            }
+
             .hero {
                 padding: 5rem 1.5rem 2rem;
             }
@@ -922,6 +1187,10 @@
 
             .section {
                 padding: 4rem 1.5rem;
+            }
+
+            .features-wrapper {
+                border-radius: 20px;
             }
 
             .cta-card {
@@ -961,6 +1230,7 @@
                 <li><a href="#about" class="nav-link">О проекте</a></li>
                 <li><a href="#features" class="nav-link">Возможности</a></li>
                 <li><a href="#season" class="nav-link">Сезон</a></li>
+                <li><a href="#staff" class="nav-link">Персонал</a></li>
                 <li><a href="https://discord.gg/edPpSRmRNu" target="_blank" class="nav-discord-btn nav-discord-btn-mobile">🎮 Discord</a></li>
             </ul>
             <a href="https://discord.gg/edPpSRmRNu" target="_blank" class="nav-discord-btn nav-desktop-btn">🎮 Discord</a>
@@ -1003,12 +1273,6 @@
             </p>
 
             <div class="hero-buttons">
-                <a href="https://discord.gg/edPpSRmRNu" target="_blank" class="btn btn-discord">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/>
-                    </svg>
-                    Присоединиться к Discord
-                </a>
                 <a href="#about" class="btn btn-outline">
                     Узнать больше
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -1023,7 +1287,7 @@
                     <div class="hero-stat-label">Участников</div>
                 </div>
                 <div class="hero-stat">
-                    <div class="hero-stat-value" data-count="12">0</div>
+                    <div class="hero-stat-value" data-count="24">0</div>
                     <div class="hero-stat-label">Государств</div>
                 </div>
                 <div class="hero-stat">
@@ -1078,7 +1342,7 @@
     </section>
 
     <!-- Features Section -->
-    <section class="section" id="features" style="background: rgba(18, 18, 26, 0.5); border-radius: 40px; margin: 0 1rem; padding: 5rem 2rem;">
+    <div class="features-wrapper" id="features">
         <div class="section-header reveal">
             <span class="section-label">Возможности</span>
             <h2 class="section-title">Почему именно Global Lens?</h2>
@@ -1122,7 +1386,7 @@
                 <p>Уважительный диалог без троллинга и пустых срачей. Мы создали среду, в которой хочется развиваться и играть.</p>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Season Section -->
     <section class="section season-section" id="season">
@@ -1186,12 +1450,12 @@
             <div class="season-body">
                 <h3>🌍 Сезон «Новый Мировой Порядок»</h3>
                 <p>
-                    Девятнадцатый сезон Global Lens — это масштабная кампания с 12 государствами, уникальными механиками и непредсказуемым сюжетом. Каждый ход приближает мир к новым альянсам или конфликтам.
+                    Девятнадцатый сезон Global Lens — это масштабная кампания с 24 государствами, уникальными механиками и непредсказуемым сюжетом. Каждый ход приближает мир к новым альянсам или конфликтам.
                 </p>
 
                 <div class="season-details">
                     <div class="season-detail">
-                        <div class="season-detail-value">12</div>
+                        <div class="season-detail-value">24</div>
                         <div class="season-detail-label">Государств-участников</div>
                     </div>
                     <div class="season-detail">
@@ -1212,6 +1476,23 @@
                         Вступить в игру
                     </a>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Staff Section -->
+    <section class="section staff-section" id="staff">
+        <div class="section-header reveal">
+            <span class="section-label">Команда</span>
+            <h2 class="section-title">Персонал Global Lens</h2>
+            <p class="section-subtitle">Люди, которые делают проект лучше каждый день</p>
+        </div>
+
+        <div class="staff-grid reveal" id="staffGrid">
+            <!-- Staff cards will be rendered here by JS -->
+            <div class="add-staff-card" id="addStaffBtn">
+                <div class="add-staff-icon">+</div>
+                <div class="add-staff-text">Добавить сотрудника</div>
             </div>
         </div>
     </section>
@@ -1268,7 +1549,149 @@
         </svg>
     </button>
 
+    <!-- Add Staff Modal -->
+    <div class="modal-overlay" id="staffModal">
+        <div class="modal">
+            <button class="modal-close" id="modalClose">✕</button>
+            <h3>Добавить сотрудника</h3>
+            <div class="form-group">
+                <label for="staffName">Имя</label>
+                <input type="text" id="staffName" placeholder="Введите имя сотрудника">
+            </div>
+            <div class="form-group">
+                <label for="staffRole">Роль</label>
+                <select id="staffRole">
+                    <option value="Основатель">Основатель</option>
+                    <option value="Администратор">Администратор</option>
+                    <option value="Модератор">Модератор</option>
+                    <option value="Разработчик">Разработчик</option>
+                    <option value="Гейм-мастер">Гейм-мастер</option>
+                    <option value="Аналитик">Аналитик</option>
+                    <option value="Контент-мейкер">Контент-мейкер</option>
+                    <option value="Дизайнер">Дизайнер</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="staffDesc">Описание</label>
+                <textarea id="staffDesc" placeholder="Краткое описание роли сотрудника"></textarea>
+            </div>
+            <button class="modal-submit" id="staffSubmit">Добавить</button>
+        </div>
+    </div>
+
     <script>
+        // Staff Management
+        const defaultStaff = [
+            { name: 'Админ', role: 'Основатель', desc: 'Создатель и главный администратор Global Lens', color: '#43b639' },
+        ];
+
+        function getStaff() {
+            const stored = localStorage.getItem('globalLensStaff');
+            if (stored) {
+                return JSON.parse(stored);
+            }
+            localStorage.setItem('globalLensStaff', JSON.stringify(defaultStaff));
+            return defaultStaff;
+        }
+
+        function saveStaff(staff) {
+            localStorage.setItem('globalLensStaff', JSON.stringify(staff));
+        }
+
+        function getInitials(name) {
+            return name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2);
+        }
+
+        function getRandomColor() {
+            const colors = ['#43b639', '#7c3aed', '#f59e0b', '#ef4444', '#06b6d4', '#ec4899', '#22c55e'];
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        function renderStaff() {
+            const staff = getStaff();
+            const grid = document.getElementById('staffGrid');
+            const addBtn = document.getElementById('addStaffBtn');
+
+            // Remove all staff cards (keep add button)
+            const existingCards = grid.querySelectorAll('.staff-card');
+            existingCards.forEach(c => c.remove());
+
+            // Add staff cards before the add button
+            staff.forEach((member, index) => {
+                const card = document.createElement('div');
+                card.className = 'staff-card';
+                card.innerHTML = `
+                    <button class="remove-staff" data-index="${index}" title="Удалить">✕</button>
+                    <div class="staff-avatar">
+                        <div class="staff-avatar-placeholder" style="background: ${member.color || getRandomColor()}">${getInitials(member.name)}</div>
+                    </div>
+                    <div class="staff-name">${member.name}</div>
+                    <div class="staff-role">${member.role}</div>
+                    <div class="staff-desc">${member.desc}</div>
+                `;
+                grid.insertBefore(card, addBtn);
+            });
+
+            // Add remove handlers
+            document.querySelectorAll('.remove-staff').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const idx = parseInt(btn.getAttribute('data-index'));
+                    const current = getStaff();
+                    current.splice(idx, 1);
+                    saveStaff(current);
+                    renderStaff();
+                });
+            });
+        }
+
+        // Modal
+        const modal = document.getElementById('staffModal');
+        const addStaffBtn = document.getElementById('addStaffBtn');
+        const modalClose = document.getElementById('modalClose');
+        const staffSubmit = document.getElementById('staffSubmit');
+
+        addStaffBtn.addEventListener('click', () => {
+            modal.classList.add('active');
+        });
+
+        modalClose.addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+
+        staffSubmit.addEventListener('click', () => {
+            const name = document.getElementById('staffName').value.trim();
+            const role = document.getElementById('staffRole').value;
+            const desc = document.getElementById('staffDesc').value.trim();
+
+            if (!name) {
+                alert('Введите имя сотрудника');
+                return;
+            }
+
+            const staff = getStaff();
+            staff.push({
+                name,
+                role,
+                desc: desc || 'Участник команды',
+                color: getRandomColor()
+            });
+            saveStaff(staff);
+            renderStaff();
+
+            // Reset form
+            document.getElementById('staffName').value = '';
+            document.getElementById('staffDesc').value = '';
+            modal.classList.remove('active');
+        });
+
+        // Navbar
         const navbar = document.getElementById('navbar');
         const backToTop = document.getElementById('backToTop');
 
@@ -1451,6 +1874,9 @@
                 }
             });
         });
+
+        // Initial render
+        renderStaff();
     </script>
 </body>
 </html>
