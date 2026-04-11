@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -30,11 +29,20 @@
         .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
         .nav-logo { font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
         .nav-logo img { height: 36px; width: auto; display: block; }
-        .nav-logo-text { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; white-space: nowrap; }
-        .nav-back { color: var(--text-secondary); text-decoration: none; padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 0.4rem; }
-        .nav-back:hover { color: var(--primary-light); background: rgba(67,182,57,0.1); }
+        .nav-logo-text { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-links { display: flex; list-style: none; gap: 0.3rem; align-items: center; flex-wrap: wrap; justify-content: center; }
+        .nav-links a:not(.nav-discord-btn) { color: var(--text-secondary); text-decoration: none; padding: 0.5rem 0.8rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; white-space: nowrap; }
+        .nav-links a:not(.nav-discord-btn):hover, .nav-links a:not(.nav-discord-btn).active { color: var(--text-primary); background: rgba(67,182,57,0.1); }
+        .nav-links a:not(.nav-discord-btn).active::after { content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 20px; height: 2px; background: var(--primary); border-radius: 1px; }
+        .nav-discord-btn { padding: 0.55rem 1.2rem; background: var(--gradient-1); color: white; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; font-family: inherit; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.4rem; }
+        .nav-discord-btn:hover { transform: translateY(-2px); box-shadow: var(--glow-green); }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; padding: 5px; flex-shrink: 0; }
+        .hamburger span { width: 25px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; border-radius: 1px; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
 
-        .page-hero { min-height: 40vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; padding: 8rem 2rem 4rem; background: var(--gradient-hero); }
+        .page-hero { min-height: 35vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; padding: 8rem 2rem 3rem; background: var(--gradient-hero); }
         .page-hero-bg { position: absolute; inset: 0; z-index: 0; }
         .page-hero-bg .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.1; }
         .page-hero-bg .orb:nth-child(1) { width: 400px; height: 400px; background: var(--primary); top: -10%; left: -5%; }
@@ -70,15 +78,24 @@
         .footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; }
         .footer-text { color: var(--text-muted); font-size: 0.85rem; }
         .footer-text span { color: var(--primary-light); }
+        .footer-contact { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .footer-contact a { color: var(--primary-light); text-decoration: none; }
+        .footer-contact a:hover { text-decoration: underline; }
 
         .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
         .reveal.visible { opacity: 1; transform: translateY(0); }
 
         @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: var(--bg-card); flex-direction: column; padding: 5rem 2rem 2rem; gap: 0.5rem; transition: right 0.3s ease; border-left: 1px solid var(--border); overflow-y: auto; }
+            .nav-links.open { right: 0; }
+            .nav-discord-btn-mobile { display: block !important; margin-top: 1rem; text-align: center; width: 100%; }
             .staff-grid { grid-template-columns: 1fr; max-width: 350px; }
             .staff-grid.centered { max-width: 350px; }
             .section { padding: 3rem 1.5rem; }
+            .nav-desktop-btn { display: none; }
         }
+        @media (min-width: 769px) { .nav-discord-btn-mobile { display: none !important; } }
     </style>
 </head>
 <body>
@@ -88,10 +105,16 @@
                 <img src="планета.png" alt="Global Lens">
                 <span class="nav-logo-text">Global Lens</span>
             </a>
-            <a href="index.html" class="nav-back">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
-                На главную
-            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Главная</a></li>
+                <li><a href="about.html" class="nav-link">О проекте</a></li>
+                <li><a href="features.html" class="nav-link">Возможности</a></li>
+                <li><a href="season.html" class="nav-link">Сезон</a></li>
+                <li><a href="staff.html" class="nav-link active">Персонал</a></li>
+                <li><a href="https://discord.gg/edPpSRmRNu" target="_blank" class="nav-discord-btn nav-discord-btn-mobile">🎮 Discord</a></li>
+            </ul>
+            <a href="https://discord.gg/edPpSRmRNu" target="_blank" class="nav-discord-btn nav-desktop-btn">🎮 Discord</a>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
         </div>
     </nav>
 
@@ -106,7 +129,7 @@
     <!-- Основатель — по центру -->
     <section class="section">
         <div style="text-align:center;"><span class="section-label">Лидерство</span></div>
-        <h2 class="section-title">👑Основатель</h2>
+        <h2 class="section-title">👑 Основатель</h2>
         <div class="staff-grid centered reveal">
             <div class="staff-card founder">
                 <div class="staff-avatar">
@@ -122,7 +145,7 @@
     <!-- Отдельная благодарность -->
     <section class="section" style="padding-top:1rem;">
         <div style="text-align:center;"><span class="section-label thanks">Признательность</span></div>
-        <h2 class="section-title">Отдельная благодарность</h2>
+        <h2 class="section-title">⭐ Отдельная благодарность</h2>
         <p class="section-subtitle">Люди, внёсшие особый вклад в развитие проекта</p>
         <div class="staff-grid reveal">
             <div class="staff-card thanks">
@@ -131,7 +154,7 @@
                 </div>
                 <div class="staff-name">Китаёзик</div>
                 <div class="staff-role">Администратор</div>
-                <div class="staff-desc">Создатель данного сайта. Сделал всё, что вы сейчас видите - от дизайна до реализации.</div>
+                <div class="staff-desc">Создатель данного сайта. Сделал всё, что вы сейчас видите — от дизайна до реализации.</div>
             </div>
 
             <div class="staff-card thanks">
@@ -158,7 +181,7 @@
                 </div>
                 <div class="staff-name">LayBay</div>
                 <div class="staff-role">Специалист по технике</div>
-                <div class="staff-desc">Реализует процесс по созданию, оценке и принятию техники. А ещё хороший картограф - карты рисует как бог.</div>
+                <div class="staff-desc">Реализует процесс по созданию, оценке и принятию техники. А ещё хороший картограф, карты рисует как бог.</div>
             </div>
         </div>
     </section>
@@ -166,7 +189,7 @@
     <!-- Администраторы — по центру -->
     <section class="section" style="padding-top:1rem;">
         <div style="text-align:center;"><span class="section-label">Управление</span></div>
-        <h2 class="section-title">Администраторы</h2>
+        <h2 class="section-title">🛡️ Администраторы</h2>
         <div class="staff-grid centered reveal">
             <div class="staff-card">
                 <div class="staff-avatar">
@@ -191,7 +214,7 @@
     <!-- Кураторы -->
     <section class="section" style="padding-top:1rem;">
         <div style="text-align:center;"><span class="section-label">Направления</span></div>
-        <h2 class="section-title">Кураторы</h2>
+        <h2 class="section-title">📋 Кураторы</h2>
         <div class="staff-grid reveal">
             <div class="staff-card">
                 <div class="staff-avatar">
@@ -208,7 +231,7 @@
                 </div>
                 <div class="staff-name">Maks</div>
                 <div class="staff-role">Куратор политологии</div>
-                <div class="staff-desc">Нет, не мессенджер. Куратор политологии. Справляется плохо, но старается. Мы верим в тебя, Макс!</div>
+                <div class="staff-desc">Нет, не мессенджер. Куратор политологии. Справляется плохо, но старается. Мы верим в тебя, Макс! 💪</div>
             </div>
 
             <div class="staff-card">
@@ -217,18 +240,21 @@
                 </div>
                 <div class="staff-name">[ARIMA] Yagami</div>
                 <div class="staff-role">Куратор модераторов</div>
-                <div class="staff-desc">Сделал так, что теперь пашет один человек. 10/10, рекомендую. Эффективность на максимуме.</div>
+                <div class="staff-desc">Сделал так, что теперь пашет один человек. 10/10, рекомендую. Эффективность на максимуме. 🏆</div>
             </div>
         </div>
     </section>
 
     <footer class="footer">
+        <p class="footer-contact">📧 <a href="mailto:global_lenz.rp@bk.ru">global_lenz.rp@bk.ru</a></p>
         <p class="footer-text">© 2024-2026 <span>Global Lens</span>. Все права защищены. 🌍 Мир без фильтров.</p>
     </footer>
 
     <script>
         const navbar=document.getElementById('navbar');
         window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>50));
+        const hamburger=document.getElementById('hamburger'),navLinks=document.getElementById('navLinks');
+        hamburger.addEventListener('click',()=>{hamburger.classList.toggle('active');navLinks.classList.toggle('open');});
         const reveals=document.querySelectorAll('.reveal');
         const obs=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('visible');}),{threshold:0.1});
         reveals.forEach(el=>obs.observe(el));

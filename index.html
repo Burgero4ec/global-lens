@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -23,11 +22,8 @@
         }
         html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--primary) var(--bg-dark); }
         body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.7; overflow-x: hidden; }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-dark); }
-        ::-webkit-scrollbar-thumb { background: var(--primary-dark); border-radius: 4px; }
+        ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: var(--bg-dark); } ::-webkit-scrollbar-thumb { background: var(--primary-dark); border-radius: 4px; }
 
-        /* Navigation */
         .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 2rem; transition: all 0.4s ease; }
         .navbar.scrolled { background: rgba(10,10,15,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0.7rem 2rem; }
         .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
@@ -46,7 +42,6 @@
         .hamburger.active span:nth-child(2) { opacity: 0; }
         .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
 
-        /* Hero */
         .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 6rem 2rem 2rem; background: var(--gradient-hero); }
         .hero-bg { position: absolute; inset: 0; z-index: 0; }
         .hero-bg .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.12; animation: float 10s ease-in-out infinite; }
@@ -81,63 +76,6 @@
         .hero-scroll svg { width: 24px; height: 24px; color: var(--text-muted); }
         @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(10px); } }
 
-        /* Sections */
-        .section { padding: 7rem 2rem; max-width: 1200px; margin: 0 auto; }
-        .section-header { text-align: center; margin-bottom: 4rem; }
-        .section-label { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--primary-light); background: rgba(67,182,57,0.1); padding: 0.35rem 1rem; border-radius: 50px; margin-bottom: 1rem; border: 1px solid rgba(67,182,57,0.2); text-transform: uppercase; letter-spacing: 0.05em; }
-        .section-title { font-size: clamp(2rem,4.5vw,2.8rem); font-weight: 800; margin-bottom: 1rem; letter-spacing: -0.02em; }
-        .section-subtitle { color: var(--text-secondary); font-size: 1.1rem; max-width: 650px; margin: 0 auto; }
-
-        /* About */
-        .about-content { max-width: 800px; margin: 0 auto; text-align: center; }
-        .about-content h3 { font-size: 1.6rem; margin-bottom: 1rem; line-height: 1.3; }
-        .about-content p { color: var(--text-secondary); margin-bottom: 1rem; font-size: 1.05rem; }
-        .about-highlights { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-top: 2rem; }
-        .highlight-item { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; padding: 1.2rem 0.8rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; font-size: 0.9rem; transition: all 0.3s ease; }
-        .highlight-item:hover { border-color: var(--primary); background: rgba(67,182,57,0.05); transform: translateY(-3px); }
-        .highlight-icon { font-size: 1.8rem; }
-
-        /* Features */
-        .features-wrapper { border-radius: 40px; margin: 0; padding: 5rem 2rem; background: rgba(18,18,26,0.5); }
-        .features-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(320px,1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
-        .feature-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 2rem; transition: all 0.4s ease; position: relative; overflow: hidden; }
-        .feature-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-1); transform: scaleX(0); transition: transform 0.4s ease; }
-        .feature-card:hover::before { transform: scaleX(1); }
-        .feature-card:hover { border-color: rgba(67,182,57,0.3); transform: translateY(-5px); box-shadow: var(--shadow); }
-        .feature-icon { width: 56px; height: 56px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin-bottom: 1.2rem; }
-        .feature-icon.bot { background: rgba(67,182,57,0.15); }
-        .feature-icon.systems { background: rgba(124,58,237,0.15); }
-        .feature-icon.events { background: rgba(220,38,38,0.15); }
-        .feature-icon.discuss { background: rgba(6,182,212,0.15); }
-        .feature-icon.content { background: rgba(236,72,153,0.15); }
-        .feature-icon.community { background: rgba(34,197,94,0.15); }
-        .feature-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.6rem; }
-        .feature-card p { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; }
-
-        /* Season */
-        .season-section { position: relative; }
-        .season-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; overflow: hidden; max-width: 1000px; margin: 0 auto; }
-        .season-header-banner { position: relative; height: 200px; overflow: hidden; }
-        .season-header-banner svg { width: 100%; height: 100%; display: block; }
-        .season-live-badge { position: absolute; top: 1.5rem; left: 1.5rem; display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); border-radius: 50px; font-size: 0.85rem; font-weight: 600; color: var(--primary-light); border: 1px solid rgba(67,182,57,0.3); }
-        .season-live-badge .live-dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; animation: pulse-green 1.5s ease-in-out infinite; }
-        .season-body { padding: 2.5rem; }
-        .season-body h3 { font-size: 1.8rem; font-weight: 800; margin-bottom: 1rem; }
-        .season-body > p { color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 2rem; }
-        .season-details { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; margin-bottom: 2rem; }
-        .season-detail { text-align: center; padding: 1.2rem; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 12px; }
-        .season-detail-value { font-size: 1.5rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .season-detail-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.3rem; }
-        .season-cta { text-align: center; }
-
-        /* Staff Link Section */
-        .staff-link-section { text-align: center; padding: 4rem 2rem; }
-        .staff-link-card { max-width: 600px; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 3rem; position: relative; overflow: hidden; }
-        .staff-link-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-1); }
-        .staff-link-card h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
-        .staff-link-card p { color: var(--text-secondary); margin-bottom: 1.5rem; }
-
-        /* CTA */
         .cta-section { text-align: center; padding: 5rem 2rem; }
         .cta-card { max-width: 800px; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 4rem 3rem; position: relative; overflow: hidden; }
         .cta-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-1); }
@@ -145,7 +83,10 @@
         .cta-card p { color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem; }
         .cta-buttons { display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; }
 
-        /* Footer */
+        .quick-links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 3rem; animation: fadeInUp 0.8s ease 0.6s forwards; opacity: 0; flex-wrap: wrap; }
+        .quick-link { display: flex; align-items: center; gap: 0.5rem; padding: 0.7rem 1.2rem; background: rgba(67,182,57,0.08); border: 1px solid var(--border); border-radius: 10px; color: var(--text-secondary); text-decoration: none; font-size: 0.9rem; transition: all 0.3s ease; }
+        .quick-link:hover { border-color: var(--primary); color: var(--primary-light); background: rgba(67,182,57,0.12); transform: translateY(-2px); }
+
         .footer { border-top: 1px solid var(--border); padding: 3rem 2rem; }
         .footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
         .footer-brand { display: flex; align-items: center; gap: 0.5rem; }
@@ -156,48 +97,43 @@
         .footer-social a:hover { border-color: var(--primary); color: var(--primary-light); transform: translateY(-3px); }
         .footer-text { color: var(--text-muted); font-size: 0.85rem; width: 100%; text-align: center; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
         .footer-text span { color: var(--primary-light); }
+        .footer-contact { color: var(--text-secondary); font-size: 0.85rem; }
+        .footer-contact a { color: var(--primary-light); text-decoration: none; }
+        .footer-contact a:hover { text-decoration: underline; }
 
-        /* Back to top */
         .back-to-top { position: fixed; bottom: 2rem; left: 2rem; width: 45px; height: 45px; border-radius: 12px; background: var(--gradient-1); border: none; color: white; display: flex; align-items: center; justify-content: center; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 100; }
         .back-to-top.visible { opacity: 1; visibility: visible; }
         .back-to-top:hover { transform: translateY(-3px); }
-
-        .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease; }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
 
         @media (max-width: 768px) {
             .hamburger { display: flex; }
             .nav-links { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: var(--bg-card); flex-direction: column; padding: 5rem 2rem 2rem; gap: 0.5rem; transition: right 0.3s ease; border-left: 1px solid var(--border); overflow-y: auto; }
             .nav-links.open { right: 0; }
             .nav-discord-btn-mobile { display: block !important; margin-top: 1rem; text-align: center; width: 100%; }
-            .about-highlights { grid-template-columns: repeat(2,1fr); }
-            .features-grid { grid-template-columns: 1fr; }
-            .season-details { grid-template-columns: repeat(2,1fr); }
             .hero { padding: 5rem 1.5rem 2rem; }
             .hero h1 { font-size: 2.2rem; }
             .hero-stats { gap: 1.5rem; }
             .hero-stat-value { font-size: 1.5rem; }
-            .section { padding: 4rem 1.5rem; }
-            .features-wrapper { border-radius: 20px; }
-            .cta-card, .staff-link-card { padding: 3rem 1.5rem; }
+            .quick-links { gap: 0.8rem; }
+            .cta-card { padding: 3rem 1.5rem; }
             .footer-content { flex-direction: column; text-align: center; }
             .nav-desktop-btn { display: none; }
         }
         @media (min-width: 769px) { .nav-discord-btn-mobile { display: none !important; } }
-        @media (max-width: 1024px) { .nav-links a:not(.nav-discord-btn) { padding: 0.5rem 0.6rem; font-size: 0.85rem; } }
     </style>
 </head>
 <body>
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <a href="#hero" class="nav-logo">
+            <a href="index.html" class="nav-logo">
                 <img src="планета.png" alt="Global Lens">
                 <span class="nav-logo-text">Global Lens</span>
             </a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#about" class="nav-link">О проекте</a></li>
-                <li><a href="#features" class="nav-link">Возможности</a></li>
-                <li><a href="#season" class="nav-link">Сезон</a></li>
+                <li><a href="index.html" class="nav-link active">Главная</a></li>
+                <li><a href="about.html" class="nav-link">О проекте</a></li>
+                <li><a href="features.html" class="nav-link">Возможности</a></li>
+                <li><a href="season.html" class="nav-link">Сезон</a></li>
                 <li><a href="staff.html" class="nav-link">Персонал</a></li>
                 <li><a href="https://discord.gg/edPpSRmRNu" target="_blank" class="nav-discord-btn nav-discord-btn-mobile">🎮 Discord</a></li>
             </ul>
@@ -217,96 +153,25 @@
             <p class="hero-description">Русскоязычное ВПИ-сообщество для тех, кто смотрит глубже. Геополитика, военное дело, экономика и скрытые механизмы мировой политики.</p>
             <p class="hero-subtext">Здесь вы не просто читаете новости — вы <strong style="color:var(--primary-light);">становитесь частью процесса</strong>.</p>
             <div class="hero-buttons">
-                <a href="#about" class="btn btn-outline">Узнать больше<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
+                <a href="about.html" class="btn btn-outline">Узнать больше<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
             </div>
             <div class="hero-stats">
                 <div class="hero-stat"><div class="hero-stat-value" data-count="509">0</div><div class="hero-stat-label">Участников</div></div>
                 <div class="hero-stat"><div class="hero-stat-value" data-count="31">0</div><div class="hero-stat-label">Государств</div></div>
                 <div class="hero-stat"><div class="hero-stat-value" data-count="19">0</div><div class="hero-stat-label">Сезонов</div></div>
             </div>
+            <div class="quick-links">
+                <a href="about.html" class="quick-link">📖 О проекте</a>
+                <a href="features.html" class="quick-link">⚡ Возможности</a>
+                <a href="season.html" class="quick-link">🌍 Сезон</a>
+                <a href="staff.html" class="quick-link">👥 Персонал</a>
+            </div>
         </div>
         <div class="hero-scroll"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg></div>
     </section>
 
-    <section class="section" id="about">
-        <div class="section-header reveal"><span class="section-label">О проекте</span><h2 class="section-title">Что такое Global Lens?</h2><p class="section-subtitle">ВПИ-сообщество нового уровня с глубокими механиками и зрелым комьюнити</p></div>
-        <div class="about-content reveal">
-            <h3>Надоели поверхностные выводы и навязанные интерпретации?</h3>
-            <p><strong>Global Lens</strong> — это русскоязычное ВПИ-сообщество, где каждый участник становится полноценным игроком на мировой арене. Здесь нет готовых ответов — есть реальные последствия ваших решений.</p>
-            <p>Геополитика, военное дело, экономика и скрытые механизмы мировой политики — всё это оживает в нашем проекте. Каждый ход меняет баланс сил, каждое решение влияет на судьбы виртуальных государств.</p>
-            <div class="about-highlights">
-                <div class="highlight-item"><span class="highlight-icon">🤖</span><span>Свой бот</span></div>
-                <div class="highlight-item"><span class="highlight-icon">🧩</span><span>Глубокие системы</span></div>
-                <div class="highlight-item"><span class="highlight-icon">🎭</span><span>Живые ивенты</span></div>
-                <div class="highlight-item"><span class="highlight-icon">🤝</span><span>Зрелое комьюнити</span></div>
-            </div>
-        </div>
-    </section>
-
-    <div class="features-wrapper" id="features">
-        <div class="section-header reveal"><span class="section-label">Возможности</span><h2 class="section-title">Почему именно Global Lens?</h2><p class="section-subtitle">Шесть причин, почему тысячи игроков выбирают нас</p></div>
-        <div class="features-grid">
-            <div class="feature-card reveal"><div class="feature-icon bot">🤖</div><h3>Продуманный бот</h3><p>Стабильный, надёжный и глубоко влияющий на игровой процесс. Торговля, ресурсы, производство — всё работает в реальном времени и определяет судьбу вашего государства.</p></div>
-            <div class="feature-card reveal"><div class="feature-icon systems">🧩</div><h3>Глубокие системы</h3><p>Каждая механика тщательно выверена и имеет реальные последствия. Дипломатия, война, экономика, внутренняя политика — всё взаимосвязано.</p></div>
-            <div class="feature-card reveal"><div class="feature-icon events">🎭</div><h3>Регулярные ивенты</h3><p>Живые ролевые события, которые меняют ход сезона. Кризисы, революции, международные конференции — ни один ход не бывает скучным.</p></div>
-            <div class="feature-card reveal"><div class="feature-icon discuss">💬</div><h3>Острые дискуссии</h3><p>Спорьте, анализируйте и оттачивайте свои взгляды. Наше сообщество — это интеллектуальная среда, где ценится аргументация и глубина мысли.</p></div>
-            <div class="feature-card reveal"><div class="feature-icon content">📚</div><h3>Эксклюзивный контент</h3><p>Уникальные системы, аналитика и новости, которых нет нигде. Каждый сезон приносит новые механики и неожиданные повороты сюжета.</p></div>
-            <div class="feature-card reveal"><div class="feature-icon community">🤝</div><h3>Зрелое сообщество</h3><p>Уважительный диалог без троллинга и пустых срачей. Мы создали среду, в которой хочется развиваться и играть.</p></div>
-        </div>
-    </div>
-
-    <section class="section season-section" id="season">
-        <div class="section-header reveal"><span class="section-label">Текущий сезон</span><h2 class="section-title">Сезон в самом разгаре</h2><p class="section-subtitle">Врывайся в игру — место ещё есть</p></div>
-        <div class="season-card reveal">
-            <div class="season-header-banner">
-                <svg viewBox="0 0 1000 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-                    <defs><linearGradient id="seasonBg" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#0a0a0f"/><stop offset="25%" style="stop-color:#0a120a"/><stop offset="50%" style="stop-color:#0a0a0f"/><stop offset="75%" style="stop-color:#0a120a"/><stop offset="100%" style="stop-color:#0a0a0f"/></linearGradient><linearGradient id="seasonLine" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#43b639"/><stop offset="50%" style="stop-color:#f59e0b"/><stop offset="100%" style="stop-color:#43b639"/></linearGradient></defs>
-                    <rect width="1000" height="200" fill="url(#seasonBg)"/>
-                    <line x1="0" y1="100" x2="1000" y2="100" stroke="rgba(67,182,57,0.12)" stroke-width="1"/>
-                    <g opacity="0.12" transform="translate(500,100) scale(0.7)">
-                        <path d="M-300 -50 L-250 -70 L-200 -60 L-180 -30 L-190 10 L-220 30 L-250 50 L-280 40 L-310 10 L-320 -20Z" fill="none" stroke="#43b639" stroke-width="1.5"/>
-                        <path d="M-250 70 L-220 60 L-200 80 L-190 120 L-210 170 L-240 200 L-270 180 L-280 140 L-270 100Z" fill="none" stroke="#43b639" stroke-width="1.5"/>
-                        <path d="M-50 -60 L-10 -70 L20 -60 L30 -30 L10 -10 L-10 0 L-40 -10 L-60 -30Z" fill="none" stroke="#43b639" stroke-width="1.5"/>
-                        <path d="M-50 30 L-10 20 L20 40 L30 80 L20 140 L-10 180 L-40 190 L-60 160 L-70 100 L-65 50Z" fill="none" stroke="#43b639" stroke-width="1.5"/>
-                        <path d="M50 -50 L120 -60 L180 -40 L200 0 L190 40 L160 60 L120 70 L80 60 L50 40 L40 0 L45 -30Z" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
-                        <path d="M150 130 L200 120 L220 140 L210 180 L180 190 L150 170Z" fill="none" stroke="#f59e0b" stroke-width="1.5"/>
-                    </g>
-                    <rect x="200" y="165" width="600" height="6" rx="3" fill="rgba(255,255,255,0.05)"/>
-                    <rect x="200" y="165" width="0" height="6" rx="3" fill="url(#seasonLine)"/>
-                    <text x="810" y="174" fill="#f59e0b" font-size="12" font-family="monospace">0%</text>
-                </svg>
-                <div class="season-live-badge"><span class="live-dot"></span>LIVE — Сезон 19</div>
-            </div>
-            <div class="season-body">
-                <h3>🌍 Сезон «Новый Мировой Порядок»</h3>
-                <p>Девятнадцатый сезон Global Lens — масштабная кампания с уникальными механиками и непредсказуемым сюжетом.</p>
-                <div class="season-details">
-                    <div class="season-detail"><div class="season-detail-value">31</div><div class="season-detail-label">Государства</div></div>
-                    <div class="season-detail"><div class="season-detail-value">11</div><div class="season-detail-label">ЧВК</div></div>
-                    <div class="season-detail"><div class="season-detail-value">2</div><div class="season-detail-label">Автономии</div></div>
-                    <div class="season-detail"><div class="season-detail-value">19</div><div class="season-detail-label">Всего ходов</div></div>
-                </div>
-                <div class="season-cta">
-                    <a href="https://discord.gg/edPpSRmRNu" target="_blank" class="btn btn-discord">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-                        Вступить в игру
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Staff Link Card -->
-    <section class="staff-link-section" id="staff">
-        <div class="staff-link-card reveal">
-            <h3>👥 Наша команда</h3>
-            <p>Познакомьтесь с людьми, которые делают Global Lens лучше каждый день</p>
-            <a href="staff.html" class="btn btn-outline">Перейти к персоналу →</a>
-        </div>
-    </section>
-
     <section class="cta-section" id="cta">
-        <div class="cta-card reveal">
+        <div class="cta-card">
             <img src="планета.png" alt="Global Lens" width="70" style="margin-bottom:1.5rem;">
             <h2>Готов взглянуть на мир <span style="background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">по-новому</span>?</h2>
             <p>Global Lens — это не просто ВПИ. Это способ взглянуть на мир иначе.</p>
@@ -326,6 +191,7 @@
                 <a href="https://discord.gg/edPpSRmRNu" target="_blank" aria-label="Discord"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
                 <a href="https://t.me/+5DaqxYO3H6VlMzhi" aria-label="Telegram"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
             </div>
+            <p class="footer-contact">📧 <a href="mailto:global_lenz.rp@bk.ru">global_lenz.rp@bk.ru</a></p>
             <p class="footer-text">© 2024-2026 <span>Global Lens</span>. Все права защищены. 🌍 Мир без фильтров.</p>
         </div>
     </footer>
@@ -339,11 +205,6 @@
         const hamburger=document.getElementById('hamburger'),navLinks=document.getElementById('navLinks');
         hamburger.addEventListener('click',()=>{hamburger.classList.toggle('active');navLinks.classList.toggle('open');});
         document.querySelectorAll('.nav-link').forEach(l=>l.addEventListener('click',()=>{hamburger.classList.remove('active');navLinks.classList.remove('open');}));
-        const sections=document.querySelectorAll('section[id]'),navItems=document.querySelectorAll('.nav-link');
-        window.addEventListener('scroll',()=>{let c='';sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)c=s.getAttribute('id');});navItems.forEach(i=>{i.classList.remove('active');if(i.getAttribute('href')==='#'+c)i.classList.add('active');});});
-        const revealElements=document.querySelectorAll('.reveal');
-        const revealObserver=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('visible');}),{threshold:0.1,rootMargin:'0px 0px -50px 0px'});
-        revealElements.forEach(el=>revealObserver.observe(el));
         const statNumbers=document.querySelectorAll('.hero-stat-value');
         const counterObserver=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting){const t=parseInt(en.target.getAttribute('data-count'));let c=0;const inc=t/50;const tm=setInterval(()=>{c+=inc;if(c>=t){en.target.textContent=t;clearInterval(tm);}else en.target.textContent=Math.floor(c);},30);counterObserver.unobserve(en.target);}}),{threshold:0.5});
         statNumbers.forEach(n=>counterObserver.observe(n));
@@ -356,7 +217,6 @@
         function connectParticles(){for(let i=0;i<particles.length;i++)for(let j=i+1;j<particles.length;j++){const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<130){ctx.beginPath();ctx.strokeStyle=`rgba(67,182,57,${0.08*(1-d/130)})`;ctx.lineWidth=0.5;ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);ctx.stroke();}}}
         function animateParticles(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw();});connectParticles();requestAnimationFrame(animateParticles);}
         animateParticles();
-        document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});}));
     </script>
 </body>
 </html>
