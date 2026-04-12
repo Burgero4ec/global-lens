@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -31,7 +32,7 @@
         .nav-logo img { height: 36px; width: auto; display: block; }
         .nav-logo-text { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .nav-links { display: flex; list-style: none; gap: 0.3rem; align-items: center; flex-wrap: wrap; justify-content: center; }
-        .nav-links a:not(.nav-discord-btn) { color: var(--text-secondary); text-decoration: none; padding: 0.5rem 0.8rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; white-space: nowrap; }
+        .nav-links a:not(.nav-discord-btn) { color: var(--text-secondary); text-decoration: none; padding: 0.5rem 0.8rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; position: relative; white-space: nowrap; }
         .nav-links a:not(.nav-discord-btn):hover, .nav-links a:not(.nav-discord-btn).active { color: var(--text-primary); background: rgba(67,182,57,0.1); }
         .nav-links a:not(.nav-discord-btn).active::after { content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 20px; height: 2px; background: var(--primary); border-radius: 1px; }
         .nav-discord-btn { padding: 0.55rem 1.2rem; background: var(--gradient-1); color: white; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; font-family: inherit; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.4rem; }
@@ -55,6 +56,8 @@
         .section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
         .section-label { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--primary-light); background: rgba(67,182,57,0.1); padding: 0.35rem 1rem; border-radius: 50px; margin-bottom: 1rem; border: 1px solid rgba(67,182,57,0.2); text-transform: uppercase; letter-spacing: 0.05em; }
         .section-label.thanks { background:rgba(245,158,11,0.1);color:var(--accent-light);border-color:rgba(245,158,11,0.2); }
+        .section-label.deputy { background:rgba(124,58,237,0.1);color:#a78bfa;border-color:rgba(124,58,237,0.2); }
+        .section-label.personnel { background:rgba(6,182,212,0.1);color:#67e8f9;border-color:rgba(6,182,212,0.2); }
         .section-title { font-size: clamp(1.5rem,3vw,2rem); font-weight: 800; margin-bottom: 2rem; text-align: center; }
         .section-subtitle { color: var(--text-muted); font-size: 0.9rem; text-align: center; margin-bottom: 2rem; margin-top: -1.5rem; }
 
@@ -73,7 +76,18 @@
         .staff-name { font-size: 1.15rem; font-weight: 700; margin-bottom: 0.3rem; }
         .staff-role { font-size: 0.8rem; color: var(--primary-light); font-family: 'JetBrains Mono', monospace; margin-bottom: 0.5rem; padding: 0.2rem 0.8rem; background: rgba(67,182,57,0.1); border-radius: 50px; display: inline-block; }
         .staff-card.thanks .staff-role { color: var(--accent-light); background: rgba(245,158,11,0.1); }
+        .staff-card.deputy .staff-role { color: #a78bfa; background: rgba(124,58,237,0.1); }
+        .staff-card.personnel .staff-role { color: #67e8f9; background: rgba(6,182,212,0.1); }
         .staff-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+
+        /* Personnel columns */
+        .personnel-columns { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; max-width: 1200px; margin: 0 auto; }
+        .personnel-column { background: var(--bg-card); border: 1px solid var(--border); border-radius: 16px; padding: 1.2rem; }
+        .personnel-column h3 { font-size: 1rem; color: var(--primary-light); margin-bottom: 1rem; text-align: center; padding-bottom: 0.8rem; border-bottom: 1px solid var(--border); }
+        .personnel-member { padding: 0.8rem 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.03); }
+        .personnel-member:last-child { border-bottom: none; }
+        .personnel-member-name { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.3rem; }
+        .personnel-member-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; }
 
         .footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; }
         .footer-text { color: var(--text-muted); font-size: 0.85rem; }
@@ -93,6 +107,7 @@
             .staff-grid { grid-template-columns: 1fr; max-width: 350px; }
             .staff-grid.centered { max-width: 350px; }
             .section { padding: 3rem 1.5rem; }
+            .personnel-columns { grid-template-columns: 1fr; }
             .nav-desktop-btn { display: none; }
         }
         @media (min-width: 769px) { .nav-discord-btn-mobile { display: none !important; } }
@@ -126,7 +141,7 @@
         </div>
     </section>
 
-    <!-- Основатель — по центру -->
+    <!-- Основатель -->
     <section class="section">
         <div style="text-align:center;"><span class="section-label">Лидерство</span></div>
         <h2 class="section-title">👑 Основатель</h2>
@@ -145,7 +160,7 @@
     <!-- Отдельная благодарность -->
     <section class="section" style="padding-top:1rem;">
         <div style="text-align:center;"><span class="section-label thanks">Признательность</span></div>
-        <h2 class="section-title">⭐ Отдельная благодарность</h2>
+        <h2 class="section-title">Отдельная благодарность</h2>
         <p class="section-subtitle">Люди, внёсшие особый вклад в развитие проекта</p>
         <div class="staff-grid reveal">
             <div class="staff-card thanks">
@@ -163,7 +178,7 @@
                 </div>
                 <div class="staff-name">Riy</div>
                 <div class="staff-role">Совладелец Event Horizon</div>
-                <div class="staff-desc">Совладелец сервера Event Horizon. Придумывал прикольные идеи и помогал делать бота. Креатив на максимум.</div>
+                <div class="staff-desc">Совладелец сервера Event Horizon. Придумывал прикольные идеи и помогал делать бота. Партнёрка... хыххыыхы..ы.ы.ы.ыххы4.</div>
             </div>
 
             <div class="staff-card thanks">
@@ -181,16 +196,25 @@
                 </div>
                 <div class="staff-name">LayBay</div>
                 <div class="staff-role">Специалист по технике</div>
-                <div class="staff-desc">Реализует процесс по созданию, оценке и принятию техники. А ещё хороший картограф, карты рисует как бог.</div>
+                <div class="staff-desc">Реализовал процесс по созданию, оценке и принятию техники.</div>
+            </div>
+
+            <div class="staff-card thanks">
+                <div class="staff-avatar">
+                    <div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#ef4444);">Q</div>
+                </div>
+                <div class="staff-name">QWERTX</div>
+                <div class="staff-role">Заместитель</div>
+                <div class="staff-desc">Прошёл полную карьерную лестницу от простого игрока до заместителя. За время работы на шампур пытались насадить минимум 5 раз (включая AytacOnan2 и прочих неравнодушных), но он выжил. Легенда сервера.</div>
             </div>
         </div>
     </section>
 
-    <!-- Администраторы — по центру -->
+    <!-- Администраторы -->
     <section class="section" style="padding-top:1rem;">
         <div style="text-align:center;"><span class="section-label">Управление</span></div>
-        <h2 class="section-title">🛡️ Администраторы</h2>
-        <div class="staff-grid centered reveal">
+        <h2 class="section-title">Администраторы</h2>
+        <div class="staff-grid reveal">
             <div class="staff-card">
                 <div class="staff-avatar">
                     <div class="staff-avatar-placeholder" style="background:var(--gradient-1);">F</div>
@@ -198,6 +222,15 @@
                 <div class="staff-name">Flowy</div>
                 <div class="staff-role">Администратор</div>
                 <div class="staff-desc">Самый добрый и лучший человек в мире с большим сердцем. Всегда поможет, всегда поддержит. Просто топ.</div>
+            </div>
+
+            <div class="staff-card">
+                <div class="staff-avatar">
+                    <img src="images.jfif" alt="Китаёзик">
+                </div>
+                <div class="staff-name">Китаёзик</div>
+                <div class="staff-role">Администратор</div>
+                <div class="staff-desc">Создатель данного сайта. Сделал всё, что вы сейчас видите — от дизайна до реализации.</div>
             </div>
 
             <div class="staff-card">
@@ -214,7 +247,7 @@
     <!-- Кураторы -->
     <section class="section" style="padding-top:1rem;">
         <div style="text-align:center;"><span class="section-label">Направления</span></div>
-        <h2 class="section-title">📋 Кураторы</h2>
+        <h2 class="section-title">Кураторы</h2>
         <div class="staff-grid reveal">
             <div class="staff-card">
                 <div class="staff-avatar">
@@ -231,7 +264,16 @@
                 </div>
                 <div class="staff-name">Maks</div>
                 <div class="staff-role">Куратор политологии</div>
-                <div class="staff-desc">Нет, не мессенджер. Куратор политологии. Справляется плохо, но старается. Мы верим в тебя, Макс! 💪</div>
+                <div class="staff-desc">Нет, не мессенджер. Куратор политологии. Справляется плохо, но старается. Мы верим в тебя, Макс!</div>
+            </div>
+
+            <div class="staff-card">
+                <div class="staff-avatar">
+                    <div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#8b5cf6,#06b6d4);">Y</div>
+                </div>
+                <div class="staff-name">Yabl1ch</div>
+                <div class="staff-role">Куратор анкетологов</div>
+                <div class="staff-desc">Самый лучший куратор анкетологов, и ещё и самый лучший анкетолог, и по совместительству заслуженный человек в политологии. И также единственный Куратор на сервере, который из сезона в сезон является лучшим работником в своём отделе. </div>
             </div>
 
             <div class="staff-card">
@@ -240,7 +282,124 @@
                 </div>
                 <div class="staff-name">[ARIMA] Yagami</div>
                 <div class="staff-role">Куратор модераторов</div>
-                <div class="staff-desc">Сделал так, что теперь пашет один человек. 10/10, рекомендую. Эффективность на максимуме. 🏆</div>
+                <div class="staff-desc">Сделал так, что теперь пашет один человек. 10/10, рекомендую. Эффективность на максимуме.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Замы кураторов -->
+    <section class="section" style="padding-top:1rem;">
+        <div style="text-align:center;"><span class="section-label deputy">Заместители</span></div>
+        <h2 class="section-title">Замы кураторов</h2>
+        <div class="staff-grid reveal">
+            <div class="staff-card deputy">
+                <div class="staff-avatar">
+                    <div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#43b639);">P</div>
+                </div>
+                <div class="staff-name">ponzc</div>
+                <div class="staff-role">Зам картографии</div>
+                <div class="staff-desc">Да-да, он и куратор, и зам. Два в одном. Эффективность в чистом виде.</div>
+            </div>
+
+            <div class="staff-card deputy">
+                <div class="staff-avatar">
+                    <div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#06b6d4);">Y</div>
+                </div>
+                <div class="staff-name">[ARIMA] Yagami</div>
+                <div class="staff-role">Зам анкетологии</div>
+                <div class="staff-desc">Самый лучший анкетолог, после Yabl1ch, конечно же. Заместитель куратора анкетологов.</div>
+            </div>
+
+            <div class="staff-card deputy">
+                <div class="staff-avatar">
+                    <div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#ef4444);">Q</div>
+                </div>
+                <div class="staff-name">QWERTX</div>
+                <div class="staff-role">Зам политологии и модерации</div>
+                <div class="staff-desc">Тот самый единственный человек, которого заставил работать [ARIMA] Yagami. Ненавидит nefusad.</div>
+            </div>
+
+            <div class="staff-card deputy">
+                <div class="staff-avatar">
+                    <div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#ef4444,#7c3aed);">N</div>
+                </div>
+                <div class="staff-name">nefusad</div>
+                <div class="staff-role">Зам куратора воен. ведущих</div>
+                <div class="staff-desc">Отличный человек. Любит спорить. Ненавидит QWERTX.</div>
+            </div>
+
+            <div class="staff-card deputy">
+                <div class="staff-avatar">
+                    <div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#22c55e,#0ea5e9);">L</div>
+                </div>
+                <div class="staff-name">LayBay</div>
+                <div class="staff-role">Зам куратора технологии</div>
+                <div class="staff-desc">Получает права на принятие участников в наборе на должности технологов в случае их полного соответствия и удачного прохождения теста на технолога.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Простой персонал -->
+    <section class="section" style="padding-top:1rem;">
+        <div style="text-align:center;"><span class="section-label personnel">Сотрудники</span></div>
+        <h2 class="section-title">Простой персонал</h2>
+        <p class="section-subtitle">Люди, которые работают каждый день</p>
+        <div class="personnel-columns reveal">
+            <!-- Политологи -->
+            <div class="personnel-column">
+                <h3>️ Политологи</h3>
+                <div class="personnel-member">
+                    <div class="personnel-member-name">Adolf_Hit</div>
+                    <div class="personnel-member-desc">Из-за него 4 человека перестали играть на сервере. Непротив такого от него.</div>
+                </div>
+                <div class="personnel-member">
+                    <div class="personnel-member-name">Житель Гипербореи</div>
+                    <div class="personnel-member-desc">Истинный мастер слова, способный найти дипломатический путь даже в самые тёмные времена. Его аналитический ум и тонкое понимание мировой политики делают его незаменимым членом команды.</div>
+                </div>
+                <div class="personnel-member">
+                    <div class="personnel-member-name">hop##lèŝs 🏴‍☠️👑</div>
+                    <div class="personnel-member-desc">Горячий факел политики, который зажигает сердца и умы. Его страсть к справедливости и неугасающая энергия вдохновляют всех вокруг стремиться к лучшему.</div>
+                </div>
+                <div class="personnel-member">
+                    <div class="personnel-member-name">ONE PIECE</div>
+                    <div class="personnel-member-desc">Не работает. Совсем. Пустая трата слота.</div>
+                </div>
+            </div>
+
+            <!-- Картографы -->
+            <div class="personnel-column">
+                <h3>Картографы</h3>
+                <div class="personnel-member">
+                    <div class="personnel-member-name" style="color:var(--text-muted);font-style:italic;">Пусто...</div>
+                    <div class="personnel-member-desc"></div>
+                </div>
+            </div>
+
+            <!-- Анкетологи -->
+            <div class="personnel-column">
+                <h3>Анкетологи</h3>
+                <div class="personnel-member">
+                    <div class="personnel-member-name" style="color:var(--text-muted);font-style:italic;">Пусто...</div>
+                    <div class="personnel-member-desc"></div>
+                </div>
+            </div>
+
+            <!-- Модераторы -->
+            <div class="personnel-column">
+                <h3>Модераторы</h3>
+                <div class="personnel-member">
+                    <div class="personnel-member-name" style="color:var(--text-muted);font-style:italic;">Пусто...</div>
+                    <div class="personnel-member-desc"></div>
+                </div>
+            </div>
+
+            <!-- Технологи -->
+            <div class="personnel-column">
+                <h3>Технологи</h3>
+                <div class="personnel-member">
+                    <div class="personnel-member-name" style="color:var(--text-muted);font-style:italic;">Пусто...</div>
+                    <div class="personnel-member-desc"></div>
+                </div>
             </div>
         </div>
     </section>

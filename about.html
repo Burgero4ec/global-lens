@@ -30,7 +30,7 @@
         .nav-logo img { height: 36px; width: auto; display: block; }
         .nav-logo-text { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .nav-links { display: flex; list-style: none; gap: 0.3rem; align-items: center; flex-wrap: wrap; justify-content: center; }
-        .nav-links a:not(.nav-discord-btn) { color: var(--text-secondary); text-decoration: none; padding: 0.5rem 0.8rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; white-space: nowrap; }
+        .nav-links a:not(.nav-discord-btn) { color: var(--text-secondary); text-decoration: none; padding: 0.5rem 0.8rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; position: relative; white-space: nowrap; }
         .nav-links a:not(.nav-discord-btn):hover, .nav-links a:not(.nav-discord-btn).active { color: var(--text-primary); background: rgba(67,182,57,0.1); }
         .nav-links a:not(.nav-discord-btn).active::after { content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 20px; height: 2px; background: var(--primary); border-radius: 1px; }
         .nav-discord-btn { padding: 0.55rem 1.2rem; background: var(--gradient-1); color: white; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; font-family: inherit; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.4rem; }
@@ -142,7 +142,11 @@
                 <h3>Живые ивенты</h3>
                 <p>Каждый ход уникален</p>
             </div>
-            
+            <div class="highlight-card">
+                <div class="highlight-icon">🤝</div>
+                <h3>Зрелое комьюнити</h3>
+                <p>Без токсичности</p>
+            </div>
         </div>
 
         <div class="cta-bar reveal">
