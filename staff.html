@@ -85,7 +85,6 @@
         .staff-card.personnel .staff-role { color: #67e8f9; background: rgba(6,182,212,0.1); }
         .staff-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
 
-        /* Personnel cards - continuous layout */
         .personnel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; max-width: 1200px; margin: 0 auto; }
         .personnel-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; display: flex; align-items: center; gap: 1rem; transition: all 0.3s ease; }
         .personnel-card:hover { border-color: rgba(67,182,57,0.3); transform: translateY(-2px); box-shadow: var(--shadow); }
@@ -119,9 +118,7 @@
             .personnel-grid { grid-template-columns: 1fr; }
             .nav-desktop-btn { display: none; }
         }
-        @media (min-width: 769px) {
-            .nav-btn-mobile { display: none !important; }
-        }
+        @media (min-width: 769px) { .nav-btn-mobile { display: none !important; } }
     </style>
 </head>
 <body>
@@ -136,6 +133,7 @@
                 <li><a href="about.html" class="nav-link">О проекте</a></li>
                 <li><a href="features.html" class="nav-link">Возможности</a></li>
                 <li><a href="season.html" class="nav-link">Сезон</a></li>
+                <li><a href="rules.html" class="nav-link">Правила</a></li>
                 <li><a href="staff.html" class="nav-link active">Персонал</a></li>
                 <li class="nav-btn-mobile"><a href="https://discord.gg/edPpSRmRNu" target="_blank" class="nav-btn discord">🎮 Discord</a></li>
                 <li class="nav-btn-mobile"><a href="https://t.me/+5DaqxYO3H6VlMzhi" target="_blank" class="nav-btn telegram">✈️ Telegram</a></li>
@@ -156,15 +154,12 @@
         </div>
     </section>
 
-    <!-- Основатель -->
     <section class="section">
         <div style="text-align:center;"><span class="section-label">Лидерство</span></div>
         <h2 class="section-title">👑 Основатель</h2>
         <div class="staff-grid centered reveal">
             <div class="staff-card founder">
-                <div class="staff-avatar">
-                    <img src="sd" alt="AytacOnan2">
-                </div>
+                <div class="staff-avatar"><img src="sd" alt="AytacOnan2"></div>
                 <div class="staff-name">AytacOnan2</div>
                 <div class="staff-role">Основатель</div>
                 <div class="staff-desc">Владелец сервера. Создал бота, который делает всю тяжёлую работу. Просто хороший человек, без которого этого проекта не существовало бы.</div>
@@ -172,52 +167,37 @@
         </div>
     </section>
 
-    <!-- Отдельная благодарность -->
     <section class="section" style="padding-top:1rem;">
         <div style="text-align:center;"><span class="section-label thanks">Признательность</span></div>
         <h2 class="section-title">Отдельная благодарность</h2>
         <p class="section-subtitle">Люди, внёсшие особый вклад в развитие проекта</p>
         <div class="staff-grid reveal">
             <div class="staff-card thanks">
-                <div class="staff-avatar">
-                    <img src="images.jfif" alt="Китаёзик">
-                </div>
+                <div class="staff-avatar"><img src="images.jfif" alt="Китаёзик"></div>
                 <div class="staff-name">Китаёзик</div>
                 <div class="staff-role">Администратор</div>
                 <div class="staff-desc">Создатель данного сайта. Сделал всё, что вы сейчас видите — от дизайна до реализации.</div>
             </div>
-
             <div class="staff-card thanks">
-                <div class="staff-avatar">
-                    <div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">R</div>
-                </div>
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">R</div></div>
                 <div class="staff-name">Riy</div>
                 <div class="staff-role">Совладелец Event Horizon</div>
                 <div class="staff-desc">Совладелец сервера Event Horizon. Придумывал прикольные идеи и помогал делать бота. Партнёрка... хыххыыхы..ы.ы.ы.ыххы4.</div>
             </div>
-
             <div class="staff-card thanks">
-                <div class="staff-avatar">
-                    <div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#8b5cf6,#06b6d4);">Y</div>
-                </div>
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#8b5cf6,#06b6d4);">Y</div></div>
                 <div class="staff-name">Yabl1ch</div>
                 <div class="staff-role">Куратор анкетологов</div>
                 <div class="staff-desc">Самый лучший куратор анкетологов и по совместительству генератор идей. Идеи сыпятся из него как из рога изобилия.</div>
             </div>
-
             <div class="staff-card thanks">
-                <div class="staff-avatar">
-                    <div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#22c55e,#0ea5e9);">L</div>
-                </div>
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#22c55e,#0ea5e9);">L</div></div>
                 <div class="staff-name">LayBay</div>
                 <div class="staff-role">Специалист по технике</div>
                 <div class="staff-desc">Реализовал процесс по созданию, оценке и принятию техники.</div>
             </div>
-
             <div class="staff-card thanks">
-                <div class="staff-avatar">
-                    <div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#ef4444);">Q</div>
-                </div>
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#ef4444);">Q</div></div>
                 <div class="staff-name">QWERTX</div>
                 <div class="staff-role">Заместитель</div>
                 <div class="staff-desc">Прошёл полную карьерную лестницу от простого игрока до заместителя. За время работы на шампур пытались насадить минимум 5 раз (включая AytacOnan2 и прочих неравнодушных), но он выжил. Легенда сервера.</div>
@@ -225,33 +205,24 @@
         </div>
     </section>
 
-    <!-- Администраторы -->
     <section class="section" style="padding-top:1rem;">
         <div style="text-align:center;"><span class="section-label">Управление</span></div>
         <h2 class="section-title">Администраторы</h2>
         <div class="staff-grid reveal">
             <div class="staff-card">
-                <div class="staff-avatar">
-                    <div class="staff-avatar-placeholder" style="background:var(--gradient-1);">F</div>
-                </div>
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:var(--gradient-1);">F</div></div>
                 <div class="staff-name">Flowy</div>
                 <div class="staff-role">Администратор</div>
                 <div class="staff-desc">Самый добрый и лучший человек в мире с большим сердцем. Всегда поможет, всегда поддержит. Просто топ.</div>
             </div>
-
             <div class="staff-card">
-                <div class="staff-avatar">
-                    <img src="images.jfif" alt="Китаёзик">
-                </div>
+                <div class="staff-avatar"><img src="images.jfif" alt="Китаёзик"></div>
                 <div class="staff-name">Китаёзик</div>
                 <div class="staff-role">Администратор</div>
                 <div class="staff-desc">Создатель данного сайта. Сделал всё, что вы сейчас видите — от дизайна до реализации.</div>
             </div>
-
             <div class="staff-card">
-                <div class="staff-avatar">
-                    <div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#ec4899,#f59e0b);">🦄</div>
-                </div>
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#ec4899,#f59e0b);">🦄</div></div>
                 <div class="staff-name">[ВНК] Феникс Единорогович</div>
                 <div class="staff-role">Администратор</div>
                 <div class="staff-desc">Единорожка. Да, просто единорожка. 🦄✨</div>
@@ -259,33 +230,24 @@
         </div>
     </section>
 
-    <!-- Кураторы -->
     <section class="section" style="padding-top:1rem;">
         <div style="text-align:center;"><span class="section-label">Направления</span></div>
         <h2 class="section-title">Кураторы</h2>
         <div class="staff-grid reveal">
             <div class="staff-card">
-                <div class="staff-avatar">
-                    <div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#06b6d4,#3b82f6);">P</div>
-                </div>
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#06b6d4,#3b82f6);">P</div></div>
                 <div class="staff-name">ponzc</div>
                 <div class="staff-role">Куратор картографов</div>
                 <div class="staff-desc">Смог восстановить и сделать стабильную работу картографии. Герой, которого заслуживает наш проект.</div>
             </div>
-
             <div class="staff-card">
-                <div class="staff-avatar">
-                    <div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#f97316,#ef4444);">M</div>
-                </div>
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#f97316,#ef4444);">M</div></div>
                 <div class="staff-name">Maks</div>
                 <div class="staff-role">Куратор политологии</div>
                 <div class="staff-desc">Нет, не мессенджер. Куратор политологии. Справляется плохо, но старается. Мы верим в тебя, Макс!</div>
             </div>
-
             <div class="staff-card">
-                <div class="staff-avatar">
-                    <div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#2563eb);">Y</div>
-                </div>
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#2563eb);">Y</div></div>
                 <div class="staff-name">[ARIMA] Yagami</div>
                 <div class="staff-role">Куратор модераторов</div>
                 <div class="staff-desc">Сделал так, что теперь пашет один человек. 10/10, рекомендую. Эффективность на максимуме.</div>
@@ -293,150 +255,112 @@
         </div>
     </section>
 
-    <!-- Замы кураторов -->
     <section class="section" style="padding-top:1rem;">
         <div style="text-align:center;"><span class="section-label deputy">Заместители</span></div>
         <h2 class="section-title">Замы кураторов</h2>
         <div class="staff-grid reveal">
             <div class="staff-card deputy">
-                <div class="staff-avatar">
-                    <div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#43b639);">P</div>
-                </div>
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#43b639);">P</div></div>
                 <div class="staff-name">ponzc</div>
-                <div class="staff-role">Зам картографии</div>
+                <div class="staff-role">Заместитель</div>
                 <div class="staff-desc">Да-да, он и куратор, и зам. Два в одном. Эффективность в чистом виде.</div>
             </div>
-
             <div class="staff-card deputy">
-                <div class="staff-avatar">
-                    <div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#06b6d4);">Y</div>
-                </div>
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#06b6d4);">Y</div></div>
                 <div class="staff-name">[ARIMA] Yagami</div>
                 <div class="staff-role">Зам анкетологии</div>
                 <div class="staff-desc">Самый лучший анкетолог, после Yabl1ch, конечно же. Заместитель куратора анкетологов.</div>
             </div>
-
             <div class="staff-card deputy">
-                <div class="staff-avatar">
-                    <div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#ef4444);">Q</div>
-                </div>
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#ef4444);">Q</div></div>
                 <div class="staff-name">QWERTX</div>
                 <div class="staff-role">Зам политологии и модерации</div>
                 <div class="staff-desc">Тот самый единственный человек, которого заставил работать [ARIMA] Yagami. Ненавидит nefusad.</div>
             </div>
-
             <div class="staff-card deputy">
-                <div class="staff-avatar">
-                    <div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#ef4444,#7c3aed);">N</div>
-                </div>
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#ef4444,#7c3aed);">N</div></div>
                 <div class="staff-name">nefusad</div>
                 <div class="staff-role">Зам куратора воен. ведущих</div>
                 <div class="staff-desc">Отличный человек. Любит спорить. Ненавидит QWERTX.</div>
             </div>
-
             <div class="staff-card deputy">
-                <div class="staff-avatar">
-                    <div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#22c55e,#0ea5e9);">L</div>
-                </div>
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#22c55e,#0ea5e9);">L</div></div>
                 <div class="staff-name">LayBay</div>
-                <div class="staff-role">Зам куратора технологии</div>
-                <div class="staff-desc">Получает права на принятие участников в наборе на должности технологов в случае их полного соответствия и удачного прохождения теста на технолога.</div>
+                <div class="staff-role">Зам картографии</div>
+                <div class="staff-desc">Получает права на принятие участников в наборе на должности картографов в случае их полного соответствия и удачного прохождения теста.</div>
+            </div>
+            <div class="staff-card deputy">
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#3b82f6,#8b5cf6);">X</div></div>
+                <div class="staff-name">x3led</div>
+                <div class="staff-role">Второй зам кур. модераторов</div>
+                <div class="staff-desc">Надежная опора модерации. Всегда на связи, следит за порядком и помогает куратору закрывать сложные ситуации.</div>
             </div>
         </div>
     </section>
 
-    <!-- Простой персонал - сплошные карточки -->
     <section class="section" style="padding-top:1rem;">
         <div style="text-align:center;"><span class="section-label personnel">Сотрудники</span></div>
         <h2 class="section-title">Простой персонал</h2>
         <p class="section-subtitle">Люди, которые работают каждый день</p>
         <div class="personnel-grid reveal">
-            <!-- Политологи -->
             <div class="personnel-card">
-                <div class="personnel-card-avatar">
-                    <div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#f97316,#ef4444);">A</div>
-                </div>
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#f97316,#ef4444);">A</div></div>
                 <div class="personnel-card-info">
                     <div class="personnel-card-name">Adolf_Hit</div>
                     <div class="personnel-card-tag">Политолог</div>
                     <div class="personnel-card-desc">Из-за него 4 человека перестали играть на сервере. Непротив такого от него.</div>
                 </div>
             </div>
-
             <div class="personnel-card">
-                <div class="personnel-card-avatar">
-                    <div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#0ea5e9,#06b6d4);">Ж</div>
-                </div>
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#0ea5e9,#06b6d4);">Ж</div></div>
                 <div class="personnel-card-info">
                     <div class="personnel-card-name">Житель Гипербореи</div>
                     <div class="personnel-card-tag">Политолог</div>
                     <div class="personnel-card-desc">Истинный мастер слова, способный найти дипломатический путь даже в самые тёмные времена. Его аналитический ум и тонкое понимание мировой политики делают его незаменимым.</div>
                 </div>
             </div>
-
             <div class="personnel-card">
-                <div class="personnel-card-avatar">
-                    <div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#1a1a1a,#f59e0b);">H</div>
-                </div>
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#1a1a1a,#f59e0b);">H</div></div>
                 <div class="personnel-card-info">
                     <div class="personnel-card-name">hop##lèŝs 🏴‍☠️👑</div>
                     <div class="personnel-card-tag">Политолог</div>
                     <div class="personnel-card-desc">Горящий факел политики, который зажигает сердца и умы. Его страсть к справедливости и неугасающая энергия вдохновляют всех вокруг стремиться к лучшему.</div>
                 </div>
             </div>
-
             <div class="personnel-card">
-                <div class="personnel-card-avatar">
-                    <div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#6b7280,#9ca3af);">O</div>
-                </div>
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#6b7280,#9ca3af);">O</div></div>
                 <div class="personnel-card-info">
                     <div class="personnel-card-name">ONE PIECE</div>
                     <div class="personnel-card-tag">Политолог</div>
                     <div class="personnel-card-desc">Пидорас. Не работает. Совсем. Пустая трата слота.</div>
                 </div>
             </div>
-
-            <!-- Картографы -->
             <div class="personnel-card" style="border-style:dashed;opacity:0.5;">
-                <div class="personnel-card-avatar">
-                    <div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#374151,#4b5563);">?</div>
-                </div>
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#374151,#4b5563);">?</div></div>
                 <div class="personnel-card-info">
                     <div class="personnel-card-name">Набор открыт</div>
                     <div class="personnel-card-tag">Картографы</div>
                     <div class="personnel-card-desc">Пока никого нет. Хочешь рисовать карты? Пиши!</div>
                 </div>
             </div>
-
-            <!-- Анкетологи -->
             <div class="personnel-card" style="border-style:dashed;opacity:0.5;">
-                <div class="personnel-card-avatar">
-                    <div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#374151,#4b5563);">?</div>
-                </div>
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#374151,#4b5563);">?</div></div>
                 <div class="personnel-card-info">
                     <div class="personnel-card-name">Набор открыт</div>
                     <div class="personnel-card-tag">Анкетологи</div>
                     <div class="personnel-card-desc">Пока никого нет. Хочешь проверять анкеты? Пиши!</div>
                 </div>
             </div>
-
-            <!-- Модераторы -->
             <div class="personnel-card" style="border-style:dashed;opacity:0.5;">
-                <div class="personnel-card-avatar">
-                    <div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#374151,#4b5563);">?</div>
-                </div>
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#374151,#4b5563);">?</div></div>
                 <div class="personnel-card-info">
                     <div class="personnel-card-name">Набор открыт</div>
                     <div class="personnel-card-tag">Модераторы</div>
                     <div class="personnel-card-desc">Пока никого нет. Хочешь следить за порядком? Пиши!</div>
                 </div>
             </div>
-
-            <!-- Технологи -->
             <div class="personnel-card" style="border-style:dashed;opacity:0.5;">
-                <div class="personnel-card-avatar">
-                    <div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#374151,#4b5563);">?</div>
-                </div>
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#374151,#4b5563);">?</div></div>
                 <div class="personnel-card-info">
                     <div class="personnel-card-name">Набор открыт</div>
                     <div class="personnel-card-tag">Технологи</div>
@@ -462,4 +386,3 @@
     </script>
 </body>
 </html>
-
