@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -66,8 +67,11 @@
         .section-title { font-size: clamp(1.5rem,3vw,2rem); font-weight: 800; margin-bottom: 2rem; text-align: center; }
         .section-subtitle { color: var(--text-muted); font-size: 0.9rem; text-align: center; margin-bottom: 2rem; margin-top: -1.5rem; }
 
-        .staff-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; max-width: 900px; margin: 0 auto; }
+        .staff-grid { display: grid; gap: 1.5rem; max-width: 900px; margin: 0 auto; }
         .staff-grid.centered { max-width: 350px; justify-content: center; }
+        .staff-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+        .staff-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
+        .staff-grid.cols-auto { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
 
         .staff-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 2rem; text-align: center; transition: all 0.3s ease; position: relative; }
         .staff-card:hover { border-color: rgba(67,182,57,0.3); transform: translateY(-3px); box-shadow: var(--shadow); }
@@ -84,6 +88,43 @@
         .staff-card.deputy .staff-role { color: #a78bfa; background: rgba(124,58,237,0.1); }
         .staff-card.personnel .staff-role { color: #67e8f9; background: rgba(6,182,212,0.1); }
         .staff-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
+
+        /* Crime Badge Styles */
+        .crime-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            cursor: pointer;
+            margin-top: 0.8rem;
+            padding: 0.4rem 0.8rem;
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 8px;
+            color: #fca5a5;
+            font-size: 0.85rem;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+            user-select: none;
+            transition: all 0.3s ease;
+        }
+        .crime-badge:hover { background: rgba(239, 68, 68, 0.2); }
+        .crime-badge svg { transition: transform 0.3s ease; fill: #fca5a5; }
+        .crime-badge.open svg { transform: rotate(180deg); }
+
+        .crime-list {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.5s ease;
+            text-align: left;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        .crime-list.show { max-height: 2000px; padding-top: 1rem; }
+        .crime-list ol, .crime-list ul { margin-left: 1.2rem; margin-bottom: 1rem; }
+        .crime-list li { margin-bottom: 0.2rem; }
+        .crime-list .img-list { border-top: 1px solid var(--border); padding-top: 0.5rem; }
+        .crime-list .img-list-title { font-weight: 600; color: var(--text-secondary); margin-bottom: 0.5rem; display: block; }
 
         .personnel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.2rem; max-width: 1200px; margin: 0 auto; }
         .personnel-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; display: flex; align-items: center; gap: 1rem; transition: all 0.3s ease; }
@@ -112,7 +153,7 @@
             .nav-links.open { right: 0; }
             .nav-btn-mobile { display: flex !important; margin-top: 0.5rem; justify-content: center; }
             .nav-buttons { gap: 0.5rem; }
-            .staff-grid { grid-template-columns: 1fr; max-width: 350px; }
+            .staff-grid.cols-3, .staff-grid.cols-2 { grid-template-columns: 1fr; max-width: 350px; }
             .staff-grid.centered { max-width: 350px; }
             .section { padding: 3rem 1.5rem; }
             .personnel-grid { grid-template-columns: 1fr; }
@@ -171,7 +212,7 @@
         <div style="text-align:center;"><span class="section-label thanks">Признательность</span></div>
         <h2 class="section-title">Отдельная благодарность</h2>
         <p class="section-subtitle">Люди, внёсшие особый вклад в развитие проекта</p>
-        <div class="staff-grid reveal">
+        <div class="staff-grid cols-auto reveal">
             <div class="staff-card thanks">
                 <div class="staff-avatar"><img src="images.jfif" alt="Китаёзик"></div>
                 <div class="staff-name">Китаёзик</div>
@@ -196,11 +237,85 @@
                 <div class="staff-role">Специалист по технике</div>
                 <div class="staff-desc">Реализовал процесс по созданию, оценке и принятию техники.</div>
             </div>
+            <!-- QWERTX Card -->
             <div class="staff-card thanks">
                 <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#ef4444);">Q</div></div>
                 <div class="staff-name">QWERTX</div>
                 <div class="staff-role">Заместитель</div>
                 <div class="staff-desc">Прошёл полную карьерную лестницу от простого игрока до заместителя. За время работы на шампур пытались насадить минимум 5 раз (включая AytacOnan2 и прочих неравнодушных), но он выжил. Легенда сервера.</div>
+                
+                <div class="crime-badge" onclick="this.classList.toggle('open'); this.nextElementSibling.classList.toggle('show');">
+                    Обвиняется в:
+                    <svg width="12" height="12" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+                </div>
+                <div class="crime-list">
+                    <ol>
+                        <li>Массовое убийство</li>
+                        <li>Принужденный каннибализм</li>
+                        <li>Преступления против человечества</li>
+                        <li>Вандализм</li>
+                        <li>Каннибализм</li>
+                        <li>Геноцид</li>
+                        <li>Похищение</li>
+                        <li>Незаконный оборот оружия</li>
+                        <li>Кража</li>
+                        <li>Мошенничество</li>
+                        <li>Изготовление и сбыт поддельных документов</li>
+                        <li>Незаконный оборот наркотиков</li>
+                        <li>Пиратство</li>
+                        <li>Коррупция</li>
+                        <li>Ловушка на дороге</li>
+                        <li>Грабеж</li>
+                        <li>Вымогательство</li>
+                        <li>Политическая угроза</li>
+                        <li>Угон транспортного средства</li>
+                        <li>Изнасилование</li>
+                        <li>Торговля людьми промышленной</li>
+                        <li>Нарушение авторского права</li>
+                        <li>Киберпреступления</li>
+                        <li>Сексуальное насилие</li>
+                        <li>Нарушение законов о защите окружающей среды</li>
+                        <li>Организация органов поддельной власти</li>
+                        <li>Военное преступление</li>
+                        <li>Утеря или уничтожение доказательств</li>
+                        <li>Неуплата налогов</li>
+                        <li>Организация или участие в мятеже</li>
+                        <li>Содействие террористической деятельности</li>
+                        <li>Следование расистским или ксенофобским взглядам</li>
+                        <li>Сотрудничество с преступной организацией</li>
+                        <li>Нарушение прав человека</li>
+                        <li>Неисполнение профессиональных обязанностей</li>
+                        <li>Уклонение от армейской службы</li>
+                        <li>Незаконное получение конфиденциальной информации</li>
+                        <li>Неправомерные действия в сфере финансов</li>
+                        <li>Саботаж или умышленное повреждение имущества</li>
+                        <li>Использование нарушенных законов для личной выгоды</li>
+                        <li>Нарушение законов о безопасности</li>
+                    </ol>
+                    <div class="img-list">
+                        <span class="img-list-title">Дополнительно (по фото):</span>
+                        <ul>
+                            <li>Жестокое обращение с животными</li>
+                            <li>Браконьерство</li>
+                            <li>Массовое убийство животных</li>
+                            <li>Побег из тюрьмы</li>
+                            <li>Сопротивление аресту</li>
+                            <li>Нападение и побои</li>
+                            <li>Обвинение в коррупции</li>
+                            <li>Преследование</li>
+                            <li>Заговор</li>
+                            <li>Контрабанда</li>
+                            <li>Незаконное пересечение границы</li>
+                            <li>Проникновение на чужую территорию</li>
+                            <li>Рабство</li>
+                            <li>Опасное вождение</li>
+                            <li>Создание опасной ситуации для жизни и здоровья</li>
+                            <li>Порча имущества</li>
+                            <li>Убийство</li>
+                            <li>Незаконная охота</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -208,7 +323,7 @@
     <section class="section" style="padding-top:1rem;">
         <div style="text-align:center;"><span class="section-label">Управление</span></div>
         <h2 class="section-title">Администраторы</h2>
-        <div class="staff-grid reveal">
+        <div class="staff-grid cols-3 reveal">
             <div class="staff-card">
                 <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:var(--gradient-1);">F</div></div>
                 <div class="staff-name">Flowy</div>
@@ -233,7 +348,7 @@
     <section class="section" style="padding-top:1rem;">
         <div style="text-align:center;"><span class="section-label">Направления</span></div>
         <h2 class="section-title">Кураторы</h2>
-        <div class="staff-grid reveal">
+        <div class="staff-grid cols-3 reveal">
             <div class="staff-card">
                 <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#06b6d4,#3b82f6);">P</div></div>
                 <div class="staff-name">ponzc</div>
@@ -258,7 +373,7 @@
     <section class="section" style="padding-top:1rem;">
         <div style="text-align:center;"><span class="section-label deputy">Заместители</span></div>
         <h2 class="section-title">Замы кураторов</h2>
-        <div class="staff-grid reveal">
+        <div class="staff-grid cols-2 reveal">
             <div class="staff-card deputy">
                 <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#43b639);">P</div></div>
                 <div class="staff-name">ponzc</div>
@@ -386,3 +501,4 @@
     </script>
 </body>
 </html>
+```
