@@ -6,25 +6,26 @@
     <title>Правила — Global Lens</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.0.18/index.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.18/index.min.css">
+    <!-- Подключаем библиотеку для парсинга Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
+        /* Те же стили */
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
             --primary: #43b639; --primary-dark: #2e8a27; --primary-light: #5dd454;
-            --accent: #f59e0b; --accent-light: #fbbf24;
             --bg-dark: #0a0a0f; --bg-card: #12121a;
             --text-primary: #f1f5f9; --text-secondary: #94a3b8; --text-muted: #64748b;
             --border: #1e1e2e;
             --gradient-1: linear-gradient(135deg, #43b639, #7ed957);
             --gradient-hero: linear-gradient(135deg, #0a0a0f 0%, #0a120a 50%, #0a0a0f 100%);
             --shadow: 0 25px 50px -12px rgba(0,0,0,0.7);
+            --tg-blue: #2AABEE;
         }
         html { scroll-behavior: smooth; }
         body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.7; overflow-x: hidden; }
-
-        /* Nav Styles Same */
         .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 2rem; transition: all 0.4s ease; }
         .navbar.scrolled { background: rgba(10,10,15,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0.7rem 2rem; }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; overflow: visible; }
         .nav-logo { font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
         .nav-logo img { height: 36px; width: auto; display: block; }
         .nav-logo-text { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
@@ -32,17 +33,17 @@
         .nav-links a:not(.nav-btn):not(.dropdown-trigger) { color: var(--text-secondary); text-decoration: none; padding: 0.5rem 0.8rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; position: relative; white-space: nowrap; }
         .nav-links a:not(.nav-btn):not(.dropdown-trigger):hover, .nav-links a:not(.nav-btn):not(.dropdown-trigger).active { color: var(--text-primary); background: rgba(67,182,57,0.1); }
         .nav-links a:not(.nav-btn):not(.dropdown-trigger).active::after { content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 20px; height: 2px; background: var(--primary); border-radius: 1px; }
-        .nav-btn { padding: 0.55rem 1.2rem; color: white; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; font-family: inherit; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.4rem; }
+        .nav-btn { padding: 0.55rem 1.2rem; color: white; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; font-family: inherit; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.4rem; z-index: 2; }
         .nav-btn:hover { transform: translateY(-2px); }
         .nav-btn.discord { background: var(--gradient-1); box-shadow: 0 4px 15px rgba(67,182,57,0.3); }
         .nav-btn.telegram { background: linear-gradient(135deg, #2AABEE, #1a8cd8); box-shadow: 0 4px 15px rgba(42,171,238,0.3); }
         .nav-buttons { display: flex; gap: 0.5rem; align-items: center; }
-        .dropdown { position: relative; }
+        .dropdown { position: relative; z-index: 1001; }
         .dropdown-trigger { color: var(--text-secondary); text-decoration: none; padding: 0.5rem 0.8rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; cursor: pointer; display: flex; align-items: center; gap: 0.3rem; white-space: nowrap; background: none; border: none; font-family: inherit; }
         .dropdown-trigger:hover, .dropdown-trigger.active { color: var(--text-primary); background: rgba(67,182,57,0.1); }
         .dropdown-trigger .arrow { font-size: 0.7rem; transition: transform 0.3s ease; }
         .dropdown.open .dropdown-trigger .arrow { transform: rotate(180deg); }
-        .dropdown-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.5rem 0; min-width: 160px; opacity: 0; visibility: hidden; transition: all 0.2s ease; box-shadow: var(--shadow); z-index: 100; margin-top: 0.5rem; }
+        .dropdown-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.5rem 0; min-width: 160px; opacity: 0; visibility: hidden; transition: all 0.2s ease; box-shadow: var(--shadow); z-index: 2000; margin-top: 0.5rem; }
         .dropdown.open .dropdown-menu { opacity: 1; visibility: visible; }
         .dropdown-menu a { display: block; padding: 0.6rem 1rem; color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: all 0.2s ease; white-space: nowrap; }
         .dropdown-menu a:hover { color: var(--text-primary); background: rgba(67,182,57,0.1); }
@@ -82,6 +83,14 @@
         .sub-header { color: var(--text-primary); font-weight: 600; margin: 1rem 0 0.5rem; display: block; }
         .note { color: var(--text-muted); font-size: 0.85rem; font-style: italic; }
         .date-badge { display: inline-block; background: rgba(67,182,57,0.1); color: var(--primary-light); padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.8rem; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace; }
+        
+        /* Стили для контента с GitHub */
+        .dynamic-content h1, .dynamic-content h2, .dynamic-content h3 { color: var(--text-primary); margin: 1.5rem 0 0.5rem; }
+        .dynamic-content a { color: var(--primary-light); text-decoration: none; }
+        .dynamic-content a:hover { text-decoration: underline; }
+        .dynamic-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1rem; }
+        .dynamic-content li { margin-bottom: 0.5rem; }
+        .dynamic-content blockquote { border-left: 3px solid var(--primary); padding-left: 1rem; color: var(--text-secondary); font-style: italic; }
 
         .footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; }
         .footer-text { color: var(--text-muted); font-size: 0.85rem; }
@@ -100,7 +109,7 @@
             .nav-buttons { gap: 0.5rem; }
             .section { padding: 3rem 1.5rem; }
             .nav-desktop-btn { display: none; }
-            .dropdown-menu { position: static; transform: none; margin-top: 0.5rem; }
+            .dropdown-menu { position: static; transform: none; margin-top: 0.5rem; width: 100%; }
         }
         @media (min-width: 769px) { .nav-btn-mobile { display: none !important; } }
     </style>
@@ -252,35 +261,8 @@
             <div class="accordion-item">
                 <button class="accordion-header">🤖 Правила пользования бота</button>
                 <div class="accordion-content">
-                    <div class="accordion-content-inner">
-                        <span class="date-badge">Последнее обновление: 4 января 2026г.</span>
-                        <p>Используя бота Global Lens (далее — «Бот»), вы соглашаетесь с настоящими Условиями обслуживания.</p>
-                        
-                        <span class="sub-header">1. Использование</span>
-                        <p>Вы обязаны соблюдать Условия обслуживания и Правила сообщества Discord. Запрещается использовать бота для спама, оскорблений или любой незаконной деятельности.</p>
-
-                        <span class="sub-header">2. Доступность и ответственность</span>
-                        <ul>
-                            <li>Бот работает по принципу "как есть".</li>
-                            <li>Администрация проекта не несёт ответственности за доступность бота в любое время суток.</li>
-                            <li>Администрация проекта не несёт ответственности, если участник проекта решил отказаться от пользования ботом, посредством удаления его данных с базы данных, а потом пожелал полного возвращения.</li>
-                        </ul>
-
-                        <span class="sub-header">4. Прекращение использования</span>
-                        <ul>
-                            <li>Мы можем ограничить или отозвать ваш доступ к боту в любое время по любой причине.</li>
-                            <li>Любое использование уязвимостей Бота предполагает автоматическое согласие на прекращение пользования ботом.</li>
-                            <li>Любое использование дополнительных аккаунтов (твинк, мультиаккаунт) в процессе использования бота предполагает согласие на прекращение пользования бота.</li>
-                        </ul>
-
-                        <span class="sub-header">5. Изменения</span>
-                        <p>Мы можем изменять настоящие Условия в любое время без предварительного уведомления. Продолжение использования бота означает согласие с любыми изменениями.</p>
-
-                        <span class="sub-header">6. Контакты</span>
-                        <ul>
-                            <li>Для связи с администрацией по решению ошибок бота или вопросов по нему - участник проекта обязуется сформировать вопрос или рапорт об ошибке через соответствующий функционал.</li>
-                            <li>Администрация не гарантирует, что может предоставить информацию по вопросу или ошибке, если не был подан через соответствующий функционал.</li>
-                        </ul>
+                    <div class="accordion-content-inner dynamic-content" id="tos-content">
+                        <p>Загрузка правил...</p>
                     </div>
                 </div>
             </div>
@@ -288,43 +270,8 @@
             <div class="accordion-item">
                 <button class="accordion-header">🔒 Правила приватности</button>
                 <div class="accordion-content">
-                    <div class="accordion-content-inner">
-                        <span class="date-badge">Последнее обновление: 29 января 2026г.</span>
-                        <p>Данная Политика конфиденциальности объясняет, какие данные собирает Global Lens Bot (далее — «Бот»), как они используются и защищаются.</p>
-                        
-                        <span class="sub-header">1. Информация, которую мы собираем</span>
-                        <p>Бот может собирать следующую информацию:</p>
-                        <ul>
-                            <li>Идентификатор пользователя Discord (User ID);</li>
-                            <li>Идентификатор сервера (Server ID);</li>
-                            <li>Изображение профиля пользователя (User avatar) для некоторого функционала Бота;</li>
-                            <li>Содержимое сообщений, необходимых для выполнения команд Бота, включая личные сообщения, отправленные Боту.</li>
-                        </ul>
-
-                        <span class="sub-header">2. Предоставление разрешений</span>
-                        <p>Используя услуги Бота, пользователь предоставляет согласие на следующие действия:</p>
-                        <ul>
-                            <li>Отправку личных сообщений от имени Бота для обеспечения функциональности приложения;</li>
-                            <li>Использование идентификаторов пользователя (включая Discord ID, никнейм, имя аккаунта и его аватар) исключительно для работы Бота.</li>
-                        </ul>
-
-                        <span class="sub-header">3. Использование данных</span>
-                        <p>Собранные данные применяются только для:</p>
-                        <ul>
-                            <li>обеспечения работы функционала Бота;</li>
-                            <li>ведения журналов модерации;</li>
-                            <li>диагностики и устранения ошибок (отладки).</li>
-                        </ul>
-                        <p>Бот не использует данные для рекламы, аналитики или передачи третьим лицам.</p>
-
-                        <span class="sub-header">4. Хранение данных</span>
-                        <p>Мы храним только минимальный объём данных и только на период, необходимый для функционирования Бота. Журналы и временные данные удаляются автоматически после прекращения использования Бота пользователем или при технической очистке системы.</p>
-
-                        <span class="sub-header">5. Удаление данных</span>
-                        <p>Пользователь может запросить удаление данных, связавшись с персоналом проекта Global Lens, имеющий доступ к обновлению актуальной информации.</p>
-
-                        <span class="sub-header">6. Изменения</span>
-                        <p>Мы можем обновлять данную Политику без предварительного уведомления. Продолжая использование Бота, вы соглашаетесь с её актуальной версией. В противном случае, пользователь может отказаться использовать бота, опираясь на пункт 5.</p>
+                    <div class="accordion-content-inner dynamic-content" id="privacy-content">
+                        <p>Загрузка правил...</p>
                     </div>
                 </div>
             </div>
@@ -344,6 +291,30 @@
         const reveals=document.querySelectorAll('.reveal');
         const obs=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('visible');}),{threshold:0.1});
         reveals.forEach(el=>obs.observe(el));
+
+        // Loading Dynamic Markdown Content
+        const tosUrl = 'https://raw.githubusercontent.com/AytacOnan2/ToS-and-Privacy-Policy-Global-Lens-Bot/main/TERMS_OF_SERVICE.md';
+        const privacyUrl = 'https://raw.githubusercontent.com/AytacOnan2/ToS-and-Privacy-Policy-Global-Lens-Bot/main/PRIVACY_POLICY.md';
+
+        async function loadMarkdown(url, elementId) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Network response was not ok');
+                const text = await response.text();
+                // Using Marked.js to parse markdown to HTML
+                const htmlContent = marked.parse(text);
+                document.getElementById(elementId).innerHTML = htmlContent;
+            } catch (error) {
+                document.getElementById(elementId).innerHTML = '<p style="color: #ef4444;">Ошибка загрузки данных. Проверьте интернет соединение или доступность GitHub.</p>';
+                console.error(error);
+            }
+        }
+
+        // Load on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadMarkdown(tosUrl, 'tos-content');
+            loadMarkdown(privacyUrl, 'privacy-content');
+        });
 
         document.querySelectorAll('.accordion-header').forEach(btn => {
             btn.addEventListener('click', () => {
