@@ -25,7 +25,7 @@
 
         .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 2rem; transition: all 0.4s ease; }
         .navbar.scrolled { background: rgba(10,10,15,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0.7rem 2rem; }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; overflow: visible; }
         .nav-logo { font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
         .nav-logo img { height: 36px; width: auto; display: block; }
         .nav-logo-text { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
@@ -34,17 +34,17 @@
         .nav-links a:not(.nav-btn):not(.dropdown-trigger):hover, .nav-links a:not(.nav-btn):not(.dropdown-trigger).active { color: var(--text-primary); background: rgba(67,182,57,0.1); }
         .nav-links a:not(.nav-btn):not(.dropdown-trigger).active::after { content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 20px; height: 2px; background: var(--primary); border-radius: 1px; }
         
-        .nav-btn { padding: 0.55rem 1.2rem; color: white; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; font-family: inherit; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.4rem; }
+        .nav-btn { padding: 0.55rem 1.2rem; color: white; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; font-family: inherit; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.4rem; z-index: 2; }
         .nav-btn:hover { transform: translateY(-2px); }
         .nav-btn.discord { background: var(--gradient-1); box-shadow: 0 4px 15px rgba(67,182,57,0.3); }
         .nav-btn.telegram { background: linear-gradient(135deg, #2AABEE, #1a8cd8); box-shadow: 0 4px 15px rgba(42,171,238,0.3); }
         
-        .dropdown { position: relative; }
+        .dropdown { position: relative; z-index: 1001; }
         .dropdown-trigger { color: var(--text-secondary); text-decoration: none; padding: 0.5rem 0.8rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; cursor: pointer; display: flex; align-items: center; gap: 0.3rem; white-space: nowrap; background: none; border: none; font-family: inherit; }
         .dropdown-trigger:hover, .dropdown-trigger.active { color: var(--text-primary); background: rgba(67,182,57,0.1); }
         .dropdown-trigger .arrow { font-size: 0.7rem; transition: transform 0.3s ease; }
         .dropdown.open .dropdown-trigger .arrow { transform: rotate(180deg); }
-        .dropdown-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.5rem 0; min-width: 160px; opacity: 0; visibility: hidden; transition: all 0.2s ease; box-shadow: var(--shadow); z-index: 100; margin-top: 0.5rem; }
+        .dropdown-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.5rem 0; min-width: 160px; opacity: 0; visibility: hidden; transition: all 0.2s ease; box-shadow: var(--shadow); z-index: 2000; margin-top: 0.5rem; }
         .dropdown.open .dropdown-menu { opacity: 1; visibility: visible; }
         .dropdown-menu a { display: block; padding: 0.6rem 1rem; color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: all 0.2s ease; white-space: nowrap; }
         .dropdown-menu a:hover { color: var(--text-primary); background: rgba(67,182,57,0.1); }
@@ -84,10 +84,7 @@
         .hero-stat { text-align: center; }
         .hero-stat-value { font-size: 2rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .hero-stat-label { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem; }
-        .hero-scroll { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); animation: bounce 2s ease-in-out infinite; }
-        .hero-scroll svg { width: 24px; height: 24px; color: var(--text-muted); }
-        @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(10px); } }
-
+        
         .cta-section { text-align: center; padding: 5rem 2rem; }
         .cta-card { max-width: 800px; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 4rem 3rem; position: relative; overflow: hidden; }
         .cta-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-1); }
@@ -124,7 +121,7 @@
             .cta-card { padding: 3rem 1.5rem; }
             .footer-content { flex-direction: column; text-align: center; }
             .nav-desktop-btn { display: none; }
-            .dropdown-menu { position: static; transform: none; margin-top: 0.5rem; }
+            .dropdown-menu { position: static; transform: none; margin-top: 0.5rem; width: 100%; }
         }
         @media (min-width: 769px) { .nav-btn-mobile { display: none !important; } }
     </style>
@@ -175,12 +172,11 @@
                 <a href="about.html" class="btn btn-outline">Узнать больше<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg></a>
             </div>
             <div class="hero-stats">
-                <div class="hero-stat"><div class="hero-stat-value" data-count="509">0</div><div class="hero-stat-label">Участников</div></div>
+                <div class="hero-stat"><div class="hero-stat-value" data-count="513">0</div><div class="hero-stat-label">Участников</div></div>
                 <div class="hero-stat"><div class="hero-stat-value" data-count="31">0</div><div class="hero-stat-label">Государств</div></div>
                 <div class="hero-stat"><div class="hero-stat-value" data-count="19">0</div><div class="hero-stat-label">Сезонов</div></div>
             </div>
         </div>
-        <div class="hero-scroll"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 13l5 5 5-5M7 6l5 5 5-5"/></svg></div>
     </section>
 
     <section class="cta-section" id="cta">
@@ -218,7 +214,6 @@
         const obs=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('visible');}),{threshold:0.1});
         reveals.forEach(el=>obs.observe(el));
 
-        // Dropdown Logic
         function toggleDropdown(id) {
             document.getElementById(id).classList.toggle('open');
         }
@@ -226,7 +221,6 @@
             document.querySelectorAll('.dropdown').forEach(d => { if (!d.contains(e.target)) d.classList.remove('open'); });
         });
 
-        // Particle Effect (Optional, simplified)
         const canvas=document.getElementById('particles'),ctx=canvas.getContext('2d');
         function resizeCanvas(){canvas.width=canvas.parentElement.offsetWidth;canvas.height=canvas.parentElement.offsetHeight;}
         resizeCanvas(); window.addEventListener('resize',resizeCanvas);
@@ -236,7 +230,6 @@
         function animateParticles(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw();});requestAnimationFrame(animateParticles);}
         animateParticles();
 
-        // Stats Counter
         const statNumbers=document.querySelectorAll('.hero-stat-value');
         const counterObserver=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting){const t=parseInt(en.target.getAttribute('data-count'));let c=0;const inc=t/50;const tm=setInterval(()=>{c+=inc;if(c>=t){en.target.textContent=t;clearInterval(tm);}else en.target.textContent=Math.floor(c);},30);counterObserver.unobserve(en.target);}}),{threshold:0.5});
         statNumbers.forEach(n=>counterObserver.observe(n));

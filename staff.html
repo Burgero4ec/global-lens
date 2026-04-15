@@ -17,14 +17,13 @@
             --gradient-1: linear-gradient(135deg, #43b639, #7ed957);
             --gradient-hero: linear-gradient(135deg, #0a0a0f 0%, #0a120a 50%, #0a0a0f 100%);
             --shadow: 0 25px 50px -12px rgba(0,0,0,0.7);
+            --tg-blue: #2AABEE;
         }
         html { scroll-behavior: smooth; }
         body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.7; overflow-x: hidden; }
-
-        /* Nav Styles Same */
         .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 2rem; transition: all 0.4s ease; }
         .navbar.scrolled { background: rgba(10,10,15,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0.7rem 2rem; }
-        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; overflow: visible; }
         .nav-logo { font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
         .nav-logo img { height: 36px; width: auto; display: block; }
         .nav-logo-text { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
@@ -32,17 +31,17 @@
         .nav-links a:not(.nav-btn):not(.dropdown-trigger) { color: var(--text-secondary); text-decoration: none; padding: 0.5rem 0.8rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; position: relative; white-space: nowrap; }
         .nav-links a:not(.nav-btn):not(.dropdown-trigger):hover, .nav-links a:not(.nav-btn):not(.dropdown-trigger).active { color: var(--text-primary); background: rgba(67,182,57,0.1); }
         .nav-links a:not(.nav-btn):not(.dropdown-trigger).active::after { content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 20px; height: 2px; background: var(--primary); border-radius: 1px; }
-        .nav-btn { padding: 0.55rem 1.2rem; color: white; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; font-family: inherit; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.4rem; }
+        .nav-btn { padding: 0.55rem 1.2rem; color: white; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; font-family: inherit; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.4rem; z-index: 2; }
         .nav-btn:hover { transform: translateY(-2px); }
         .nav-btn.discord { background: var(--gradient-1); box-shadow: 0 4px 15px rgba(67,182,57,0.3); }
         .nav-btn.telegram { background: linear-gradient(135deg, #2AABEE, #1a8cd8); box-shadow: 0 4px 15px rgba(42,171,238,0.3); }
         .nav-buttons { display: flex; gap: 0.5rem; align-items: center; }
-        .dropdown { position: relative; }
+        .dropdown { position: relative; z-index: 1001; }
         .dropdown-trigger { color: var(--text-secondary); text-decoration: none; padding: 0.5rem 0.8rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; cursor: pointer; display: flex; align-items: center; gap: 0.3rem; white-space: nowrap; background: none; border: none; font-family: inherit; }
         .dropdown-trigger:hover, .dropdown-trigger.active { color: var(--text-primary); background: rgba(67,182,57,0.1); }
         .dropdown-trigger .arrow { font-size: 0.7rem; transition: transform 0.3s ease; }
         .dropdown.open .dropdown-trigger .arrow { transform: rotate(180deg); }
-        .dropdown-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.5rem 0; min-width: 160px; opacity: 0; visibility: hidden; transition: all 0.2s ease; box-shadow: var(--shadow); z-index: 100; margin-top: 0.5rem; }
+        .dropdown-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.5rem 0; min-width: 160px; opacity: 0; visibility: hidden; transition: all 0.2s ease; box-shadow: var(--shadow); z-index: 2000; margin-top: 0.5rem; }
         .dropdown.open .dropdown-menu { opacity: 1; visibility: visible; }
         .dropdown-menu a { display: block; padding: 0.6rem 1rem; color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: all 0.2s ease; white-space: nowrap; }
         .dropdown-menu a:hover { color: var(--text-primary); background: rgba(67,182,57,0.1); }
@@ -72,9 +71,12 @@
 
         .staff-grid { display: grid; gap: 1.5rem; max-width: 900px; margin: 0 auto; }
         .staff-grid.centered { max-width: 350px; justify-content: center; }
-        .staff-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
-        .staff-grid.cols-2 { grid-template-columns: repeat(2, 1fr); }
-        .staff-grid.cols-auto { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+        
+        /* Grid Logic for Staff */
+        .staff-grid.grid-3 { grid-template-columns: repeat(3, 1fr); } /* Admins */
+        .staff-grid.grid-2 { grid-template-columns: repeat(2, 1fr); } /* Curators */
+        .staff-grid.grid-auto { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); } /* Thanks */
+        .staff-grid.grid-3-deputies { grid-template-columns: repeat(3, 1fr); } /* Deputies */
 
         .staff-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 2rem; text-align: center; transition: all 0.3s ease; position: relative; }
         .staff-card:hover { border-color: rgba(67,182,57,0.3); transform: translateY(-3px); box-shadow: var(--shadow); }
@@ -154,12 +156,12 @@
             .nav-links.open { right: 0; }
             .nav-btn-mobile { display: flex !important; margin-top: 0.5rem; justify-content: center; width: 100%; }
             .nav-buttons { gap: 0.5rem; }
-            .staff-grid.cols-3, .staff-grid.cols-2 { grid-template-columns: 1fr; max-width: 350px; }
+            .staff-grid.grid-3, .staff-grid.grid-2, .staff-grid.grid-3-deputies { grid-template-columns: 1fr; max-width: 350px; }
             .staff-grid.centered { max-width: 350px; }
             .section { padding: 3rem 1.5rem; }
             .personnel-grid { grid-template-columns: 1fr; }
             .nav-desktop-btn { display: none; }
-            .dropdown-menu { position: static; transform: none; margin-top: 0.5rem; }
+            .dropdown-menu { position: static; transform: none; margin-top: 0.5rem; width: 100%; }
         }
         @media (min-width: 769px) { .nav-btn-mobile { display: none !important; } }
     </style>
@@ -221,7 +223,7 @@
         <div style="text-align:center;"><span class="section-label thanks">Признательность</span></div>
         <h2 class="section-title">Отдельная благодарность</h2>
         <p class="section-subtitle">Люди, внёсшие особый вклад в развитие проекта</p>
-        <div class="staff-grid cols-auto reveal">
+        <div class="staff-grid grid-auto reveal">
             <div class="staff-card thanks">
                 <div class="staff-avatar"><img src="images.jfif" alt="Китаёзик"></div>
                 <div class="staff-name">Китаёзик</div>
@@ -238,7 +240,7 @@
                 <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#8b5cf6,#06b6d4);">Y</div></div>
                 <div class="staff-name">Yabl1ch</div>
                 <div class="staff-role">Куратор анкетологов</div>
-                <div class="staff-desc">Самый лучший куратор анкетологов и по совместительству генератор идей. Идеи сыпятся из него как из рога изобилия.</div>
+                <div class="staff-desc">Самый лучший куратор анкетологов, и ещё и самый лучший анкетолог, и по совместительству заслуженный человек в политологии. И также единственный Куратор на сервере, который из сезона в сезон является лучшим работником в своём отделе.</div>
             </div>
             <div class="staff-card thanks">
                 <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#22c55e,#0ea5e9);">L</div></div>
@@ -246,7 +248,6 @@
                 <div class="staff-role">Специалист по технике</div>
                 <div class="staff-desc">Реализовал процесс по созданию, оценке и принятию техники.</div>
             </div>
-            
             <div class="staff-card thanks" id="qwertxCard">
                 <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#ef4444);">Q</div></div>
                 <div class="staff-name">QWERTX</div>
@@ -302,7 +303,7 @@
                         <li>Нарушение законов о безопасности</li>
                     </ol>
                     <div class="img-list">
-                        <span class="img-list-title">Дополнительно:</span>
+                        <span class="img-list-title">Дополнительно (по фото):</span>
                         <ul>
                             <li>Жестокое обращение с животными</li>
                             <li>Браконьерство</li>
@@ -332,7 +333,8 @@
     <section class="section" style="padding-top:1rem;">
         <div style="text-align:center;"><span class="section-label">Управление</span></div>
         <h2 class="section-title">Администраторы</h2>
-        <div class="staff-grid cols-3 reveal">
+        <!-- 3 Админа -> 3 в ряд -->
+        <div class="staff-grid grid-3 reveal">
             <div class="staff-card">
                 <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:var(--gradient-1);">F</div></div>
                 <div class="staff-name">Flowy</div>
@@ -357,7 +359,8 @@
     <section class="section" style="padding-top:1rem;">
         <div style="text-align:center;"><span class="section-label">Направления</span></div>
         <h2 class="section-title">Кураторы</h2>
-        <div class="staff-grid cols-3 reveal">
+        <!-- 4 Куратора -> 2 в ряд -->
+        <div class="staff-grid grid-2 reveal">
             <div class="staff-card">
                 <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#06b6d4,#3b82f6);">P</div></div>
                 <div class="staff-name">ponzc</div>
@@ -371,7 +374,13 @@
                 <div class="staff-desc">Нет, не мессенджер. Куратор политологии. Справляется плохо, но старается. Мы верим в тебя, Макс!</div>
             </div>
             <div class="staff-card">
-                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#2563eb);">Y</div></div>
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#8b5cf6,#06b6d4);">Y</div></div>
+                <div class="staff-name">Yabl1ch</div>
+                <div class="staff-role">Куратор анкетологов</div>
+                <div class="staff-desc">Самый лучший куратор анкетологов, и ещё и самый лучший анкетолог, и по совместительству заслуженный человек в политологии. И также единственный Куратор на сервере, который из сезона в сезон является лучшим работником в своём отделе.</div>
+            </div>
+            <div class="staff-card">
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#2563eb);">A</div></div>
                 <div class="staff-name">[ARIMA] Yagami</div>
                 <div class="staff-role">Куратор модераторов</div>
                 <div class="staff-desc">Сделал так, что теперь пашет один человек. 10/10, рекомендую. Эффективность на максимуме.</div>
@@ -382,7 +391,7 @@
     <section class="section" style="padding-top:1rem;">
         <div style="text-align:center;"><span class="section-label deputy">Заместители</span></div>
         <h2 class="section-title">Замы кураторов</h2>
-        <div class="staff-grid cols-2 reveal">
+        <div class="staff-grid grid-3-deputies reveal">
             <div class="staff-card deputy">
                 <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#43b639);">P</div></div>
                 <div class="staff-name">ponzc</div>
@@ -508,25 +517,13 @@
         const obs=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('visible');}),{threshold:0.1});
         reveals.forEach(el=>obs.observe(el));
 
-        // Toggle crime list for QWERTX only
         function toggleCrime() {
             document.getElementById('crimeBtn').classList.toggle('open');
             document.getElementById('crimeList').classList.toggle('show');
         }
 
-        // Dropdown toggle
-        function toggleDropdown(id) {
-            document.getElementById(id).classList.toggle('open');
-        }
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
-            document.querySelectorAll('.dropdown').forEach(d => {
-                if (!d.contains(e.target)) {
-                    d.classList.remove('open');
-                }
-            });
-        });
+        function toggleDropdown(id) { document.getElementById(id).classList.toggle('open'); }
+        document.addEventListener('click', function(e) { document.querySelectorAll('.dropdown').forEach(d => { if (!d.contains(e.target)) d.classList.remove('open'); }); });
     </script>
 </body>
 </html>
