@@ -1,366 +1,448 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Lens — Команда</title>
+    <title>Global Lens — мир без фильтров и клише</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.0.18/index.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.18/index.min.css">
     <style>
-        /* Основные стили */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
-            color: #e0e0e0;
-            margin: 0;
-            padding: 0;
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #43b639; --primary-dark: #2e8a27; --primary-light: #5dd454;
+            --accent: #f59e0b; --bg-dark: #0a0a0f; --bg-card: #12121a;
+            --text-primary: #f1f5f9; --text-secondary: #94a3b8; --text-muted: #64748b;
+            --border: #1e1e2e;
+            --gradient-1: linear-gradient(135deg, #43b639, #7ed957);
+            --shadow: 0 25px 50px -12px rgba(0,0,0,0.7);
         }
+        html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: var(--primary) var(--bg-dark); }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.7; overflow-x: hidden; }
+        ::-webkit-scrollbar { width: 8px; } ::-webkit-scrollbar-track { background: var(--bg-dark); } ::-webkit-scrollbar-thumb { background: var(--primary-dark); border-radius: 4px; }
 
-        /* Навигация */
         .navbar {
-            background-color: #1f1f1f;
-            padding: 15px 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            height: 60px;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            padding: 0 1rem;
+        }
+        .nav-container {
+            max-width: 1200px; margin: 0 auto; width: 100%;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .nav-left { display: flex; align-items: center; gap: 2rem; flex: 1; }
+
+        .nav-logo {
+            font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 800;
+            text-decoration: none; display: flex; align-items: center; gap: 0.5rem;
+            color: var(--primary-light); flex-shrink: 0;
+        }
+        .nav-logo img { height: 28px; width: auto; }
+
+        .nav-menu {
+            display: flex; align-items: center; gap: 0.25rem;
+            list-style: none;
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-            color: #fff;
-            margin-right: 40px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        .nav-menu > li > a.nav-link, .nav-menu > li > .nav-dropdown-trigger {
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.5rem 0.8rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            display: block;
+            background: none; border: none; cursor: pointer; font-family: inherit;
+            display: flex; align-items: center; gap: 0.3rem;
         }
+        .nav-menu > li > a.nav-link:hover, .nav-menu > li > a.nav-link.active,
+        .nav-menu > li > .nav-dropdown-trigger:hover, .nav-menu > li > .nav-dropdown-trigger.active {
+            color: var(--text-primary);
+        }
+
+        .nav-dropdown { position: relative; }
+        .nav-dropdown .arrow { font-size: 0.6rem; transition: transform 0.2s ease; }
+        .nav-dropdown.open > .nav-dropdown-trigger .arrow { transform: rotate(180deg); }
+
+        .nav-dropdown-menu {
+            position: absolute; top: 100%; left: 0;
+            background: #161620;
+            border: 1px solid var(--border);
+            border-radius: 0 10px 10px 10px;
+            padding: 0.5rem 0;
+            min-width: 180px;
+            opacity: 0; visibility: hidden;
+            transform: translateY(-5px);
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow);
+            z-index: 2000;
+        }
+        .nav-dropdown.open > .nav-dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+
+        .nav-dropdown-menu .nav-dropdown { position: relative; }
+
+        .nav-dropdown-menu .nav-dropdown-trigger {
+            width: 100%; text-align: left;
+            background: none; border: none; color: var(--text-secondary);
+            padding: 0.5rem 1rem; font-size: 0.85rem; font-weight: 500;
+            cursor: pointer; display: flex; align-items: center; gap: 0.3rem;
+            transition: all 0.2s ease; font-family: inherit;
+        }
+        .nav-dropdown-menu .nav-dropdown-trigger:hover { color: var(--text-primary); background: rgba(67, 182, 57, 0.05); }
+        .nav-dropdown-menu .nav-dropdown-trigger .arrow { margin-left: auto; font-size: 0.6rem; }
+
+        .nav-dropdown-menu .nav-dropdown-menu {
+            position: absolute; left: 100%; top: 0;
+            border-radius: 10px; margin-left: -1px;
+        }
+
+        .nav-dropdown-menu a {
+            display: block; padding: 0.5rem 1rem;
+            color: var(--text-secondary); text-decoration: none;
+            font-size: 0.85rem; transition: all 0.2s ease;
+        }
+        .nav-dropdown-menu a:hover { color: var(--text-primary); background: rgba(67, 182, 57, 0.05); }
 
         .nav-buttons {
-            display: flex;
-            gap: 10px;
+            display: flex; gap: 0.5rem; align-items: center;
         }
+        .btn-header {
+            padding: 0.4rem 0.8rem; font-size: 0.8rem; font-weight: 600;
+            border-radius: 8px; text-decoration: none;
+            transition: all 0.2s ease;
+            display: flex; align-items: center; gap: 0.3rem;
+        }
+        .btn-discord { background: var(--gradient-1); color: white; }
+        .btn-discord:hover { transform: translateY(-1px); }
+        .btn-telegram { background: rgba(67, 182, 57, 0.15); color: var(--primary-light); }
+        .btn-telegram:hover { background: rgba(67, 182, 57, 0.25); }
 
-        /* Стили для выпадающих кнопок */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; padding: 5px; flex-shrink: 0; }
+        .hamburger span { width: 22px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; border-radius: 1px; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
-        .dropbtn {
-            background-color: #333;
-            color: white;
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
+        .mobile-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 999; display: none; opacity: 0; transition: opacity 0.3s; }
+        .mobile-overlay.active { display: block; opacity: 1; }
 
-        .dropbtn:hover {
-            background-color: #444;
+        .mobile-menu {
+            position: fixed; top: 0; right: -320px; width: 300px; height: 100vh;
+            background: #12121a; z-index: 1000;
+            transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
+            padding: 70px 1.5rem 2rem;
+            display: flex; flex-direction: column; gap: 0.5rem;
         }
+        .mobile-menu.open { right: 0; }
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #2c2c2c;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-            border-radius: 5px;
-            overflow: hidden;
+        .mobile-menu a {
+            display: block; padding: 0.8rem 1rem;
+            color: var(--text-secondary); text-decoration: none;
+            font-size: 1rem; border-radius: 8px; transition: color 0.2s;
         }
+        .mobile-menu a:hover { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+        .mobile-menu a.active { color: var(--primary-light); font-weight: 600; }
 
-        .dropdown-content a {
-            color: #ccc;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            transition: background 0.2s;
+        .mobile-dropdown-trigger {
+            width: 100%; text-align: left;
+            background: none; border: none; color: var(--text-secondary);
+            padding: 0.8rem 1rem; font-size: 1rem; font-weight: 500;
+            cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+            font-family: inherit; border-radius: 8px;
+            transition: all 0.2s;
         }
+        .mobile-dropdown-trigger:hover { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+        .mobile-dropdown-trigger .arrow { font-size: 0.7rem; transition: transform 0.3s; }
+        .mobile-dropdown-trigger.open .arrow { transform: rotate(180deg); }
 
-        .dropdown-content a:hover {
-            background-color: #3a3a3a;
-            color: white;
+        .mobile-dropdown-content {
+            max-height: 0; overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding-left: 1rem;
         }
+        .mobile-dropdown-content.open { max-height: 500px; }
+        .mobile-dropdown-content a { font-size: 0.9rem; padding: 0.6rem 1rem; color: var(--text-muted); }
+        .mobile-dropdown-content a:hover { color: var(--primary-light); }
 
-        /* Показываем меню при наведении */
-        .dropdown:hover .dropdown-content {
-            display: block;
+        .mobile-buttons {
+            display: flex; gap: 0.5rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);
         }
+        .mobile-buttons a { flex: 1; text-align: center; font-weight: 600; }
 
-        /* Основной контент */
-        .container {
-            max-width: 1200px;
-            margin: 40px auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; padding: 4rem 2rem 2rem; background: linear-gradient(135deg, #0a0a0f 0%, #0a120a 50%, #0a0a0f 100%); }
+        .hero-bg { position: absolute; inset: 0; z-index: 0; }
+        .hero-bg .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.12; animation: float 10s ease-in-out infinite; }
+        .hero-bg .orb:nth-child(1) { width: 500px; height: 500px; background: var(--primary); top: -10%; left: -5%; animation-delay: 0s; }
+        .hero-bg .orb:nth-child(2) { width: 400px; height: 400px; background: var(--accent); top: 40%; right: -5%; animation-delay: -4s; }
+        .hero-bg .orb:nth-child(3) { width: 350px; height: 350px; background: #7c3aed; bottom: -5%; left: 20%; animation-delay: -7s; }
+        @keyframes float { 0%,100% { transform: translate(0,0) scale(1); } 33% { transform: translate(40px,-30px) scale(1.08); } 66% { transform: translate(-30px,20px) scale(0.92); } }
+        .hero-grid { position: absolute; inset: 0; background-image: linear-gradient(rgba(67,182,57,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(67,182,57,0.03) 1px, transparent 1px); background-size: 80px 80px; z-index: 0; }
+        #particles { position: absolute; inset: 0; z-index: 0; }
+        .hero-content { text-align: center; z-index: 1; max-width: 900px; }
+        .hero-emblem { margin: 0 auto 2rem; animation: fadeInUp 0.8s ease forwards; }
+        .hero-emblem img { max-width: 120px; height: auto; filter: drop-shadow(0 0 20px rgba(67,182,57,0.3)); }
+        .hero-badge { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.5rem 1.2rem; background: rgba(67,182,57,0.1); border: 1px solid rgba(67,182,57,0.25); border-radius: 50px; font-size: 0.85rem; color: var(--primary-light); margin-bottom: 1.5rem; font-family: 'JetBrains Mono', monospace; font-weight: 600; animation: fadeInUp 0.8s ease 0.15s forwards; opacity: 0; }
+        .hero-badge .pulse-dot { width: 8px; height: 8px; background: var(--primary); border-radius: 50%; animation: pulse-green 2s ease-in-out infinite; }
+        @keyframes pulse-green { 0%,100% { opacity:1; box-shadow:0 0 0 0 rgba(67,182,57,0.6); } 50% { opacity:0.7; box-shadow:0 0 0 8px rgba(67,182,57,0); } }
+        .hero h1 { font-size: clamp(2.5rem,6vw,4rem); font-weight: 900; line-height: 1.05; margin-bottom: 1.5rem; animation: fadeInUp 0.8s ease 0.25s forwards; opacity: 0; letter-spacing: -0.02em; }
+        .hero h1 .gradient-text { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-description { font-size: 1.15rem; color: var(--text-secondary); max-width: 650px; margin: 0 auto 1rem; animation: fadeInUp 0.8s ease 0.35s forwards; opacity: 0; }
+        .hero-subtext { font-size: 1rem; color: var(--text-muted); max-width: 550px; margin: 0 auto 2.5rem; animation: fadeInUp 0.8s ease 0.4s forwards; opacity: 0; }
+        .hero-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; animation: fadeInUp 0.8s ease 0.45s forwards; opacity: 0; }
+        @keyframes fadeInUp { from { opacity:0; transform:translateY(35px); } to { opacity:1; transform:translateY(0); } }
+        .btn { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.9rem 1.8rem; border-radius: 10px; font-size: 0.95rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; cursor: pointer; border: none; font-family: inherit; }
+        .btn-primary { background: var(--gradient-1); color: white; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(67,182,57,0.4); }
+        .btn-outline { background: transparent; color: var(--text-primary); border: 1px solid var(--border); }
+        .btn-outline:hover { border-color: var(--primary); background: rgba(67,182,57,0.08); transform: translateY(-2px); }
+        .hero-stats { display: flex; justify-content: center; gap: 3rem; margin-top: 3rem; animation: fadeInUp 0.8s ease 0.55s forwards; opacity: 0; }
+        .hero-stat { text-align: center; }
+        .hero-stat-value { font-size: 2rem; font-weight: 800; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .hero-stat-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.2rem; }
 
-        /* Карточки персонажей */
-        .card {
-            background-color: #1f1f1f;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-            border: 1px solid #333;
-        }
+        .cta-section { text-align: center; padding: 5rem 2rem; }
+        .cta-card { max-width: 800px; margin: 0 auto; background: var(--bg-card); border: 1px solid var(--border); border-radius: 24px; padding: 4rem 3rem; position: relative; overflow: hidden; }
+        .cta-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gradient-1); }
+        .cta-card h2 { font-size: clamp(1.8rem,4vw,2.5rem); font-weight: 800; margin-bottom: 1rem; }
+        .cta-card p { color: var(--text-secondary); font-size: 1.1rem; max-width: 600px; margin: 0 auto 2rem; }
 
-        .card h2 {
-            margin-top: 0;
-            color: #ffcc00;
-            border-bottom: 2px solid #333;
-            padding-bottom: 10px;
-        }
+        .footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; }
+        .footer-content { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .footer-brand { display: flex; align-items: center; gap: 0.5rem; }
+        .footer-brand img { height: 24px; width: auto; }
+        .footer-brand-text { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 1rem; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .footer-social { display: flex; gap: 0.8rem; }
+        .footer-social a { width: 36px; height: 36px; border-radius: 8px; background: var(--bg-card); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--text-secondary); text-decoration: none; transition: all 0.3s ease; }
+        .footer-social a:hover { border-color: var(--primary); color: var(--primary-light); transform: translateY(-2px); }
+        .footer-text { color: var(--text-muted); font-size: 0.8rem; width: 100%; text-align: center; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+        .footer-text span { color: var(--primary-light); }
+        .footer-contact { color: var(--text-secondary); font-size: 0.8rem; }
+        .footer-contact a { color: var(--primary-light); text-decoration: none; }
 
-        .role {
-            display: inline-block;
-            background-color: #333;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            margin-bottom: 10px;
-            color: #aaa;
-        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        .description {
-            line-height: 1.6;
-            font-size: 14px;
-            color: #ccc;
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-menu { display: none; }
+            .hero { padding: 3rem 1.5rem 2rem; }
+            .hero h1 { font-size: 2rem; }
+            .hero-stats { gap: 1.5rem; }
+            .hero-stat-value { font-size: 1.5rem; }
+            .cta-card { padding: 3rem 1.5rem; }
+            .footer-content { flex-direction: column; text-align: center; }
         }
-
-        /* Секция наград (скрытый текст) */
-        details {
-            margin-top: 15px;
-            background: #252525;
-            padding: 10px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        summary {
-            font-weight: bold;
-            color: #4caf50;
-            outline: none;
-        }
-
-        summary:hover {
-            color: #66bb6a;
-        }
-
-        ul.awards-list {
-            list-style-type: none;
-            padding: 0;
-            margin-top: 10px;
-            max-height: 300px; /* Ограничиваем высоту */
-            overflow-y: auto;  /* Добавляем скролл */
-            padding-right: 5px;
-        }
-        
-        /* Кастомный скроллбар для списка */
-        ul.awards-list::-webkit-scrollbar {
-            width: 6px;
-        }
-        ul.awards-list::-webkit-scrollbar-thumb {
-            background-color: #555;
-            border-radius: 3px;
-        }
-
-        ul.awards-list li {
-            margin-bottom: 8px;
-            font-size: 13px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid #333;
-            color: #ddd;
-        }
-        
-        ul.awards-list li:last-child {
-            border-bottom: none;
-        }
-
     </style>
 </head>
 <body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <a href="index.html" class="nav-logo">
+                    <img src="planeta.png" alt="GL">
+                    <span>Global Lens</span>
+                </a>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="nav-link active">Главная</a></li>
 
-    <!-- Навигация с выпадающими списками -->
-    <nav class="navbar">
-        <div class="logo">Global Lens</div>
-        <div class="nav-buttons">
-            <!-- Группа 1: Информация -->
-            <div class="dropdown">
-                <button class="dropbtn">Информация ▾</button>
-                <div class="dropdown-content">
-                    <a href="#">О проекте</a>
-                    <a href="#">Правила</a>
-                </div>
-            </div>
-            
-            <!-- Группа 2: Контент (О сервере, Новости, Обновления) -->
-            <div class="dropdown">
-                <button class="dropbtn">Контент ▾</button>
-                <div class="dropdown-content">
-                    <a href="#">О сервере</a>
-                    <a href="#">Новости</a>
-                    <a href="#">Обновления</a>
-                </div>
+                    <li class="nav-dropdown" id="infoDropdown">
+                        <button class="nav-dropdown-trigger" onclick="toggleDropdown('infoDropdown')">
+                            Информация <span class="arrow">▼</span>
+                        </button>
+                        <div class="nav-dropdown-menu">
+                            <div class="nav-dropdown" id="aboutDropdown">
+                                <button class="nav-dropdown-trigger" onclick="event.stopPropagation(); toggleDropdown('aboutDropdown')">
+                                    О проекте <span class="arrow">▶</span>
+                                </button>
+                                <div class="nav-dropdown-menu">
+                                    <a href="about.html">О сервере</a>
+                                    <a href="about.html#news">Новости</a>
+                                    <a href="about.html#updates">Обновления</a>
+                                </div>
+                            </div>
+                            <div class="nav-dropdown" id="rulesDropdown">
+                                <button class="nav-dropdown-trigger" onclick="event.stopPropagation(); toggleDropdown('rulesDropdown')">
+                                    Правила <span class="arrow">▶</span>
+                                </button>
+                                <div class="nav-dropdown-menu">
+                                    <a href="rules.html#server">Правила сервера</a>
+                                    <a href="rules.html#bot">Правила бота</a>
+                                    <a href="rules.html#privacy">Приватность</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <li><a href="features.html" class="nav-link">Возможности</a></li>
+                    <li><a href="season.html" class="nav-link">Сезон</a></li>
+                    <li><a href="staff.html" class="nav-link">Персонал</a></li>
+                </ul>
             </div>
 
-            <!-- Группа 3: Документы (Правила сервера, бота, приватность) -->
-            <div class="dropdown">
-                <button class="dropbtn">Документы ▾</button>
-                <div class="dropdown-content">
-                    <a href="#">Правила сервера</a>
-                    <a href="#">Правила бота</a>
-                    <a href="#">Приватность</a>
-                </div>
+            <div class="nav-buttons">
+                <a href="https://discord.gg/edPpSRmRNu" target="_blank" class="btn-header btn-discord">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                    Discord
+                </a>
+                <a href="https://t.me/+5DaqxYO3H6VlMzhi" class="btn-header btn-telegram">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                    Telegram
+                </a>
+            </div>
+
+            <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+                <span></span><span></span><span></span>
             </div>
         </div>
     </nav>
 
-    <!-- Основной контент -->
-    <div class="container">
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <a href="index.html" class="active">Главная</a>
 
-        <!-- Adolf_Hit -->
-        <div class="card">
-            <h2>Adolf_Hit</h2>
-            <span class="role">Бывший Куратор Модерации</span>
-            <p class="description">
-                Был куратором модерации и благополучно просрал свой пост, наверное, потому что из-за него 3 человека покинуло сервер, а один перестал играть.
-            </p>
+        <button class="mobile-dropdown-trigger" onclick="toggleMobileDropdown(this)">
+            Информация <span class="arrow">▼</span>
+        </button>
+        <div class="mobile-dropdown-content">
+            <button class="mobile-dropdown-trigger" onclick="toggleMobileDropdown(this)">
+                О проекте <span class="arrow">▼</span>
+            </button>
+            <div class="mobile-dropdown-content">
+                <a href="about.html">О сервере</a>
+                <a href="about.html#news">Новости</a>
+                <a href="about.html#updates">Обновления</a>
+            </div>
+
+            <button class="mobile-dropdown-trigger" onclick="toggleMobileDropdown(this)">
+                Правила <span class="arrow">▼</span>
+            </button>
+            <div class="mobile-dropdown-content">
+                <a href="rules.html#server">Правила сервера</a>
+                <a href="rules.html#bot">Правила бота</a>
+                <a href="rules.html#privacy">Приватность</a>
+            </div>
         </div>
 
-        <!-- LayBay (Объединенный) -->
-        <div class="card">
-            <h2>LayBay</h2>
-            <span class="role">Заместитель</span>
-            <p class="description">
-                Объединенный профиль сотрудника.
-            </p>
-        </div>
+        <a href="features.html">Возможности</a>
+        <a href="season.html">Сезон</a>
+        <a href="staff.html">Персонал</a>
 
-        <!-- Said (С наградами) -->
-        <div class="card">
-            <h2>ponzc</h2>
-            <span class="role">Командир</span>
-            <p class="description">
-                Легендарный командир с безупречной репутацией (по его словам).
-            </p>
-            
-            <!-- Скрытая кнопка с наградами -->
-            <details>
-                <summary>🏆 Награды (Нажмите чтобы открыть)</summary>
-                <ul class="awards-list">
-                    <li>🏅 Орден «Волчья тропа» I степени — за скрытное перемещение по тылам врага без карты и фонарика</li>
-                    <li>🏅 Медаль «За взятие блокпоста без очереди» — за проезд через КПП по звонку старшему</li>
-                    <li>🏅 Знак отличия «Мастер горного эха» — за успешную дезинформацию противника криками «Аллах Акбар» с разных сторон</li>
-                    <li>🏅 Орден «Сломанный КПП» — за физическое уничтожение шлагбаума лбом или бампером</li>
-                    <li>🏅 Медаль «За отстрел тепловизора из рогатки» — за ювелирную точность попадания галькой в дорогую оптику</li>
-                    <li>🏅 Крест «Ночной абрек» — за 10+ успешных ночных рейдов в тапочках, чтоб не шуметь</li>
-                    <li>🏅 Медаль «За бой в тапочках» — за внезапное боестолкновение прямо во время омовения</li>
-                    <li>🏅 Знак «Ветеран битвы за урожай конопли» — за оборону стратегического сырья от чужих рук</li>
-                    <li>🏅 Орден «Скрытый Шамиль» — за партизанскую хитрость, достойную имама</li>
-                    <li>🏅 Медаль «За меткий плевок в глаз БТРу» — за временное ослепление механика-водителя подручными средствами</li>
-                    <li>🏅 Почетный знак «Горец-невидимка» — за умение раствориться в буковом лесу за секунду до обыска</li>
-                    <li>🏅 Орден «Бородатый джигит» — за ношение бороды в условиях отсутствия воды и бритвы более 40 дней</li>
-                    <li>🏅 Медаль «Снайпер-хлеборез» — за точное попадание из СВД в ящик с сухпайком противника</li>
-                    <li>🏅 Знак «За взятие языка глухонемого» — за бесполезный, но героический захват пленного, который ничего не рассказал</li>
-                    <li>🏅 Орден «Аллаху Акбар Бар» I степени — за самый громкий тактический крик, поднявший боевой дух роты</li>
-                    <li>🏅 Медаль «За угон БТР-80 с охраняемой стоянки» — за наглость и знание где ключи оставляет механик</li>
-                    <li>🏅 Знак «Повелитель "Зелёнки"» — за умение ориентироваться в лесу с точностью GPS</li>
-                    <li>🏅 Орден «Волчья сыть» — за употребление просроченной тушенки 1985 года без последствий для желудка</li>
-                    <li>🏅 Медаль «За форсирование Сунжи вброд в минус 20» — за ледяное мужество и отсутствие резиновых сапог</li>
-                    <li>🏅 Знак «Тень Аргуна» — за бесшумное перемещение по Аргунскому ущелью</li>
-                    <li>🏅 Орден «Золотой кнопочный телефон» — за решение всех вопросов одним звонком нужному человеку</li>
-                    <li>🏅 Медаль «За взятие бюджета» — за успешное освоение выделенных средств без остатка в казне</li>
-                    <li>🏅 Знак «Почетный тамада Военно-Полевого Совета» — за умение вести заседание и тосты одновременно</li>
-                    <li>🏅 Орден «Ватсап-Дипломат» — за урегулирование конфликта через голосовые сообщения в мессенджере</li>
-                    <li>🏅 Медаль «За отжатие гуманитарки у своих» — за перераспределение помощи в пользу своего подразделения</li>
-                    <li>🏅 Знак «Главный по печенькам ЮНИСЕФ» — за контроль над сладким гуманитарным грузом</li>
-                    <li>🏅 Орден «Друг детей и сирот» — за раздачу конфет перед объективами камер</li>
-                    <li>🏅 Медаль «За отважную коррупцию» — за взятие отката в особо крупном размере под носом у проверки</li>
-                    <li>🏅 Знак «Хранитель общака» I степени с бриллиантами — за сохранность общей кассы при отступлении</li>
-                    <li>🏅 Орден «Свой в доску» — за умение договориться с кем угодно на любом уровне</li>
-                    <li>🏅 Медаль «За вклад в черный рынок Грозного» — за налаживание поставок дефицитных товаров</li>
-                    <li>🏅 Знак «Почетный смотрящий за нефтяной скважиной» — за контроль кустарного нефтепромысла</li>
-                    <li>🏅 Орден «Ковровая дорожка Шали» — за умение красиво встретить высокого гостя в полевых условиях</li>
-                    <li>🏅 Медаль «За дипломатическое решение вопроса с помощью ПЗРК» — за убеждение оппонента силой аргументов на плече</li>
-                    <li>🏅 Знак «Спикер Совета Старейшин» — за способность говорить три часа и ничего не сказать по делу</li>
-                    <li>🏅 Орден «Мирный атом» — за хранение ртути и прочих полезных веществ в гараже</li>
-                    <li>🏅 Медаль «За вхождение в положение» — за умение войти в любую ситуацию и не выйти без выгоды</li>
-                    <li>🏅 Знак «Ветеран Кадыровско-Масхадовских разборок» — за выживание при любом режиме и власти</li>
-                    <li>🏅 Орден «Примиритель кровников» — за примирение двух враждующих родов путем устранения обоих</li>
-                    <li>🏅 Медаль «За отстаивание суверенитета кухни» — за недопуск женщин к приготовлению плова</li>
-                    <li>🏅 Медаль «За варку хинкала в полевых условиях» — за кулинарный подвиг под обстрелом</li>
-                    <li>🏅 Орден «Золотой Газырь» — за эталонное ношение кавказской формы с газырями</li>
-                    <li>🏅 Знак «Чеченский йог» — за способность выспаться на голых камнях за час</li>
-                    <li>🏅 Медаль «За рекордное количество нашивок на форме» — за превращение камуфляжа в иконостас</li>
-                    <li>🏅 Орден «Почетный пастух боевых баранов» — за успешную эвакуацию отары из зоны боевых действий</li>
-                    <li>🏅 Медаль «За отлов волка голыми руками» — на самом деле соседская овчарка, но звучит грозно</li>
-                    <li>🏅 Знак «Самый быстрый разбор-сбор АК под пловом» — за рекордное время обслуживания автомата в перерыве между блюдами</li>
-                    <li>🏅 Орден «Скала Кавказа» — за богатырское телосложение и вес свыше центнера</li>
-                    <li>🏅 Медаль «За спасение папахи из огня» — за риск жизнью ради головного убора</li>
-                    <li>🏅 Знак «Чтец Корана на бис» — за красивое чтение сур под аплодисменты моджахедов</li>
-                    <li>🏅 Орден «Лучший водитель "Девятки" по серпантину» — за дрифт по горной дороге с полным салоном бойцов</li>
-                    <li>🏅 Медаль «За поднятие тоста стоя на бруствере» — за ораторское искусство под свистом пуль</li>
-                    <li>🏅 Знак «Хранитель традиций» — за постоянное ношение кинжала даже в бане</li>
-                    <li>🏅 Орден «Самогонщик Веденского района» — за обеспечение фронта стратегическим напитком</li>
-                    <li>🏅 Медаль «За лезгинку на броне» — за исполнение национального танца на движущемся БТРе</li>
-                    <li>🏅 Знак «Гроза ГАИ» — за езду без прав и номеров с 1994 года без единого штрафа</li>
-                    <li>🏅 Орден «Кунак Доку Умарова» — за близкое знакомство с одиозным полевым командиром</li>
-                    <li>🏅 Медаль «За сохранение чеченского языка в нецензурной форме» — за виртуозное владение родной обсценной лексикой</li>
-                    <li>🏅 Знак «Золотая бормашина» — за стоматологическую помощь бойцам в полевом лазарете</li>
-                    <li>🏅 Медаль «За изобретение тушенки из барана» — за кулинарный прорыв в полевой кухне</li>
-                    <li>🏅 Орден «Страж Вайнахской этики» — за соблюдение кодекса чести даже при дележе добычи</li>
-                    <li>🏅 Медаль «За 1000 и одну историю про первую войну» — за неиссякаемый запас баек у костра</li>
-                    <li>🏅 Знак «Повелитель УАЗика» — за умение починить «буханку» молотком и матом</li>
-                    <li>🏅 Медаль «За усмирение коня во время салюта» — за удержание скакуна при автоматной очереди в воздух</li>
-                    <li>🏅 Орден «Золотой чеченский акцент» — за речь, которую понимают только земляки</li>
-                    <li>🏅 Медаль «За пробитие брони взглядом» — за фирменный тяжелый взгляд исподлобья</li>
-                    <li>🏅 Орден «Альфа-самец блокпоста» — за доминирование над всеми на КПП</li>
-                    <li>🏅 Знак «Почетный ныряльщик в Каспийское море за патронами» — за подъем утопленного боезапаса</li>
-                    <li>🏅 Медаль «За вынос мозга пленному ФСБшнику» — за успешную дезинформацию вражеского агента</li>
-                    <li>🏅 Орден «Спин-офф Кавказской пленницы» — за похищение невесты с элементами экшена</li>
-                    <li>🏅 Медаль «За взятие языка жестов» — за допрос глухонемого пленного из награды №14</li>
-                    <li>🏅 Знак «Обладатель госномера "КРА 001"» — за езду с картонным блатным номером</li>
-                    <li>🏅 Орден «За разминирование минёта» — за исправление опечатки в боевом приказе ценой здоровья</li>
-                    <li>🏅 Медаль «За оскорбление чувств верующих соседнего вилаята» — за излишне громкий такбир не в том месте</li>
-                    <li>🏅 Знак «Ветеран форумной войны в разделе "Чечня.ру"» — за тысячи постов в интернет-баталиях</li>
-                    <li>🏅 Орден «Золотой свисток» — за сотрудничество со всеми сторонами конфликта одновременно</li>
-                    <li>🏅 Медаль «За утилизацию стратегического запаса вермишели "Роллтон"» — за съедение НЗ в мирное время</li>
-                    <li>🏅 Знак «Почетный наблюдатель за спутниками НАТО» — за высматривание вражеских аппаратов в небе</li>
-                    <li>🏅 Орден «За победу в тендере на откат» — за предложение лучшего процента нужному чиновнику</li>
-                    <li>🏅 Медаль «За художественный свист пули над ухом» — за виртуозное уклонение от выстрела</li>
-                    <li>🏅 Знак «Крестный отец Центороя» — за неформальное влияние в родовом селе Кадырова</li>
-                    <li>🏅 Медаль «За подрыв доверия» — за успешное внедрение дезинформации в ряды противника</li>
-                    <li>🏅 Орден «Черная вдова» — за переживание четырех жен и поиск пятой</li>
-                    <li>🏅 Медаль «За взятие высоты 776.0 в компьютерной игре» — за виртуальный реванш в шутере</li>
-                    <li>🏅 Знак «Мастер спорта по спортивному минированию» — за установку растяжек с олимпийским спокойствием</li>
-                    <li>🏅 Орден «Святой Георгий Победоносец» — за победу в рукопашной схватке с более сильным противником</li>
-                    <li>🏅 Медаль «Ветеран Чеченской Республики Ичкерия» — за выслугу лет при любом режиме</li>
-                    <li>🏅 Знак «Гвардия Дудаева» — за службу еще при первом президенте ЧРИ</li>
-                    <li>🏅 Орден «Рука Кремля» — за умение получать финансирование с обеих сторон конфликта</li>
-                    <li>🏅 Медаль «За взятие Грозного» — за успешную навигацию по городу без карты и навигатора</li>
-                    <li>🏅 Знак «Участник Бородинского сражения» — за то, что перепутал эпохи, но сражался достойно</li>
-                    <li>🏅 Орден «Асса» — за самый громкий и протяжный боевой клич в истории подразделения</li>
-                    <li>🏅 Медаль «За поимку шпиона» — за нейтрализацию соседского кота, воровавшего рыбу</li>
-                    <li>🏅 Знак «Хранитель Зелимхана» — за подражание легендарному абреку Зелимхану Харачоевскому</li>
-                    <li>🏅 Орден «Ичкерийский Суворов» — за науку отступать без потерь личного состава</li>
-                    <li>🏅 Медаль «За оборону подвала собственного дома» — за героическое удержание личного погреба</li>
-                    <li>🏅 Знак «Друг Арби Бараева» — за знакомство с известным полевым командиром</li>
-                    <li>🏅 Орден «Красная звезда» — за найденный в горах советский орден, покрашенный в зеленый</li>
-                    <li>🏅 Медаль «За отвагу на диване» — за стратегическое планирование операций не вставая с лежанки</li>
-                    <li>🏅 Знак «Герой Чеченской Республики Ичкерия» — за самопровозглашенный подвиг перед зеркалом</li>
-                </ul>
-            </details>
+        <div class="mobile-buttons">
+            <a href="https://discord.gg/edPpSRmRNu" target="_blank" class="btn-header btn-discord" style="padding: 0.6rem;">Discord</a>
+            <a href="https://t.me/+5DaqxYO3H6VlMzhi" class="btn-header btn-telegram" style="padding: 0.6rem;">Telegram</a>
         </div>
-
     </div>
 
+    <section class="hero" id="hero">
+        <div class="hero-bg"><div class="orb"></div><div class="orb"></div><div class="orb"></div></div>
+        <div class="hero-grid"></div>
+        <canvas id="particles"></canvas>
+        <div class="hero-content">
+            <div class="hero-emblem"><img src="planeta.png" alt="Global Lens"></div>
+            <div class="hero-badge"><span class="pulse-dot"></span> Сезон в самом разгаре</div>
+            <h1>Мир <span class="gradient-text">без фильтров</span><br>и клише</h1>
+            <p class="hero-description">Русскоязычное ВПИ-сообщество для тех, кто смотрит глубже. Геополитика, военное дело, экономика и скрытые механизмы мировой политики.</p>
+            <p class="hero-subtext">Здесь вы не просто читаете новости — вы <strong style="color:var(--primary-light);">становитесь частью процесса</strong>.</p>
+            <div class="hero-buttons">
+                <a href="https://discord.gg/edPpSRmRNu" target="_blank" class="btn btn-primary">Присоединиться к Discord</a>
+                <a href="about.html" class="btn btn-outline">Узнать больше</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat"><div class="hero-stat-value" data-count="513">0</div><div class="hero-stat-label">Участников</div></div>
+                <div class="hero-stat"><div class="hero-stat-value" data-count="31">0</div><div class="hero-stat-label">Государств</div></div>
+                <div class="hero-stat"><div class="hero-stat-value" data-count="19">0</div><div class="hero-stat-label">Сезонов</div></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="cta">
+        <div class="cta-card reveal">
+            <img src="planeta.png" alt="Global Lens" width="70" style="margin-bottom:1.5rem;">
+            <h2>Готов взглянуть на мир <span style="background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">по-новому</span>?</h2>
+            <p>Global Lens — это не просто ВПИ. Это способ взглянуть на мир иначе.</p>
+            <div class="cta-buttons">
+                <a href="https://discord.gg/edPpSRmRNu" target="_blank" class="btn btn-primary">Присоединиться к Discord</a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <img src="planeta.png" alt="GL">
+                <span class="footer-brand-text">Global Lens</span>
+            </div>
+            <div class="footer-social">
+                <a href="https://discord.gg/edPpSRmRNu" target="_blank" aria-label="Discord">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.095 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                </a>
+                <a href="https://t.me/+5DaqxYO3H6VlMzhi" aria-label="Telegram">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                </a>
+            </div>
+            <p class="footer-contact">📧 <a href="mailto:global_lenz.rp@bk.ru">global_lenz.rp@bk.ru</a></p>
+            <p class="footer-text">© 2024-2026 <span>Global Lens</span>. Все права защищены. 🌍</p>
+        </div>
+    </footer>
+
+    <script>
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 10));
+
+        function toggleDropdown(id) {
+            const el = document.getElementById(id);
+            const wasOpen = el.classList.contains('open');
+            document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+            if (!wasOpen) el.classList.add('open');
+        }
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.nav-dropdown')) {
+                document.querySelectorAll('.nav-dropdown').forEach(d => d.classList.remove('open'));
+            }
+        });
+
+        function toggleMobileMenu() {
+            document.getElementById('hamburger').classList.toggle('active');
+            document.getElementById('mobileMenu').classList.toggle('open');
+            document.getElementById('mobileOverlay').classList.toggle('active');
+        }
+        function toggleMobileDropdown(btn) {
+            btn.classList.toggle('open');
+            const content = btn.nextElementSibling;
+            if (content && content.classList.contains('mobile-dropdown-content')) {
+                content.classList.toggle('open');
+            }
+        }
+
+        const reveals = document.querySelectorAll('.reveal');
+        const obs = new IntersectionObserver(e => e.forEach(en => { if(en.isIntersecting) en.target.classList.add('visible'); }), { threshold: 0.1 });
+        reveals.forEach(el => obs.observe(el));
+
+        const canvas = document.getElementById('particles'), ctx = canvas.getContext('2d');
+        function resizeCanvas() { canvas.width = canvas.parentElement.offsetWidth; canvas.height = canvas.parentElement.offsetHeight; }
+        resizeCanvas(); window.addEventListener('resize', resizeCanvas);
+        const particles = [];
+        class Particle { constructor() { this.reset(); } reset() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.size = Math.random() * 2 + 0.5; this.speedX = (Math.random() - 0.5) * 0.3; this.speedY = (Math.random() - 0.5) * 0.3; this.opacity = Math.random() * 0.4 + 0.1; this.color = Math.random() > 0.4 ? '67,182,57' : '245,158,11'; } update() { this.x += this.speedX; this.y += this.speedY; if(this.x<0||this.x>canvas.width||this.y<0||this.y>canvas.height) this.reset(); } draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI*2); ctx.fillStyle = `rgba(${this.color},${this.opacity})`; ctx.fill(); } }
+        for(let i=0; i<50; i++) particles.push(new Particle());
+        function animateParticles() { ctx.clearRect(0,0,canvas.width,canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animateParticles); }
+        animateParticles();
+
+        const statNumbers = document.querySelectorAll('.hero-stat-value');
+        const counterObserver = new IntersectionObserver(e => e.forEach(en => {
+            if(en.isIntersecting) {
+                const t = parseInt(en.target.getAttribute('data-count'));
+                let c = 0; const inc = t/50;
+                const tm = setInterval(() => { c += inc; if(c>=t) { en.target.textContent = t; clearInterval(tm); } else en.target.textContent = Math.floor(c); }, 30);
+                counterObserver.unobserve(en.target);
+            }
+        }), { threshold: 0.5 });
+        statNumbers.forEach(n => counterObserver.observe(n));
+    </script>
 </body>
 </html>
-```
