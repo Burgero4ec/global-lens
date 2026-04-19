@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Правила — Global Lens</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.0.18/index.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.18/index.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #43b639; --primary-dark: #2e8a27; --primary-light: #5dd454;
+            --bg-dark: #0a0a0f; --bg-card: #12121a;
+            --text-primary: #f1f5f9; --text-secondary: #94a3b8; --text-muted: #64748b;
+            --border: #1e1e2e;
+            --gradient-1: linear-gradient(135deg, #43b639, #7ed957);
+            --gradient-hero: linear-gradient(135deg, #0a0a0f 0%, #0a120a 50%, #0a0a0f 100%);
+            --shadow: 0 25px 50px -12px rgba(0,0,0,0.7);
+            --tg-blue: #2AABEE;
+        }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg-dark); color: var(--text-primary); line-height: 1.7; overflow-x: hidden; }
+        .navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1rem 2rem; transition: all 0.4s ease; }
+        .navbar.scrolled { background: rgba(10,10,15,0.95); backdrop-filter: blur(20px); border-bottom: 1px solid var(--border); padding: 0.7rem 2rem; }
+        .nav-container { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; overflow: visible; }
+        .nav-logo { font-family: 'JetBrains Mono', monospace; font-size: 1.4rem; font-weight: 800; text-decoration: none; display: flex; align-items: center; gap: 0.6rem; flex-shrink: 0; }
+        .nav-logo img { height: 36px; width: auto; display: block; }
+        .nav-logo-text { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-links { display: flex; list-style: none; gap: 0.3rem; align-items: center; flex-wrap: wrap; justify-content: center; }
+        .nav-links a:not(.nav-btn):not(.dropdown-trigger) { color: var(--text-secondary); text-decoration: none; padding: 0.5rem 0.8rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; position: relative; white-space: nowrap; }
+        .nav-links a:not(.nav-btn):not(.dropdown-trigger):hover, .nav-links a:not(.nav-btn):not(.dropdown-trigger).active { color: var(--text-primary); background: rgba(67,182,57,0.1); }
+        .nav-links a:not(.nav-btn):not(.dropdown-trigger).active::after { content: ''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 20px; height: 2px; background: var(--primary); border-radius: 1px; }
+        .nav-btn { padding: 0.55rem 1.2rem; color: white; border: none; border-radius: 8px; font-size: 0.85rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; font-family: inherit; white-space: nowrap; display: inline-flex; align-items: center; gap: 0.4rem; z-index: 2; }
+        .nav-btn:hover { transform: translateY(-2px); }
+        .nav-btn.discord { background: var(--gradient-1); box-shadow: 0 4px 15px rgba(67,182,57,0.3); }
+        .nav-btn.telegram { background: linear-gradient(135deg, #2AABEE, #1a8cd8); box-shadow: 0 4px 15px rgba(42,171,238,0.3); }
+        .nav-buttons { display: flex; gap: 0.5rem; align-items: center; }
+        .dropdown { position: relative; z-index: 1001; }
+        .dropdown-trigger { color: var(--text-secondary); text-decoration: none; padding: 0.5rem 0.8rem; border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: all 0.3s ease; cursor: pointer; display: flex; align-items: center; gap: 0.3rem; white-space: nowrap; background: none; border: none; font-family: inherit; }
+        .dropdown-trigger:hover, .dropdown-trigger.active { color: var(--text-primary); background: rgba(67,182,57,0.1); }
+        .dropdown-trigger .arrow { font-size: 0.7rem; transition: transform 0.3s ease; }
+        .dropdown.open .dropdown-trigger .arrow { transform: rotate(180deg); }
+        .dropdown-menu { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 0.5rem 0; min-width: 160px; opacity: 0; visibility: hidden; transition: all 0.2s ease; box-shadow: var(--shadow); z-index: 2000; margin-top: 0.5rem; }
+        .dropdown.open .dropdown-menu { opacity: 1; visibility: visible; }
+        .dropdown-menu a { display: block; padding: 0.6rem 1rem; color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; transition: all 0.2s ease; white-space: nowrap; }
+        .dropdown-menu a:hover { color: var(--text-primary); background: rgba(67,182,57,0.1); }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; padding: 5px; flex-shrink: 0; }
+        .hamburger span { width: 25px; height: 2px; background: var(--text-primary); transition: all 0.3s ease; border-radius: 1px; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px,5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(5px,-5px); }
+
+        .page-hero { min-height: 35vh; display: flex; align-items: center; justify-content: center; text-align: center; position: relative; overflow: hidden; padding: 8rem 2rem 3rem; background: var(--gradient-hero); }
+        .page-hero-bg { position: absolute; inset: 0; z-index: 0; }
+        .page-hero-bg .orb { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.1; }
+        .page-hero-bg .orb:nth-child(1) { width: 400px; height: 400px; background: var(--primary); top: -10%; left: -5%; }
+        .page-hero-bg .orb:nth-child(2) { width: 300px; height: 300px; background: #f59e0b; top: 30%; right: -5%; }
+        .page-hero-content { position: relative; z-index: 1; }
+        .page-hero h1 { font-size: clamp(2rem,5vw,3rem); font-weight: 900; margin-bottom: 0.5rem; }
+        .page-hero h1 .gradient-text { background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .page-hero p { color: var(--text-secondary); font-size: 1.1rem; }
+
+        .section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .section-title { font-size: clamp(1.5rem,3vw,2rem); font-weight: 800; margin-bottom: 2rem; text-align: center; }
+        
+        .accordion-container { max-width: 850px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
+        .accordion-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: all 0.3s ease; }
+        .accordion-item:hover { border-color: rgba(67,182,57,0.3); }
+        .accordion-header { width: 100%; padding: 1.2rem 1.5rem; background: none; border: none; color: var(--text-primary); font-size: 1.1rem; font-weight: 600; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-family: inherit; }
+        .accordion-header::after { content: '+'; font-size: 1.5rem; transition: transform 0.3s ease; color: var(--primary-light); }
+        .accordion-item.active .accordion-header::after { transform: rotate(45deg); }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; background: rgba(0,0,0,0.2); }
+        .accordion-content-inner { padding: 0 1.5rem 1.5rem; color: var(--text-secondary); line-height: 1.7; font-size: 0.95rem; }
+        .accordion-content-inner p { margin-bottom: 0.8rem; }
+        .accordion-content-inner ul, .accordion-content-inner ol { margin-left: 1.5rem; margin-bottom: 0.8rem; }
+        .accordion-content-inner li { margin-bottom: 0.4rem; }
+        .rule-num { color: var(--primary-light); font-weight: 600; }
+        .rule-divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(67,182,57,0.3), transparent); margin: 1rem 0; border: none; }
+        .penalty { color: var(--accent); font-weight: 500; display: block; margin-top: 0.3rem; }
+        .sub-header { color: var(--text-primary); font-weight: 600; margin: 1rem 0 0.5rem; display: block; }
+        .note { color: var(--text-muted); font-size: 0.85rem; font-style: italic; }
+        .date-badge { display: inline-block; background: rgba(67,182,57,0.1); color: var(--primary-light); padding: 0.2rem 0.6rem; border-radius: 6px; font-size: 0.8rem; margin-bottom: 1rem; font-family: 'JetBrains Mono', monospace; }
+        
+        .dynamic-content h1, .dynamic-content h2, .dynamic-content h3 { color: var(--text-primary); margin: 1.5rem 0 0.5rem; }
+        .dynamic-content a { color: var(--primary-light); text-decoration: none; }
+        .dynamic-content a:hover { text-decoration: underline; }
+        .dynamic-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1rem; }
+        .dynamic-content li { margin-bottom: 0.5rem; }
+        .dynamic-content blockquote { border-left: 3px solid var(--primary); padding-left: 1rem; color: var(--text-secondary); font-style: italic; }
+
+        .footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; }
+        .footer-text { color: var(--text-muted); font-size: 0.85rem; }
+        .footer-text span { color: var(--primary-light); }
+        .footer-contact { color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 0.5rem; }
+        .footer-contact a { color: var(--primary-light); text-decoration: none; }
+
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .hamburger { display: flex; }
+            .nav-links { position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; background: var(--bg-card); flex-direction: column; padding: 5rem 2rem 2rem; gap: 0.5rem; transition: right 0.3s ease; border-left: 1px solid var(--border); overflow-y: auto; }
+            .nav-links.open { right: 0; }
+            .nav-btn-mobile { display: flex !important; margin-top: 0.5rem; justify-content: center; width: 100%; }
+            .nav-buttons { gap: 0.5rem; }
+            .section { padding: 3rem 1.5rem; }
+            .nav-desktop-btn { display: none; }
+            .dropdown-menu { position: static; transform: none; margin-top: 0.5rem; width: 100%; }
+        }
+        @media (min-width: 769px) { .nav-btn-mobile { display: none !important; } }
+    </style>
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <img src="planeta.png" alt="Global Lens">
+                <span class="nav-logo-text">Global Lens</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="nav-link">Главная</a></li>
+                <li class="dropdown" id="aboutDropdown">
+                    <button class="dropdown-trigger" onclick="toggleDropdown('aboutDropdown')">
+                        О проекте <span class="arrow">▼</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="about.html">О сервере</a>
+                        <a href="about.html#news">Новости</a>
+                        <a href="about.html#updates">Обновления</a>
+                    </div>
+                </li>
+                <li><a href="features.html" class="nav-link">Возможности</a></li>
+                <li><a href="season.html" class="nav-link">Сезон</a></li>
+                <li><a href="staff.html" class="nav-link">Персонал</a></li>
+                <li class="dropdown" id="rulesDropdown">
+                    <button class="dropdown-trigger" onclick="toggleDropdown('rulesDropdown')">
+                        Правила <span class="arrow">▼</span>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="rules.html#server">Правила сервера</a>
+                        <a href="rules.html#bot">Правила бота</a>
+                        <a href="rules.html#privacy">Приватность</a>
+                    </div>
+                </li>
+                <li class="nav-btn-mobile"><a href="https://discord.gg/edPpSRmRNu" target="_blank" class="nav-btn discord">🎮 Discord</a></li>
+                <li class="nav-btn-mobile"><a href="https://t.me/+5DaqxYO3H6VlMzhi" target="_blank" class="nav-btn telegram">✈️ Telegram</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="https://discord.gg/edPpSRmRNu" target="_blank" class="nav-btn discord nav-desktop-btn">🎮 Discord</a>
+                <a href="https://t.me/+5DaqxYO3H6VlMzhi" target="_blank" class="nav-btn telegram nav-desktop-btn">✈️ Telegram</a>
+            </div>
+            <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <div class="page-hero-bg"><div class="orb"></div><div class="orb"></div></div>
+        <div class="page-hero-content">
+            <h1>Правила <span class="gradient-text">Global Lens</span></h1>
+            <p>Для поддержания порядка и продуктивной игры</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="accordion-container reveal">
+            <div class="accordion-item" id="server">
+                <button class="accordion-header">📜 Правила сервера</button>
+                <div class="accordion-content">
+                    <div class="accordion-content-inner">
+                        <p>Для поддержания порядка и обеспечения продуктивной игры, при использовании сервера "Global Lens", вы соглашаетесь с следующими правилами. Все правила применяются ко всем каналам на сервере, если не указано иное.</p>
+                        <hr class="rule-divider">
+                        
+                        <p><span class="rule-num">Правило - 1.1</span><br>Правила также распространяются на личные сообщения, если обе стороны являются участниками проекта. Правило также запрещает распространение личных сообщений, даже если одна из сторон не находится на проекте.</p>
+                        <span class="note">-# Наказание за личные сообщения происходит только, если распространяется реклама и за распротранение личных сообщений.</span>
+                        <span class="penalty">Наказание зависит от нарушенного правила</span>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило - 1.2</span><br>Разрешается использовать только один аккаунт на проекте, если тот не влияет на ролевую игру. Использование нескольких аккаунтов для обхода наказания или создания беспорядка запрещено.</p>
+                        <span class="penalty">Наказание: бан твинка/основы.</span>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило - 1.3</span><br>Действия высшего персонала в лице Руководства, Заместителя руководства и Администрации не подлежат оспариванию, если имеют конкретную почву, основанную на правилах или отдельных исключительных решениях.</p>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило - 1.4</span><br>Пресекательные меры за нарушения любого из правил применяются по усмотрению персонала проекта. Если вы желаете оспорить данное решение, вы можете связаться с высшей администрацией проекта.</p>
+                        <span class="note">Общие правила.</span>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило 1.5</span><br>Запрещено упоминать высший персонал проекта без какой-либо на то весомой причины. Если возникают вопросы - в поддержку (обычные тикеты) или через /report question (или bug) к высшему персоналу.</p>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило - 2.1</span><br>Учетные записи, созданные менее трех дней назад, не имеют права на регистрацию страны.</p>
+                        <span class="note">Правила регистрации</span>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило - 2.2</span><br>Все анкеты, которые не соблюдают форму подачи, будут отклонены на усмотрение анкетолога.</p>
+                        <span class="note">Правила регистрации</span>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило - 2.3</span><br>При смене страны участник теряет весь прогресс, который он получил во время игры за неё.</p>
+                        <span class="note">Правила регистрации</span>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило - 2.4</span><br>Любое использование уязвимостей бота, включая баги, ошибки и прочее для личных целей или вреду сообществу - согласно Правилам использования автоматически предполагает отказ от использования услуг бота и обязывает к последующему снятию с регистрации.</p>
+                        <span class="penalty">Наказание: снятие с регистрации. По усмотрению высшей администрации: возможен бан, запрет регистрации, мут на длительный срок.</span>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило - 3.1</span><br>Запрещены оскорбления, угрозы, домогательства или любое другое поведение, которое может вызвать дискриминацию, неприязнь или неудобство. Кроме того, запрещены оскорбления родственников участника несмотря на то, что высказывания могут быть якобы шуточными.</p>
+                        <span class="penalty">Наказание: мут от 10 минут до 1 часа.</span>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило - 3.2</span><br>Запрещено размещение, обмен или оправдывание нелегального, порнографического, оскорбительного или иного неприемлимого контента, включая распространение и пропаганду тоталитарной символики, а также запрещается распространение политической агитации и его обсуждение, связанных с военными конфликтами, включая военные действия между Украиной и Россией. Не приветствуется пропаганда, защита и другое обсуждение позиций каждой из сторон, указанной ранее.</p>
+                        <span class="penalty">Наказание: мут от 3 часов до 1 дня. За оскорбление родственников наказание повышенное в 2 раза.</span>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило - 3.3</span><br>Запрещено размещение повторяющихся сообщений, нежелательной рекламы или навязчивых сообщений, которые могут вызвать помехи в общении на проекте. Также включает использование капса, оффтоп или неприличного количества эмодзи.</p>
+                        <span class="penalty">Наказание: мут от 10 минут до 1 часа.</span>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило - 3.4</span><br>Запрещено разглашение личной информации других участников без их согласия. Это включает адреса, телефоны, электронные адреса или другие личные данные.</p>
+                        <span class="penalty">Наказание: мут от 6 часов до 1 дня.</span>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило - 3.5</span><br>Запрещена реклама других проектов или продуктов без предварительного согласия администрации сервера.</p>
+                        <span class="penalty">Наказание: мут от 1 часа до бана аккаунта.</span>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило - 3.6</span><br>Запрещено подстрекательство участников на конфликт, их разжигание и активное участие в них. Модерация и администрация проекта оставляют за собой право замутить только инициатора конфликта, либо же применить наказание ко всем сторонам конфликта.</p>
+                        <span class="penalty">Наказание: мут от 1 часа до 1 дня.</span>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило 4.1</span><br>Запрещено несоблюдение тематики чата. Наличие "//" в сообщении не освобождает участника от ответственности.</p>
+                        <span class="note">Правило игры. Данное правило распространяется на все каналы, вне зависимости от их тематики.</span>
+                        <span class="penalty">Наказание: мут от 10 до 60 минут.</span>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило 4.2</span><br>Все новости должны быть оформлены грамотно и на русском языке, за исключением заголовков и фраз, прямо связанных с этими странами в их собственных новостях.</p>
+                        <span class="note">Правило игры. Наказание: предупреждение/откат.</span>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило 4.3</span><br>Правильно оформленная новость считается таковой, когда в ней полностью раскрыта тема новости, приведены комментарии участвующих лиц, в том числе государственных деятелей, минимум 30 слов. Для сверхдержав - минимальное количество слов ровняется 50.</p>
+                        <span class="note">Правило игры. Наказание: предупреждение/откат.</span>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило 4.4</span><br>Запрещена передача денежных средств и военных сил без какого-либо RP. В соответствии с данным правилом, - соглашения являются единоразовой акцией.</p>
+                        <span class="penalty">Наказание: изъятие финансовых средств или военных сил без права на возвращение.</span>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило 4.5</span><br>После регистрации каждое государство и организация получает щит на 3 суток, если не администрация не указывает другой срок. Во время щита нельзя объявлять войны, предъявлять ультиматумы и получать их. Кроме того, в случае ультиматума - их срок автоматически установлен в 24 часа.</p>
+                        <span class="penalty">Наказание: откат, далее мут.</span>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило 4.6</span><br>Политолог вправе провести войну от имени государства, которое не занимает игрок, а также против ИИ. Кроме того, политолог вправе отвечать на события и ультиматумы от имени государства, которому они были предъявлены несмотря на то, что политолог может быть игроком.</p>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило 4.7</span><br>Все формы переговоры, включая секретные, проходят в соответствующем форуме. Все попытки перенести переговоры в личные сообщения или голосовой канал наносят автоматическое клеймо, что они недействительные, не регулируются ролевой игрой и как-либо не могут повлиять на последнее. Все политологи обязаны быть нейтральными в проверке переговоров и/или соглашений.</p>
+                        <span class="note">*Новости или соглашения, сформированные на основе "личных" или "голосовых" переговоров признаются недействительными и подлежат откату.</span>
+                        <hr class="rule-divider">
+
+                        <p><span class="rule-num">Правило 4.8</span><br>Все договоры сохраняют свою силу при смене игрока. Новый игрок в праве их денонсировать.</p>
+
+                        <span class="sub-header">Другое.</span>
+                        <p>Руководство и администрация может лишь частично гарантировать неприкосновенность личной жизни. Каждый участник в обсуждении своей личной жизни с другими участниками сам обязуется выстроить определённые рамки за которые не стоит переходить в диалоге. Если определённого выстроения рамок не произошло, то руководство и администрация в праве мутить исключительно по общесерверным правилам. Также, участник сам решает какую информацию про себя распространять. Если эта информация было использована другими сторонами против него же, то наказание на проекте совершается по соответственному правилу.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p class="footer-contact">📧 <a href="mailto:global_lenz.rp@bk.ru">global_lenz.rp@bk.ru</a></p>
+        <p class="footer-text">© 2024-2026 <span>Global Lens</span>. Все права защищены. 🌍 Мир без фильтров.</p>
+    </footer>
+
+    <script>
+        const navbar=document.getElementById('navbar');
+        window.addEventListener('scroll',()=>navbar.classList.toggle('scrolled',window.scrollY>50));
+        const hamburger=document.getElementById('hamburger'),navLinks=document.getElementById('navLinks');
+        hamburger.addEventListener('click',()=>{hamburger.classList.toggle('active');navLinks.classList.toggle('open');});
+        const reveals=document.querySelectorAll('.reveal');
+        const obs=new IntersectionObserver(e=>e.forEach(en=>{if(en.isIntersecting)en.target.classList.add('visible');}),{threshold:0.1});
+        reveals.forEach(el=>obs.observe(el));
+
+        const tosUrl = 'https://raw.githubusercontent.com/AytacOnan2/ToS-and-Privacy-Policy-Global-Lens-Bot/main/TERMS_OF_SERVICE.md';
+        const privacyUrl = 'https://raw.githubusercontent.com/AytacOnan2/ToS-and-Privacy-Policy-Global-Lens-Bot/main/PRIVACY_POLICY.md';
+
+        async function loadMarkdown(url, elementId) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('Network response was not ok');
+                const text = await response.text();
+                const htmlContent = marked.parse(text);
+                document.getElementById(elementId).innerHTML = htmlContent;
+            } catch (error) {
+                document.getElementById(elementId).innerHTML = '<p style="color: #ef4444;">Ошибка загрузки данных.</p>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadMarkdown(tosUrl, 'tos-content');
+            loadMarkdown(privacyUrl, 'privacy-content');
+        });
+
+        document.querySelectorAll('.accordion-header').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const content = btn.nextElementSibling;
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.accordion-item').forEach(i => {
+                    i.classList.remove('active');
+                    i.querySelector('.accordion-content').style.maxHeight = null;
+                });
+                if (!isActive) {
+                    item.classList.add('active');
+                    content.style.maxHeight = content.scrollHeight + "px";
+                }
+            });
+        });
+
+        function toggleDropdown(id) { document.getElementById(id).classList.toggle('open'); }
+        document.addEventListener('click', function(e) { document.querySelectorAll('.dropdown').forEach(d => { if (!d.contains(e.target)) d.classList.remove('open'); }); });
+    </script>
+</body>
+</html>
