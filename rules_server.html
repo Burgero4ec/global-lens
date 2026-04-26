@@ -30,22 +30,31 @@
         ::-webkit-scrollbar-track{background:var(--bg-dark)}
         ::-webkit-scrollbar-thumb{background:var(--primary-dark);border-radius:4px}
 
-        /* === НАВИГАЦИЯ (из шаблона) === */
+        /* === НАВИГАЦИЯ (анимация при скролле) === */
         .navbar{
             position:fixed;top:0;left:0;right:0;z-index:1000;
-            background:rgba(10,10,15,0.95);backdrop-filter:blur(20px);
-            border-bottom:1px solid var(--border);
             height:60px;display:flex;align-items:center;padding:0 1rem;
+            background: transparent;
+            backdrop-filter: none;
+            border-bottom: 1px solid transparent;
+            transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
         }
+        .navbar.scrolled{
+            background: rgba(10,10,15,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
         .nav-container{
-            max-width:1200px;margin:0 auto;width:100%;
+            max-width:1400px;margin:0 auto;width:100%;
             display:flex;align-items:center;justify-content:space-between;
         }
         .nav-left{
             display:flex;align-items:center;gap:2rem;flex:1;
         }
         .nav-logo{
-            font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:800;
+            font-family:'JetBrains Mono',monospace;
+            font-size: clamp(1rem, 2vw, 1.2rem);font-weight:800;
             text-decoration:none;display:flex;align-items:center;gap:0.5rem;
             color:var(--primary-light);flex-shrink:0;
         }
@@ -56,8 +65,8 @@
         .nav-menu>li>a.nav-link,
         .nav-menu>li>.nav-dropdown-trigger{
             color:var(--text-secondary);text-decoration:none;
-            padding:0.5rem 0.8rem;font-size:0.85rem;font-weight:500;
-            transition:all 0.2s ease;white-space:nowrap;
+            padding:0.5rem 0.8rem;font-size: clamp(0.8rem, 1.2vw, 0.9rem);
+            font-weight:500;transition:all 0.2s ease;white-space:nowrap;
             display:flex;align-items:center;gap:0.3rem;
             background:none;border:none;cursor:pointer;font-family:inherit;
         }
@@ -106,7 +115,8 @@
         }
         .nav-buttons{display:flex;gap:0.5rem;align-items:center}
         .btn-header{
-            padding:0.4rem 0.8rem;font-size:0.8rem;font-weight:600;border-radius:8px;
+            padding:0.4rem 0.8rem;font-size: clamp(0.7rem, 1vw, 0.8rem);
+            font-weight:600;border-radius:8px;
             text-decoration:none;transition:all 0.2s ease;
             display:flex;align-items:center;gap:0.3rem;
         }
@@ -170,8 +180,9 @@
 
         /* === HERO === */
         .page-hero{
-            min-height:35vh;display:flex;align-items:center;justify-content:center;
-            text-align:center;position:relative;overflow:hidden;padding:8rem 2rem 3rem;
+            min-height:40vh;display:flex;align-items:center;justify-content:center;
+            text-align:center;position:relative;overflow:hidden;
+            padding: clamp(5rem, 10vw, 8rem) 2rem 3rem;
             background:linear-gradient(135deg,#0a0a0f 0%,#0a120a 50%,#0a0a0f 100%);
         }
         .page-hero-bg{position:absolute;inset:0;z-index:0}
@@ -181,30 +192,46 @@
         .page-hero-bg .orb:nth-child(1){width:400px;height:400px;background:var(--primary);top:-10%;left:-5%}
         .page-hero-bg .orb:nth-child(2){width:300px;height:300px;background:#f59e0b;top:30%;right:-5%}
         .page-hero-content{position:relative;z-index:1}
-        .page-hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:900;margin-bottom:0.5rem}
+        .page-hero h1{
+            font-size: clamp(2rem, 6vw, 3.5rem);font-weight:900;margin-bottom:0.5rem;
+        }
         .page-hero h1 .gradient-text{
             background:var(--gradient-1);-webkit-background-clip:text;
             -webkit-text-fill-color:transparent;background-clip:text;
         }
-        .page-hero p{color:var(--text-secondary);font-size:1.1rem}
+        .page-hero p{
+            color:var(--text-secondary);font-size: clamp(1rem, 2.5vw, 1.3rem);
+        }
 
         /* === СЕКЦИЯ И АККОРДЕОН === */
-        .section{padding:4rem 2rem;max-width:1200px;margin:0 auto}
-        .accordion-container{max-width:850px;margin:0 auto;display:flex;flex-direction:column;gap:1rem}
+        .section{
+            padding: clamp(2rem, 5vw, 4rem) 2rem;
+            max-width: 1200px;
+            margin:0 auto;
+        }
+        .accordion-container{
+            max-width: 1000px;margin:0 auto;
+            display:flex;flex-direction:column;gap:1.2rem;
+        }
         .accordion-item{
             background:var(--bg-card);border:1px solid var(--border);
             border-radius:14px;overflow:hidden;transition:all 0.3s ease;
         }
         .accordion-item:hover{border-color:rgba(67,182,57,0.3)}
         .accordion-header{
-            width:100%;padding:1.2rem 1.5rem;background:none;border:none;
-            color:var(--text-primary);font-size:1.1rem;font-weight:600;
+            width:100%;
+            padding: clamp(1rem, 3vw, 1.5rem) clamp(1rem, 3vw, 2rem);
+            background:none;border:none;
+            color:var(--text-primary);
+            font-size: clamp(1rem, 2.5vw, 1.3rem);font-weight:600;
             text-align:left;cursor:pointer;display:flex;justify-content:space-between;
             align-items:center;font-family:inherit;transition:background 0.2s;
         }
         .accordion-header:hover{background:rgba(255,255,255,0.02)}
         .accordion-header::after{
-            content:'+';font-size:1.5rem;transition:transform 0.3s ease;
+            content:'+';
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            transition:transform 0.3s ease;
             color:var(--primary-light);
         }
         .accordion-item.active .accordion-header::after{transform:rotate(45deg)}
@@ -214,11 +241,13 @@
             background:rgba(0,0,0,0.2);
         }
         .accordion-content-inner{
-            padding:0 1.5rem 1.5rem;color:var(--text-secondary);
-            line-height:1.7;font-size:0.95rem;
+            padding: 0 clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem);
+            color:var(--text-secondary);
+            line-height:1.8;
+            font-size: clamp(0.9rem, 1.8vw, 1.05rem);
         }
         .accordion-content-inner p{margin-bottom:0.8rem}
-        .accordion-content-inner ul,.accordion-content-inner ol{margin-left:1.5rem;margin-bottom:0.8rem}
+        .accordion-content-inner ul,.accordion-content-inner ol{margin-left: clamp(1rem, 2vw, 2rem);margin-bottom:0.8rem}
         .accordion-content-inner li{margin-bottom:0.4rem}
         .rule-num{color:var(--primary-light);font-weight:600}
         .rule-divider{
@@ -230,10 +259,21 @@
         .note{color:var(--text-muted);font-size:0.85rem;font-style:italic}
 
         /* === ФУТЕР === */
-        .footer{border-top:1px solid var(--border);padding:2rem;text-align:center}
-        .footer-text{color:var(--text-muted);font-size:0.85rem}
+        .footer{
+            border-top:1px solid var(--border);
+            padding: clamp(1.5rem, 3vw, 2.5rem) 2rem;
+            text-align:center;
+        }
+        .footer-text{
+            color:var(--text-muted);
+            font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+        }
         .footer-text span{color:var(--primary-light)}
-        .footer-contact{color:var(--text-secondary);font-size:0.85rem;margin-bottom:0.5rem}
+        .footer-contact{
+            color:var(--text-secondary);
+            font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+            margin-bottom:0.5rem;
+        }
         .footer-contact a{color:var(--primary-light);text-decoration:none}
 
         /* === АНИМАЦИЯ ПОЯВЛЕНИЯ === */
@@ -244,12 +284,13 @@
         @media(max-width:768px){
             .hamburger{display:flex}
             .nav-menu{display:none}
-            .section{padding:3rem 1.5rem}
+            .section{padding:2rem 1rem}
+            .accordion-container{gap:0.8rem}
         }
     </style>
 </head>
 <body>
-    <!-- ===== НАВИГАЦИЯ (ТОЧНО ПО ШАБЛОНУ) ===== -->
+    <!-- ===== НАВИГАЦИЯ (с анимацией) ===== -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-left">
@@ -269,8 +310,8 @@
                                 </button>
                                 <div class="nav-dropdown-menu">
                                     <a href="about.html">О сервере</a>
-                                    <a href="about.html#news">Новости</a>
-                                    <a href="about.html#updates">Обновления</a>
+                                    <a href="news.html">Новости</a>
+                                    <a href="updates.html">Обновления</a>
                                 </div>
                             </div>
                             <div class="nav-dropdown" id="rulesDropdown">
@@ -321,8 +362,8 @@
             </button>
             <div class="mobile-dropdown-content">
                 <a href="about.html">О сервере</a>
-                <a href="about.html#news">Новости</a>
-                <a href="about.html#updates">Обновления</a>
+                <a href="news.html">Новости</a>
+                <a href="updates.html">Обновления</a>
             </div>
             <button class="mobile-dropdown-trigger" onclick="toggleMobileDropdown(this, event)">
                 Правила <span class="arrow">▼</span>
@@ -361,99 +402,101 @@
                 <button class="accordion-header">📜 Правила сервера</button>
                 <div class="accordion-content" style="max-height: 5000px;">
                     <div class="accordion-content-inner">
-                        <p>Для поддержания порядка и обеспечения продуктивной игры, при использовании сервера "Global Lens", вы соглашаетесь с следующими правилами. Все правила применяются ко всем каналам на сервере, если не указано иное.</p>
-                        <hr class="rule-divider">
-                        
-                        <p><span class="rule-num">Правило - 1.1</span><br>Правила также распространяются на личные сообщения, если обе стороны являются участниками проекта. Правило также запрещает распространение личных сообщений, даже если одна из сторон не находится на проекте.</p>
-                        <span class="note">-# Наказание за личные сообщения происходит только, если распространяется реклама и за распротранение личных сообщений.</span>
-                        <span class="penalty">Наказание зависит от нарушенного правила</span>
+                        <!-- ВСТУПЛЕНИЕ -->
+                        <p>Для поддержания порядка и обеспечения продуктивной игры, при использовании сервера "Global Lens", вы соглашаетесь с нижеизложенными правилами. Все правила применяются ко всем каналам на сервере, если не указано иное.</p>
                         <hr class="rule-divider">
 
-                        <p><span class="rule-num">Правило - 1.2</span><br>Разрешается использовать только один аккаунт на проекте, если тот не влияет на ролевую игру. Использование нескольких аккаунтов для обхода наказания или создания беспорядка запрещено.</p>
-                        <span class="penalty">Наказание: бан твинка/основы.</span>
+                        <!-- Правило 1.1 -->
+                        <p><span class="rule-num">Правило - 1.1</span><br>Зона действия правил и личные границы.<br>
+                        Правила проекта обязательны для соблюдения во всех публичных каналах. Личная переписка участников не модерируется, однако рассылка рекламы в ЛС или публикация чужих личных сообщений (включая скриншоты и видео) в открытом доступе строго наказывается.</p>
+                        <span class="penalty">Наказание: от мута до бана</span>
                         <hr class="rule-divider">
 
-                        <p><span class="rule-num">Правило - 1.3</span><br>Действия высшего персонала в лице Руководства, Заместителя руководства и Администрации не подлежат оспариванию, если имеют конкретную почву, основанную на правилах или отдельных исключительных решениях.</p>
+                        <!-- Правило 1.2 -->
+                        <p><span class="rule-num">Правило - 1.2</span><br>Учетные записи и ролевой процесс.<br>
+                        На проекте разрешено использовать только один основной профиль, а дополнительный аккаунт допускается исключительно в осведомительных целях — например, если основной был временно ограничен самой платформой Discord, либо технические неполадки не позволяют зайти с главной учетной записи. При этом создание таких резервных профилей для обхода выданных локальных наказаний, создания беспорядка или получения выгоды в процессе ролевой игры приведет к блокировке всех ваших аккаунтов.</p>
+                        <span class="penalty">Наказание: бан всех учетных записей</span>
                         <hr class="rule-divider">
 
-                        <p><span class="rule-num">Правило - 1.4</span><br>Пресекательные меры за нарушения любого из правил применяются по усмотрению персонала проекта. Если вы желаете оспорить данное решение, вы можете связаться с высшей администрацией проекта.</p>
+                        <!-- Правило 1.3 -->
+                        <p><span class="rule-num">Правило - 1.3</span><br>Субординация и служба поддержки.<br>
+                        Любые пресекательные меры применяются на усмотрение персонала, а обоснованные решения высшего руководства не подлежат публичному оспариванию. Запрещено беспричинно упоминать высшую администрацию — со всеми вопросами, жалобами и апелляциями необходимо обращаться напрямую в службу поддержки.</p>
                         <span class="note">Общие правила.</span>
                         <hr class="rule-divider">
 
-                        <p><span class="rule-num">Правило 1.5</span><br>Запрещено упоминать высший персонал проекта без какой-либо на то весомой причины. Если возникают вопросы - в поддержку (обычные тикеты) или через /report question (или bug) к высшему персоналу.</p>
-                        <hr class="rule-divider">
-
-                        <!-- Остальные правила полностью сохранены как в исходном документе -->
-                        <p><span class="rule-num">Правило - 2.1</span><br>Учетные записи, созданные менее трех дней назад, не имеют права на регистрацию страны.</p>
+                        <!-- Правила регистрации (2.1) -->
+                        <span class="sub-header">Правила регистрации</span>
+                        <p><span class="rule-num">Правило - 2.1</span><br>Регистрация и управление страной.<br>
+                        Подать заявку на создание страны могут только владельцы учетных записей, зарегистрированных не менее трех дней назад. Анкета должна строго соответствовать установленной форме подачи, в противном случае анкетолог вправе её отклонить. Важно учитывать, что при смене игровой страны весь прогресс, достигнутый за предыдущее государство, полностью и безвозвратно обнуляется.</p>
                         <span class="note">Правила регистрации</span>
                         <hr class="rule-divider">
 
-                        <p><span class="rule-num">Правило - 2.2</span><br>Все анкеты, которые не соблюдают форму подачи, будут отклонены на усмотрение анкетолога.</p>
+                        <!-- Правило 2.2 -->
+                        <p><span class="rule-num">Правило - 2.2</span><br>Техническая честность и использование бота.<br>
+                        Любое намеренное использование уязвимостей, багов или ошибок серверного бота в личных целях или во вред проекту категорически запрещено. Подобные действия расцениваются как отказ от услуг бота и ведут к автоматическому снятию с регистрации (потере страны). В зависимости от тяжести нарушения, администрация может дополнительно применить длительный мут, запрет на повторную регистрацию или полную блокировку на сервере.</p>
+                        <span class="penalty">Наказание: снятие с регистрации, вплоть до бана</span>
                         <span class="note">Правила регистрации</span>
                         <hr class="rule-divider">
 
-                        <p><span class="rule-num">Правило - 2.3</span><br>При смене страны участник теряет весь прогресс, который он получил во время игры за неё.</p>
-                        <span class="note">Правила регистрации</span>
+                        <!-- Правило 3.1 -->
+                        <p><span class="rule-num">Правило - 3.1</span><br>Уважительное общение и запрет конфликтов.<br>
+                        Запрещены любые оскорбления, угрозы, травля и дискриминация. Оскорбление или упоминание родственников в негативном ключе категорически запрещено даже в шуточной форме. Также запрещено подстрекать участников к конфликтам, разжигать ссоры или активно в них участвовать. Администрация оставляет за собой право наказать как исключительно инициатора, так и всех участников перепалки.</p>
+                        <span class="penalty">Наказание: от мута до 1 дня (за родственников — удвоение)</span>
                         <hr class="rule-divider">
 
-                        <p><span class="rule-num">Правило - 2.4</span><br>Любое использование уязвимостей бота, включая баги, ошибки и прочее для личных целей или вреду сообществу - согласно Правилам использования автоматически предполагает отказ от использования услуг бота и обязывает к последующему снятию с регистрации.</p>
-                        <span class="penalty">Наказание: снятие с регистрации. По усмотрению высшей администрации: возможен бан, запрет регистрации, мут на длительный срок.</span>
+                        <!-- Правило 3.2 -->
+                        <p><span class="rule-num">Правило - 3.2</span><br>Запрещенный контент и реальная политика.<br>
+                        Запрещена публикация, обмен и оправдание нелегальных материалов, порнографии, шокирующего контента (NSFW), распространение тоталитарной символики, а также оправдание всех нарушений прав против общества. Проект находится вне реальной политики. Строго запрещена политическая агитация, пропаганда и обсуждение реальных вооруженных конфликтов (включая войну между Украиной и Россией). Защита или продвижение позиций любых сторон из реального мира не приветствуется и пресекается.</p>
+                        <span class="penalty">Наказание: мут от 3 часов до 1 дня</span>
                         <hr class="rule-divider">
 
-                        <p><span class="rule-num">Правило - 3.1</span><br>Запрещены оскорбления, угрозы, домогательства или любое другое поведение, которое может вызвать дискриминацию, неприязнь или неудобство. Кроме того, запрещены оскорбления родственников участника несмотря на то, что высказывания могут быть якобы шуточными.</p>
-                        <span class="penalty">Наказание: мут от 10 минут до 1 часа.</span>
+                        <!-- Правило 3.3 -->
+                        <p><span class="rule-num">Правило - 3.3</span><br>Конфиденциальность.<br>
+                        Категорически запрещено разглашать личную информацию других участников без их прямого согласия. Это касается реальных адресов, номеров телефонов, электронных почт, фотографий и любых других персональных данных.</p>
+                        <span class="penalty">Наказание: мут от 6 часов до 1 дня</span>
                         <hr class="rule-divider">
 
-                        <p><span class="rule-num">Правило - 3.2</span><br>Запрещено размещение, обмен или оправдывание нелегального, порнографического, оскорбительного или иного неприемлимого контента, включая распространение и пропаганду тоталитарной символики, а также запрещается распространение политической агитации и его обсуждение, связанных с военными конфликтами, включая военные действия между Украиной и Россией. Не приветствуется пропаганда, защита и другое обсуждение позиций каждой из сторон, указанной ранее.</p>
-                        <span class="penalty">Наказание: мут от 3 часов до 1 дня. За оскорбление родственников наказание повышенное в 2 раза.</span>
+                        <!-- Правило 3.4 -->
+                        <p><span class="rule-num">Правило - 3.4</span><br>Чистота чата: спам и реклама.<br>
+                        Запрещено засорять чаты повторяющимися сообщениями, бессмысленным текстом, чрезмерным использованием CAPS LOCK или огромным количеством эмодзи. Оффтоп в тематических каналах также наказуем. Любой пиар сторонних проектов, серверов или продуктов без предварительного одобрения высшей администрации сервера запрещен и может привести к вечной блокировке аккаунта.</p>
+                        <span class="penalty">Наказание: от мута до бана</span>
                         <hr class="rule-divider">
 
-                        <p><span class="rule-num">Правило - 3.3</span><br>Запрещено размещение повторяющихся сообщений, нежелательной рекламы или навязчивых сообщений, которые могут вызвать помехи в общении на проекте. Также включает использование капса, оффтоп или неприличного количества эмодзи.</p>
-                        <span class="penalty">Наказание: мут от 10 минут до 1 часа.</span>
+                        <!-- Правило 4.1 -->
+                        <span class="sub-header">Правила игры</span>
+                        <p><span class="rule-num">Правило - 4.1</span><br>Общение и публикация новостей.<br>
+                        — Тематика чатов. Строго соблюдайте назначение каналов. Использование скобок // не освобождает от ответственности за оффтоп.<br>
+                        — Формат новостей. Все игровые сводки публикуются на грамотном русском языке (допускаются аутентичные заголовки, фразы в цитатах и очень минимальные ошибки). Новость должна полностью раскрывать суть события и включать комментарии участвующих лиц или гос. деятелей.<br>
+                        — Объем. Минимальный размер новости — 30 слов, а для государств со статусом сверхдержавы — 50 слов. Неформатные новости подлежат откату.</p>
+                        <span class="note">Правило игры</span>
                         <hr class="rule-divider">
 
-                        <p><span class="rule-num">Правило - 3.4</span><br>Запрещено разглашение личной информации других участников без их согласия. Это включает адреса, телефоны, электронные адреса или другие личные данные.</p>
-                        <span class="penalty">Наказание: мут от 6 часов до 1 дня.</span>
+                        <!-- Правило 4.2 -->
+                        <p><span class="rule-num">Правило - 4.2</span><br>Дипломатия, переговоры и транзакции.<br>
+                        — Прозрачность переговоров. Любые переговоры (включая секретные) ведутся исключительно в соответствующих форумных каналах. Соглашения и новости, основанные на договоренностях из личных сообщений (ЛС) или голосовых чатов, считаются недействительными, не влияют на RP-процесс и подлежат откату.<br>
+                        — Передача ресурсов. Любая передача финансов или военных сил требует полноценного RP-обоснования. Скрытые переводы без отыгровки ведут к изъятию средств без права возврата.<br>
+                        — Преемственность договоров. При смене игрока на государстве, автономии или организации все ранее заключенные им пакты и договоры сохраняют свою силу. Новый правитель имеет полное право их денонсировать. Политологи при проверке соглашений обязаны сохранять абсолютный нейтралитет.</p>
+                        <span class="note">Правило игры</span>
                         <hr class="rule-divider">
 
-                        <p><span class="rule-num">Правило - 3.5</span><br>Запрещена реклама других проектов или продуктов без предварительного согласия администрации сервера.</p>
-                        <span class="penalty">Наказание: мут от 1 часа до бана аккаунта.</span>
+                        <!-- Правило 4.3 -->
+                        <p><span class="rule-num">Правило - 4.3</span><br>Игровые механики: щиты, ультиматумы и NPC.<br>
+                        — Защитный щит. После регистрации новое государство, автономия или организация получает иммунитет на 3 суток (если администрацией не указано иное). В этот период запрещено объявлять войны, получать и отправлять санкции, а также выдвигать или получать ультиматумы.<br>
+                        — Ультиматумы. Стандартный срок действия любого ультиматума автоматически фиксируется на реальных 24 часах.<br>
+                        — Роль политологов. Политолог (даже если он сам является игроком) имеет право отыгрывать войны, дипломатию и отвечать на ультиматумы от лица государств, не занятых игроками (NPC).</p>
+                        <span class="note">Правило игры</span>
                         <hr class="rule-divider">
 
-                        <p><span class="rule-num">Правило - 3.6</span><br>Запрещено подстрекательство участников на конфликт, их разжигание и активное участие в них. Модерация и администрация проекта оставляют за собой право замутить только инициатора конфликта, либо же применить наказание ко всем сторонам конфликта.</p>
-                        <span class="penalty">Наказание: мут от 1 часа до 1 дня.</span>
+                        <!-- Правило 4.4 -->
+                        <p><span class="rule-num">Правило - 4.4</span><br>Дополнительные игровые регламенты.<br>
+                        Помимо основного свода, на проекте действуют детализированные правила для конкретных RP-механик:<br>
+                        — Правила войн: регулируют порядок ведения боевых действий, включая обоснование для начала конфликта (казус белли), причины для отката, механику сражений, а также назначение и процедуру смены ведущего политолога.<br>
+                        — Правила соглашений: устанавливают стандартизированную форму для заключения международных договоров и регламентируют обязательный состав участников сделки.<br>
+                        — Правила военной активности: закрепляют строгие шаблоны оформления военных действий, существующие лимиты, а также штрафные санкции за несоблюдение установленных форматов подачи.</p>
+                        <span class="note">Правило игры</span>
                         <hr class="rule-divider">
 
-                        <p><span class="rule-num">Правило 4.1</span><br>Запрещено несоблюдение тематики чата. Наличие "//" в сообщении не освобождает участника от ответственности.</p>
-                        <span class="note">Правило игры. Данное правило распространяется на все каналы, вне зависимости от их тематики.</span>
-                        <span class="penalty">Наказание: мут от 10 до 60 минут.</span>
-                        <hr class="rule-divider">
-
-                        <p><span class="rule-num">Правило 4.2</span><br>Все новости должны быть оформлены грамотно и на русском языке, за исключением заголовков и фраз, прямо связанных с этими странами в их собственных новостях.</p>
-                        <span class="note">Правило игры. Наказание: предупреждение/откат.</span>
-                        <hr class="rule-divider">
-
-                        <p><span class="rule-num">Правило 4.3</span><br>Правильно оформленная новость считается таковой, когда в ней полностью раскрыта тема новости, приведены комментарии участвующих лиц, в том числе государственных деятелей, минимум 30 слов. Для сверхдержав - минимальное количество слов ровняется 50.</p>
-                        <span class="note">Правило игры. Наказание: предупреждение/откат.</span>
-                        <hr class="rule-divider">
-
-                        <p><span class="rule-num">Правило 4.4</span><br>Запрещена передача денежных средств и военных сил без какого-либо RP. В соответствии с данным правилом, - соглашения являются единоразовой акцией.</p>
-                        <span class="penalty">Наказание: изъятие финансовых средств или военных сил без права на возвращение.</span>
-                        <hr class="rule-divider">
-
-                        <p><span class="rule-num">Правило 4.5</span><br>После регистрации каждое государство и организация получает щит на 3 суток, если не администрация не указывает другой срок. Во время щита нельзя объявлять войны, предъявлять ультиматумы и получать их. Кроме того, в случае ультиматума - их срок автоматически установлен в 24 часа.</p>
-                        <span class="penalty">Наказание: откат, далее мут.</span>
-                        <hr class="rule-divider">
-
-                        <p><span class="rule-num">Правило 4.6</span><br>Политолог вправе провести войну от имени государства, которое не занимает игрок, а также против ИИ. Кроме того, политолог вправе отвечать на события и ультиматумы от имени государства, которому они были предъявлены несмотря на то, что политолог может быть игроком.</p>
-                        <hr class="rule-divider">
-
-                        <p><span class="rule-num">Правило 4.7</span><br>Все формы переговоры, включая секретные, проходят в соответствующем форуме. Все попытки перенести переговоры в личные сообщения или голосовой канал наносят автоматическое клеймо, что они недействительные, не регулируются ролевой игрой и как-либо не могут повлиять на последнее. Все политологи обязаны быть нейтральными в проверке переговоров и/или соглашений.</p>
-                        <span class="note">*Новости или соглашения, сформированные на основе "личных" или "голосовых" переговоров признаются недействительными и подлежат откату.</span>
-                        <hr class="rule-divider">
-
-                        <p><span class="rule-num">Правило 4.8</span><br>Все договоры сохраняют свою силу при смене игрока. Новый игрок в праве их денонсировать.</p>
-
+                        <!-- Другое -->
                         <span class="sub-header">Другое.</span>
                         <p>Руководство и администрация может лишь частично гарантировать неприкосновенность личной жизни. Каждый участник в обсуждении своей личной жизни с другими участниками сам обязуется выстроить определённые рамки за которые не стоит переходить в диалоге. Если определённого выстроения рамок не произошло, то руководство и администрация в праве мутить исключительно по общесерверным правилам. Также, участник сам решает какую информацию про себя распространять. Если эта информация было использована другими сторонами против него же, то наказание на проекте совершается по соответственному правилу.</p>
                     </div>
@@ -474,11 +517,11 @@
             // Navbar scroll effect
             const navbar = document.getElementById('navbar');
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 10) navbar.classList.add('scrolled');
+                if (window.scrollY > 50) navbar.classList.add('scrolled');
                 else navbar.classList.remove('scrolled');
             });
 
-            // Desktop dropdown logic (точная копия из шаблона)
+            // Desktop dropdown logic
             function closeDropdown(el) {
                 el.classList.remove('open');
                 el.querySelectorAll('.nav-dropdown.open').forEach(c => c.classList.remove('open'));
@@ -525,7 +568,7 @@
                 if(content && content.classList.contains('mobile-dropdown-content')) content.classList.toggle('open');
             };
 
-            // Аккордеон (можно оставить как есть, но добавим активацию)
+            // Аккордеон
             const accHeaders = document.querySelectorAll('.accordion-header');
             accHeaders.forEach(header => {
                 header.addEventListener('click', function() {
@@ -535,13 +578,12 @@
                         item.classList.remove('active');
                         content.style.maxHeight = null;
                     } else {
-                        // можно закрыть другие, но не обязательно
                         item.classList.add('active');
                         content.style.maxHeight = content.scrollHeight + 'px';
                     }
                 });
             });
-            // для первого элемента (уже active) зададим высоту
+            // Начальная высота для активного элемента
             const activeItem = document.querySelector('.accordion-item.active');
             if(activeItem) {
                 const content = activeItem.querySelector('.accordion-content');

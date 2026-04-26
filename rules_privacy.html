@@ -10,7 +10,7 @@
     <!-- Marked для Markdown -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
-        /* === СБРОС И ПЕРЕМЕННЫЕ (КАК В ШАБЛОНЕ) === */
+        /* === СБРОС И ПЕРЕМЕННЫЕ === */
         *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
         :root{
             --primary:#43b639; --primary-dark:#2e8a27; --primary-light:#5dd454;
@@ -32,22 +32,34 @@
         ::-webkit-scrollbar-track{background:var(--bg-dark)}
         ::-webkit-scrollbar-thumb{background:var(--primary-dark);border-radius:4px}
 
-        /* === НАВИГАЦИЯ (ТОЧНО ИЗ ШАБЛОНА) === */
+        /* === НАВИГАЦИЯ (анимация при скролле) === */
         .navbar{
             position:fixed;top:0;left:0;right:0;z-index:1000;
-            background:rgba(10,10,15,0.95);backdrop-filter:blur(20px);
-            border-bottom:1px solid var(--border);
             height:60px;display:flex;align-items:center;padding:0 1rem;
+            /* изначально прозрачный */
+            background: transparent;
+            backdrop-filter: none;
+            border-bottom: 1px solid transparent;
+            transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
         }
+        .navbar.scrolled{
+            background: rgba(10,10,15,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
         .nav-container{
-            max-width:1200px;margin:0 auto;width:100%;
+            max-width: 1400px; /* увеличена максимальная ширина для больших экранов */
+            margin:0 auto;width:100%;
             display:flex;align-items:center;justify-content:space-between;
         }
         .nav-left{
             display:flex;align-items:center;gap:2rem;flex:1;
         }
         .nav-logo{
-            font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:800;
+            font-family:'JetBrains Mono',monospace;
+            font-size: clamp(1rem, 2vw, 1.2rem); /* адаптивный шрифт */
+            font-weight:800;
             text-decoration:none;display:flex;align-items:center;gap:0.5rem;
             color:var(--primary-light);flex-shrink:0;
         }
@@ -58,7 +70,9 @@
         .nav-menu>li>a.nav-link,
         .nav-menu>li>.nav-dropdown-trigger{
             color:var(--text-secondary);text-decoration:none;
-            padding:0.5rem 0.8rem;font-size:0.85rem;font-weight:500;
+            padding:0.5rem 0.8rem;
+            font-size: clamp(0.8rem, 1.2vw, 0.9rem); /* адаптивный шрифт */
+            font-weight:500;
             transition:all 0.2s ease;white-space:nowrap;
             display:flex;align-items:center;gap:0.3rem;
             background:none;border:none;cursor:pointer;font-family:inherit;
@@ -108,7 +122,9 @@
         }
         .nav-buttons{display:flex;gap:0.5rem;align-items:center}
         .btn-header{
-            padding:0.4rem 0.8rem;font-size:0.8rem;font-weight:600;border-radius:8px;
+            padding:0.4rem 0.8rem;
+            font-size: clamp(0.7rem, 1vw, 0.8rem); /* адаптивный шрифт */
+            font-weight:600;border-radius:8px;
             text-decoration:none;transition:all 0.2s ease;
             display:flex;align-items:center;gap:0.3rem;
         }
@@ -172,8 +188,10 @@
 
         /* === HERO === */
         .page-hero{
-            min-height:35vh;display:flex;align-items:center;justify-content:center;
-            text-align:center;position:relative;overflow:hidden;padding:8rem 2rem 3rem;
+            min-height:40vh;
+            display:flex;align-items:center;justify-content:center;
+            text-align:center;position:relative;overflow:hidden;
+            padding: clamp(5rem, 10vw, 8rem) 2rem 3rem;
             background:linear-gradient(135deg,#0a0a0f 0%,#0a120a 50%,#0a0a0f 100%);
         }
         .page-hero-bg{position:absolute;inset:0;z-index:0}
@@ -183,30 +201,50 @@
         .page-hero-bg .orb:nth-child(1){width:400px;height:400px;background:var(--primary);top:-10%;left:-5%}
         .page-hero-bg .orb:nth-child(2){width:300px;height:300px;background:#f59e0b;top:30%;right:-5%}
         .page-hero-content{position:relative;z-index:1}
-        .page-hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:900;margin-bottom:0.5rem}
+        .page-hero h1{
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight:900;margin-bottom:0.5rem;
+        }
         .page-hero h1 .gradient-text{
             background:var(--gradient-1);-webkit-background-clip:text;
             -webkit-text-fill-color:transparent;background-clip:text;
         }
-        .page-hero p{color:var(--text-secondary);font-size:1.1rem}
+        .page-hero p{
+            color:var(--text-secondary);
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+        }
 
         /* === СЕКЦИЯ И АККОРДЕОН === */
-        .section{padding:4rem 2rem;max-width:1200px;margin:0 auto}
-        .accordion-container{max-width:850px;margin:0 auto;display:flex;flex-direction:column;gap:1rem}
+        .section{
+            padding: clamp(2rem, 5vw, 4rem) 2rem;
+            max-width: 1200px;
+            margin:0 auto;
+        }
+        .accordion-container{
+            max-width: 1000px;
+            margin:0 auto;
+            display:flex;flex-direction:column;gap:1.2rem;
+        }
         .accordion-item{
             background:var(--bg-card);border:1px solid var(--border);
             border-radius:14px;overflow:hidden;transition:all 0.3s ease;
         }
         .accordion-item:hover{border-color:rgba(67,182,57,0.3)}
         .accordion-header{
-            width:100%;padding:1.2rem 1.5rem;background:none;border:none;
-            color:var(--text-primary);font-size:1.1rem;font-weight:600;
+            width:100%;
+            padding: clamp(1rem, 3vw, 1.5rem) clamp(1rem, 3vw, 2rem);
+            background:none;border:none;
+            color:var(--text-primary);
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            font-weight:600;
             text-align:left;cursor:pointer;display:flex;justify-content:space-between;
             align-items:center;font-family:inherit;transition:background 0.2s;
         }
         .accordion-header:hover{background:rgba(255,255,255,0.02)}
         .accordion-header::after{
-            content:'+';font-size:1.5rem;transition:transform 0.3s ease;
+            content:'+';
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            transition:transform 0.3s ease;
             color:var(--primary-light);
         }
         .accordion-item.active .accordion-header::after{transform:rotate(45deg)}
@@ -216,11 +254,16 @@
             background:rgba(0,0,0,0.2);
         }
         .accordion-content-inner{
-            padding:0 1.5rem 1.5rem;color:var(--text-secondary);
-            line-height:1.7;font-size:0.95rem;
+            padding: 0 clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem);
+            color:var(--text-secondary);
+            line-height:1.8;
+            font-size: clamp(0.9rem, 1.8vw, 1.05rem);
         }
         .accordion-content-inner p{margin-bottom:0.8rem}
-        .accordion-content-inner ul,.accordion-content-inner ol{margin-left:1.5rem;margin-bottom:0.8rem}
+        .accordion-content-inner ul,.accordion-content-inner ol{
+            margin-left: clamp(1rem, 2vw, 2rem);
+            margin-bottom:0.8rem;
+        }
         .accordion-content-inner li{margin-bottom:0.4rem}
         .rule-num{color:var(--primary-light);font-weight:600}
         .rule-divider{
@@ -250,10 +293,21 @@
         }
 
         /* === ФУТЕР === */
-        .footer{border-top:1px solid var(--border);padding:2rem;text-align:center}
-        .footer-text{color:var(--text-muted);font-size:0.85rem}
+        .footer{
+            border-top:1px solid var(--border);
+            padding: clamp(1.5rem, 3vw, 2.5rem) 2rem;
+            text-align:center;
+        }
+        .footer-text{
+            color:var(--text-muted);
+            font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+        }
         .footer-text span{color:var(--primary-light)}
-        .footer-contact{color:var(--text-secondary);font-size:0.85rem;margin-bottom:0.5rem}
+        .footer-contact{
+            color:var(--text-secondary);
+            font-size: clamp(0.8rem, 1.5vw, 0.95rem);
+            margin-bottom:0.5rem;
+        }
         .footer-contact a{color:var(--primary-light);text-decoration:none}
 
         /* === АНИМАЦИЯ ПОЯВЛЕНИЯ === */
@@ -264,12 +318,13 @@
         @media(max-width:768px){
             .hamburger{display:flex}
             .nav-menu{display:none}
-            .section{padding:3rem 1.5rem}
+            .section{padding:2rem 1rem}
+            .accordion-container{gap:0.8rem}
         }
     </style>
 </head>
 <body>
-    <!-- ===== НАВИГАЦИЯ (ИДЕНТИЧНА ШАБЛОНУ) ===== -->
+    <!-- ===== НАВИГАЦИЯ (с анимацией) ===== -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <div class="nav-left">
@@ -397,10 +452,10 @@
     <!-- СКРИПТЫ (НАВИГАЦИЯ + АККОРДЕОН + MARKDOWN) -->
     <script>
         (function() {
-            // ---------- НАВИГАЦИЯ (ИЗ ШАБЛОНА) ----------
+            // ---------- НАВИГАЦИЯ (анимация при скролле > 50px) ----------
             const navbar = document.getElementById('navbar');
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 10) navbar.classList.add('scrolled');
+                if (window.scrollY > 50) navbar.classList.add('scrolled');
                 else navbar.classList.remove('scrolled');
             });
 

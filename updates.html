@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>О сервере — Global Lens</title>
+    <title>Обновления — Global Lens</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.0.18/index.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.18/index.min.css">
     <style>
@@ -71,7 +71,9 @@
         .section{padding:clamp(2rem,5vw,4rem) 2rem;max-width:1200px;margin:0 auto}
         .content-block{background:var(--bg-card);border:1px solid var(--border);border-radius:16px;padding:clamp(1.5rem,3vw,2.5rem);margin-bottom:1rem}
         .content-block h2{font-size:clamp(1.3rem,2.5vw,1.6rem);margin-bottom:1rem;color:var(--primary-light)}
+        .content-block h3{font-size:1.1rem;margin:1.5rem 0 0.5rem;color:var(--text-primary)}
         .content-block p,.content-block li{color:var(--text-secondary);margin-bottom:0.5rem;line-height:1.7;font-size:clamp(0.9rem,1.8vw,1.05rem)}
+        .content-block ul{margin-left:1.5rem;margin-bottom:1rem}
         .footer{border-top:1px solid var(--border);padding:clamp(1.5rem,3vw,2.5rem) 2rem;text-align:center}
         .footer-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
         .footer-brand{display:flex;align-items:center;gap:0.5rem}
@@ -99,7 +101,7 @@
                         <div class="nav-dropdown-menu">
                             <div class="nav-dropdown" id="aboutDropdown">
                                 <button class="nav-dropdown-trigger" onclick="toggleDropdown('aboutDropdown', event)">О проекте <span class="arrow">▶</span></button>
-                                <div class="nav-dropdown-menu"><a href="about.html" class="active">О сервере</a><a href="news.html">Новости</a><a href="updates.html">Обновления</a></div>
+                                <div class="nav-dropdown-menu"><a href="about.html">О сервере</a><a href="news.html">Новости</a><a href="updates.html" class="active">Обновления</a></div>
                             </div>
                             <div class="nav-dropdown" id="rulesDropdown">
                                 <button class="nav-dropdown-trigger" onclick="toggleDropdown('rulesDropdown', event)">Правила <span class="arrow">▶</span></button>
@@ -119,14 +121,13 @@
             <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></div>
         </div>
     </nav>
-    <!-- Мобильное меню аналогично остальным страницам -->
     <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
     <div class="mobile-menu" id="mobileMenu">
         <a href="index.html">Главная</a>
         <button class="mobile-dropdown-trigger" onclick="toggleMobileDropdown(this, event)">Информация <span class="arrow">▼</span></button>
         <div class="mobile-dropdown-content">
             <button class="mobile-dropdown-trigger" onclick="toggleMobileDropdown(this, event)">О проекте <span class="arrow">▼</span></button>
-            <div class="mobile-dropdown-content"><a href="about.html" class="active">О сервере</a><a href="news.html">Новости</a><a href="updates.html">Обновления</a></div>
+            <div class="mobile-dropdown-content"><a href="about.html">О сервере</a><a href="news.html">Новости</a><a href="updates.html" class="active">Обновления</a></div>
             <button class="mobile-dropdown-trigger" onclick="toggleMobileDropdown(this, event)">Правила <span class="arrow">▼</span></button>
             <div class="mobile-dropdown-content"><a href="rules_server.html">Правила сервера</a><a href="rules_bot.html">Правила бота</a><a href="rules_privacy.html">Приватность</a></div>
         </div>
@@ -142,17 +143,69 @@
     <section class="page-hero">
         <div class="page-hero-bg"><div class="orb"></div><div class="orb"></div></div>
         <div class="page-hero-content">
-            <h1>О <span class="gradient-text">сервере</span></h1>
-            <p>ВПИ-сообщество нового уровня</p>
+            <h1>Обновления <span class="gradient-text">проекта</span></h1>
+            <p>История изменений и улучшений</p>
         </div>
     </section>
 
     <section class="section">
         <div class="content-block">
-            <h2>🌍 Что такое Global Lens?</h2>
-            <p><strong>Global Lens</strong> — это русскоязычное ВПИ-сообщество, где каждый участник становится полноценным игроком на мировой арене. Здесь нет готовых ответов — есть реальные последствия ваших решений.</p>
-            <p>Геополитика, военное дело, экономика и скрытые механизмы мировой политики — всё это оживает в нашем проекте. Каждый ход меняет баланс сил, каждое решение влияет на судьбы виртуальных государств.</p>
-            <p>Надоели поверхностные выводы и навязанные интерпретации? Здесь вы не просто читаете новости — вы <span style="color:var(--primary-light);font-weight:600;">становитесь частью процесса</span>.</p>
+            <h2>🔧 Обновление 13 — Сезон 20</h2>
+            <h3>Информация</h3>
+            <ul>
+                <li>У стран и автономий добавлена поддержка правительства.</li>
+                <li>Отделение автономий от метрополии теперь сообщается последнему в ЛС.</li>
+                <li>Отделение от метрополии предоставляет автономии щит на 12 часов.</li>
+                <li>При отделении автономии — инвестиции в неё от метрополии будут национализироваться.</li>
+                <li>Объявление независимости автономии не сможет в конечном результате снять у метрополии более 15% ВВП.</li>
+                <li>Добавлено подтверждение объявления независимости для автономий.</li>
+                <li>Для автономий убраны рядки специализации, государственного и экономического управления.</li>
+            </ul>
+            <h3>Регистрация</h3>
+            <ul>
+                <li>Снятие с регистрации теперь снимает у игрока купленные лицензии.</li>
+            </ul>
+            <h3>Магазин, инвентарь и предметы</h3>
+            <ul>
+                <li>Добавлена возможность изменить информацию о технике перед подачей.</li>
+                <li>Добавлена возможность подтверждения подачи техники.</li>
+                <li>Описание техники в подаче теперь ограничено 512 символами.</li>
+                <li>Добавлена команда !item_info.</li>
+            </ul>
+            <h3>Переводы, прибыль, коррупция и санкции</h3>
+            <ul>
+                <li>Рост коррупции у автономии замедлен в 2 раза по отношению к метрополии.</li>
+                <li>Государственные расходы автономии понижены с 0.5% от ВВП до 0.1% от ВВП.</li>
+                <li>При росте коррупции у метрополии — 10% от неё (роста) начисляется к автономии.</li>
+            </ul>
+            <h3>Дипломатия</h3>
+            <ul>
+                <li>Добавлена возможность продажи лицензий без вмешательства кураторов.</li>
+                <li>Страна самостоятельно теперь может выставлять цены на лицензии.</li>
+                <li>Выставлено ограничение на продажу предметов террористическим организациям.</li>
+            </ul>
+            <h3>Настройки</h3>
+            <ul>
+                <li>Автономии теперь могут настраивать запрос на перевод денег и получение инвестиций.</li>
+                <li>ЧВК и другие организации теперь могут настраивать запрос на перевод денег.</li>
+                <li>Обновлён вид панели настроек.</li>
+            </ul>
+            <h3>Другое</h3>
+            <ul>
+                <li>В случае принятия инвестиций — отправителю будет приходить уведомление.</li>
+                <li>В случае принятия перевода — отправителю будет приходить уведомление.</li>
+            </ul>
+            <h3>Альянсы</h3>
+            <ul>
+                <li>Возвращена возможность взымать деньги с альянса в пользу кого-то из участников.</li>
+                <li>Возвращена возможность указывать проценты как аргументы для начисления/снятия казны альянса.</li>
+                <li>В целом улучшен внешний вид команд.</li>
+            </ul>
+            <h3>МВФ</h3>
+            <ul>
+                <li>Добавлена возможность инвестировать в МВФ и заработать на этом.</li>
+            </ul>
+            <p style="font-style:italic;margin-top:1.5rem;">* «Война — это великий уравнитель. Её не заботят ни победа, ни поражение, так как в её безжалостных объятиях на краю гибели оказываются все.»</p>
         </div>
     </section>
 

@@ -12,13 +12,28 @@
         html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--primary) var(--bg-dark)}
         body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-primary);line-height:1.7;overflow-x:hidden}
         ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg-dark)}::-webkit-scrollbar-thumb{background:var(--primary-dark);border-radius:4px}
-        .navbar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(10,10,15,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);height:60px;display:flex;align-items:center;padding:0 1rem}
-        .nav-container{max-width:1200px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
+
+        /* === НАВИГАЦИЯ (анимация при скролле) === */
+        .navbar{
+            position:fixed;top:0;left:0;right:0;z-index:1000;
+            height:60px;display:flex;align-items:center;padding:0 1rem;
+            background:transparent;
+            backdrop-filter:none;
+            border-bottom:1px solid transparent;
+            transition:background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
+        }
+        .navbar.scrolled{
+            background:rgba(10,10,15,0.95);
+            backdrop-filter:blur(20px);
+            border-bottom:1px solid var(--border);
+        }
+
+        .nav-container{max-width:1400px;margin:0 auto;width:100%;display:flex;align-items:center;justify-content:space-between}
         .nav-left{display:flex;align-items:center;gap:2rem;flex:1}
-        .nav-logo{font-family:'JetBrains Mono',monospace;font-size:1.1rem;font-weight:800;text-decoration:none;display:flex;align-items:center;gap:0.5rem;color:var(--primary-light);flex-shrink:0}
+        .nav-logo{font-family:'JetBrains Mono',monospace;font-size:clamp(1rem,2vw,1.2rem);font-weight:800;text-decoration:none;display:flex;align-items:center;gap:0.5rem;color:var(--primary-light);flex-shrink:0}
         .nav-logo img{height:28px;width:auto}
         .nav-menu{display:flex;align-items:center;gap:0.25rem;list-style:none}
-        .nav-menu>li>a.nav-link,.nav-menu>li>.nav-dropdown-trigger{color:var(--text-secondary);text-decoration:none;padding:0.5rem 0.8rem;font-size:0.85rem;font-weight:500;transition:all 0.2s ease;white-space:nowrap;display:flex;align-items:center;gap:0.3rem;background:none;border:none;cursor:pointer;font-family:inherit}
+        .nav-menu>li>a.nav-link,.nav-menu>li>.nav-dropdown-trigger{color:var(--text-secondary);text-decoration:none;padding:0.5rem 0.8rem;font-size:clamp(0.8rem,1.2vw,0.9rem);font-weight:500;transition:all 0.2s ease;white-space:nowrap;display:flex;align-items:center;gap:0.3rem;background:none;border:none;cursor:pointer;font-family:inherit}
         .nav-menu>li>a.nav-link:hover,.nav-menu>li>a.nav-link.active,.nav-menu>li>.nav-dropdown-trigger:hover,.nav-menu>li>.nav-dropdown-trigger.active{color:var(--text-primary)}
         .nav-dropdown{position:relative}
         .nav-dropdown .arrow{font-size:0.6rem;transition:transform 0.2s ease}
@@ -33,7 +48,7 @@
         .nav-dropdown-menu a{display:block;padding:0.5rem 1rem;color:var(--text-secondary);text-decoration:none;font-size:0.85rem;transition:all 0.2s ease}
         .nav-dropdown-menu a:hover{color:var(--text-primary);background:rgba(67,182,57,0.05)}
         .nav-buttons{display:flex;gap:0.5rem;align-items:center}
-        .btn-header{padding:0.4rem 0.8rem;font-size:0.8rem;font-weight:600;border-radius:8px;text-decoration:none;transition:all 0.2s ease;display:flex;align-items:center;gap:0.3rem}
+        .btn-header{padding:0.4rem 0.8rem;font-size:clamp(0.7rem,1vw,0.8rem);font-weight:600;border-radius:8px;text-decoration:none;transition:all 0.2s ease;display:flex;align-items:center;gap:0.3rem}
         .btn-discord{background:var(--gradient-1);color:white}.btn-discord:hover{transform:translateY(-1px)}
         .btn-telegram{background:rgba(67,182,57,0.15);color:var(--primary-light)}.btn-telegram:hover{background:rgba(67,182,57,0.25)}
         .hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;padding:5px;flex-shrink:0}
@@ -59,37 +74,36 @@
         .mobile-buttons{display:flex;gap:0.5rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
         .mobile-buttons a{flex:1;text-align:center;font-weight:600}
 
-        .page-hero{min-height:35vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:8rem 2rem 3rem;background:linear-gradient(135deg,#0a0a0f 0%,#0a120a 50%,#0a0a0f 100%)}
+        .page-hero{min-height:40vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:clamp(5rem,10vw,8rem) 2rem 3rem;background:linear-gradient(135deg,#0a0a0f 0%,#0a120a 50%,#0a0a0f 100%)}
         .page-hero-bg{position:absolute;inset:0;z-index:0}
         .page-hero-bg .orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:0.1}
         .page-hero-bg .orb:nth-child(1){width:400px;height:400px;background:var(--primary);top:-10%;left:-5%}
         .page-hero-bg .orb:nth-child(2){width:300px;height:300px;background:#f59e0b;top:30%;right:-5%}
         .page-hero-content{position:relative;z-index:1}
-        .page-hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:900;margin-bottom:0.5rem}
+        .page-hero h1{font-size:clamp(2rem,6vw,3.5rem);font-weight:900;margin-bottom:0.5rem}
         .page-hero h1 .gradient-text{background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .page-hero p{color:var(--text-secondary);font-size:1.1rem}
+        .page-hero p{color:var(--text-secondary);font-size:clamp(1rem,2.5vw,1.3rem)}
 
-        .section{padding:4rem 2rem;max-width:1200px;margin:0 auto}
-        .section-title{font-size:clamp(1.5rem,3vw,2rem);font-weight:800;margin-bottom:2rem;text-align:center}
+        .section{padding:clamp(2rem,5vw,4rem) 2rem;max-width:1200px;margin:0 auto}
         .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
         .feature-card{background:var(--bg-card);border:1px solid var(--border);border-radius:18px;padding:2rem;transition:all 0.3s ease}
         .feature-card:hover{border-color:rgba(67,182,57,0.3);transform:translateY(-3px);box-shadow:var(--shadow)}
-        .feature-icon{width:50px;height:50px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1rem}
+        .feature-icon{width:clamp(45px,7vw,55px);height:clamp(45px,7vw,55px);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1rem}
         .feature-icon.econ{background:rgba(245,158,11,0.15)}.feature-icon.systems{background:rgba(124,58,237,0.15)}.feature-icon.events{background:rgba(220,38,38,0.15)}.feature-icon.discuss{background:rgba(6,182,212,0.15)}.feature-icon.content{background:rgba(236,72,153,0.15)}.feature-icon.community{background:rgba(34,197,94,0.15)}
-        .feature-card h3{font-size:1.15rem;font-weight:700;margin-bottom:0.6rem}
-        .feature-card p{color:var(--text-secondary);font-size:0.95rem;line-height:1.6}
+        .feature-card h3{font-size:clamp(1.1rem,2vw,1.2rem);font-weight:700;margin-bottom:0.6rem}
+        .feature-card p{color:var(--text-secondary);font-size:clamp(0.9rem,1.8vw,1rem);line-height:1.6}
 
-        .footer{border-top:1px solid var(--border);padding:2rem;text-align:center}
+        .footer{border-top:1px solid var(--border);padding:clamp(1.5rem,3vw,2.5rem) 2rem;text-align:center}
         .footer-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
         .footer-brand{display:flex;align-items:center;gap:0.5rem}
         .footer-brand img{height:24px;width:auto}
-        .footer-brand-text{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1rem;background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .footer-brand-text{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:clamp(0.9rem,2vw,1.1rem);background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
         .footer-social{display:flex;gap:0.8rem}
         .footer-social a{width:36px;height:36px;border-radius:8px;background:var(--bg-card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--text-secondary);text-decoration:none;transition:all 0.3s ease}
         .footer-social a:hover{border-color:var(--primary);color:var(--primary-light);transform:translateY(-2px)}
-        .footer-text{color:var(--text-muted);font-size:0.8rem;width:100%;text-align:center;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+        .footer-text{color:var(--text-muted);font-size:clamp(0.7rem,1.3vw,0.85rem);width:100%;text-align:center;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
         .footer-text span{color:var(--primary-light)}
-        .footer-contact{color:var(--text-secondary);font-size:0.8rem}
+        .footer-contact{color:var(--text-secondary);font-size:clamp(0.7rem,1.3vw,0.85rem)}
         .footer-contact a{color:var(--primary-light);text-decoration:none}
         @media(max-width:768px){.hamburger{display:flex}.nav-menu{display:none}.features-grid{grid-template-columns:1fr}.footer-content{flex-direction:column;text-align:center}}
     </style>
@@ -106,7 +120,7 @@
                         <div class="nav-dropdown-menu">
                             <div class="nav-dropdown" id="aboutDropdown">
                                 <button class="nav-dropdown-trigger" onclick="toggleDropdown('aboutDropdown', event)">О проекте <span class="arrow">▶</span></button>
-                                <div class="nav-dropdown-menu"><a href="about.html">О сервере</a><a href="about.html#news">Новости</a><a href="about.html#updates">Обновления</a></div>
+                                <div class="nav-dropdown-menu"><a href="about.html">О сервере</a><a href="news.html">Новости</a><a href="updates.html">Обновления</a></div>
                             </div>
                             <div class="nav-dropdown" id="rulesDropdown">
                                 <button class="nav-dropdown-trigger" onclick="toggleDropdown('rulesDropdown', event)">Правила <span class="arrow">▶</span></button>
@@ -132,7 +146,7 @@
         <button class="mobile-dropdown-trigger" onclick="toggleMobileDropdown(this, event)">Информация <span class="arrow">▼</span></button>
         <div class="mobile-dropdown-content">
             <button class="mobile-dropdown-trigger" onclick="toggleMobileDropdown(this, event)">О проекте <span class="arrow">▼</span></button>
-            <div class="mobile-dropdown-content"><a href="about.html">О сервере</a><a href="about.html#news">Новости</a><a href="about.html#updates">Обновления</a></div>
+            <div class="mobile-dropdown-content"><a href="about.html">О сервере</a><a href="news.html">Новости</a><a href="updates.html">Обновления</a></div>
             <button class="mobile-dropdown-trigger" onclick="toggleMobileDropdown(this, event)">Правила <span class="arrow">▼</span></button>
             <div class="mobile-dropdown-content"><a href="rules_server.html">Правила сервера</a><a href="rules_bot.html">Правила бота</a><a href="rules_privacy.html">Приватность</a></div>
         </div>
@@ -174,7 +188,7 @@
     </footer>
 
     <script>
-        const navbar = document.getElementById('navbar'); window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 10));
+        const navbar = document.getElementById('navbar'); window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
         function closeDropdown(el) { el.classList.remove('open'); el.querySelectorAll('.nav-dropdown.open').forEach(c => c.classList.remove('open')); }
         function closeAllTopDropdowns() { document.querySelectorAll('#navMenu > .nav-dropdown.open').forEach(d => closeDropdown(d)); }
         function toggleDropdown(id, event) { if(event) { event.preventDefault(); event.stopPropagation(); } const el = document.getElementById(id); if(!el) return; const isOpen = el.classList.contains('open'); const siblings = el.parentElement ? el.parentElement.querySelectorAll(':scope > .nav-dropdown') : []; siblings.forEach(s => { if(s!==el) closeDropdown(s); }); if(isOpen) closeDropdown(el); else el.classList.add('open'); }

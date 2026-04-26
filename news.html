@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>О сервере — Global Lens</title>
+    <title>Новости — Global Lens</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/jetbrains-mono@5.0.18/index.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.18/index.min.css">
     <style>
+        /* стили идентичны about.html, только заголовок и контент другие */
         *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
         :root{--primary:#43b639;--primary-dark:#2e8a27;--primary-light:#5dd454;--accent:#f59e0b;--bg-dark:#0a0a0f;--bg-card:#12121a;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--border:#1e1e2e;--gradient-1:linear-gradient(135deg,#43b639,#7ed957);--shadow:0 25px 50px -12px rgba(0,0,0,0.7)}
         html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--primary) var(--bg-dark)}
@@ -99,7 +100,7 @@
                         <div class="nav-dropdown-menu">
                             <div class="nav-dropdown" id="aboutDropdown">
                                 <button class="nav-dropdown-trigger" onclick="toggleDropdown('aboutDropdown', event)">О проекте <span class="arrow">▶</span></button>
-                                <div class="nav-dropdown-menu"><a href="about.html" class="active">О сервере</a><a href="news.html">Новости</a><a href="updates.html">Обновления</a></div>
+                                <div class="nav-dropdown-menu"><a href="about.html">О сервере</a><a href="news.html" class="active">Новости</a><a href="updates.html">Обновления</a></div>
                             </div>
                             <div class="nav-dropdown" id="rulesDropdown">
                                 <button class="nav-dropdown-trigger" onclick="toggleDropdown('rulesDropdown', event)">Правила <span class="arrow">▶</span></button>
@@ -119,14 +120,13 @@
             <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></div>
         </div>
     </nav>
-    <!-- Мобильное меню аналогично остальным страницам -->
     <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
     <div class="mobile-menu" id="mobileMenu">
         <a href="index.html">Главная</a>
         <button class="mobile-dropdown-trigger" onclick="toggleMobileDropdown(this, event)">Информация <span class="arrow">▼</span></button>
         <div class="mobile-dropdown-content">
             <button class="mobile-dropdown-trigger" onclick="toggleMobileDropdown(this, event)">О проекте <span class="arrow">▼</span></button>
-            <div class="mobile-dropdown-content"><a href="about.html" class="active">О сервере</a><a href="news.html">Новости</a><a href="updates.html">Обновления</a></div>
+            <div class="mobile-dropdown-content"><a href="about.html">О сервере</a><a href="news.html" class="active">Новости</a><a href="updates.html">Обновления</a></div>
             <button class="mobile-dropdown-trigger" onclick="toggleMobileDropdown(this, event)">Правила <span class="arrow">▼</span></button>
             <div class="mobile-dropdown-content"><a href="rules_server.html">Правила сервера</a><a href="rules_bot.html">Правила бота</a><a href="rules_privacy.html">Приватность</a></div>
         </div>
@@ -142,17 +142,19 @@
     <section class="page-hero">
         <div class="page-hero-bg"><div class="orb"></div><div class="orb"></div></div>
         <div class="page-hero-content">
-            <h1>О <span class="gradient-text">сервере</span></h1>
-            <p>ВПИ-сообщество нового уровня</p>
+            <h1>Новости <span class="gradient-text">проекта</span></h1>
+            <p>Актуальные события и анонсы</p>
         </div>
     </section>
 
     <section class="section">
         <div class="content-block">
-            <h2>🌍 Что такое Global Lens?</h2>
-            <p><strong>Global Lens</strong> — это русскоязычное ВПИ-сообщество, где каждый участник становится полноценным игроком на мировой арене. Здесь нет готовых ответов — есть реальные последствия ваших решений.</p>
-            <p>Геополитика, военное дело, экономика и скрытые механизмы мировой политики — всё это оживает в нашем проекте. Каждый ход меняет баланс сил, каждое решение влияет на судьбы виртуальных государств.</p>
-            <p>Надоели поверхностные выводы и навязанные интерпретации? Здесь вы не просто читаете новости — вы <span style="color:var(--primary-light);font-weight:600;">становитесь частью процесса</span>.</p>
+            <h2>📢 Старт 20-го сезона!</h2>
+            <p><strong>В эту пятницу</strong> начался юбилейный 20-й сезон Global Lens. Предыдущий сезон был досрочно завершён, чтобы дать дорогу масштабному обновлению и новым механикам.</p>
+            <p>Новый сезон — это время переосмысления и фундаментальных перемен. Традиционные методы ведения политики уступают место новым реалиям, а прежние устои начинают рушиться. Политика малых стран способна изменить расклад сил целых регионов.</p>
+            <p>Каждое слово обретает вес, определяя уровень поддержки внутри страны. Отныне каждый правитель стоит перед выбором: утонет ли его страна в междоусобицах или же вознесется на мировой пьедестал.</p>
+            <p><em>«Война, подпитываемая жгучим пламенем попранной веры, превращённой в ненависть, не знает иного конца, кроме истребления.»</em></p>
+            <p>Полный список изменений читайте <a href="updates.html" style="color:var(--primary-light);">на странице обновлений</a>.</p>
         </div>
     </section>
 
