@@ -121,7 +121,7 @@
         .nav-btn.telegram:hover{background:rgba(var(--primary-rgb),0.25)}
         .nav-btn svg{width:16px;height:16px;flex-shrink:0}
 
-        /* переключатель тем (десктоп) */
+        /* переключатель тем */
         .theme-toggle{
             background: rgba(var(--primary-rgb),0.25);
             cursor:pointer;
@@ -151,20 +151,6 @@
             transition:border-color 0.2s;
         }
         .theme-option:hover{border-color:white}
-
-        /* мобильное меню: переключатель тем */
-        .mobile-theme-switcher{
-            display:flex;
-            justify-content:center;
-            gap:0.6rem;
-            margin-top:1rem;
-            padding-top:1rem;
-            border-top:1px solid var(--border);
-        }
-        .mobile-theme-switcher .theme-option{
-            width:32px;
-            height:32px;
-        }
 
         .hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;padding:5px;flex-shrink:0;z-index:1101}
         .hamburger span{width:22px;height:2px;background:var(--text-primary);transition:all 0.3s ease;border-radius:1px}
@@ -228,7 +214,7 @@
         }
         .section-label.thanks{
             background:rgba(245,158,11,0.1);
-            color:#f59e0b;
+            color:#f59e0b; /* фиксированный цвет */
             border-color:rgba(245,158,11,0.2);
         }
         .section-label.deputy{
@@ -264,7 +250,7 @@
             background:linear-gradient(135deg,rgba(var(--primary-rgb),0.08),var(--bg-card));
         }
         .staff-card.thanks{
-            border-color:rgba(245,158,11,0.3);
+            border-color:rgba(245,158,11,0.3); /* фиксированный цвет */
             background:linear-gradient(135deg,rgba(245,158,11,0.05),var(--bg-card));
         }
         .staff-avatar{
@@ -278,7 +264,7 @@
             width:90px;height:90px;
         }
         .staff-card.thanks .staff-avatar{
-            border-color:#f59e0b;
+            border-color:#f59e0b; /* фиксированный цвет */
         }
         .staff-avatar img{width:100%;height:100%;object-fit:cover}
         .staff-avatar-placeholder{
@@ -296,7 +282,7 @@
             border-radius:50px;display:inline-block;
         }
         .staff-card.thanks .staff-role{
-            color:#f59e0b;
+            color:#f59e0b; /* фиксированный цвет */
             background:rgba(245,158,11,0.1);
         }
         .staff-card.deputy .staff-role{
@@ -430,12 +416,6 @@
             <a href="https://discord.gg/edPpSRmRNu" target="_blank" class="discord">Discord</a>
             <a href="https://t.me/+5DaqxYO3H6VlMzhi" target="_blank" class="telegram">Telegram</a>
         </div>
-        <!-- Переключатель тем для мобильного меню -->
-        <div class="mobile-theme-switcher">
-            <span class="theme-option" data-theme="green" style="background: #43b639;" onclick="setTheme('green')" title="Зелёная"></span>
-            <span class="theme-option" data-theme="blue" style="background: #3b82f6;" onclick="setTheme('blue')" title="Синяя"></span>
-            <span class="theme-option" data-theme="orange" style="background: #f97316;" onclick="setTheme('orange')" title="Оранжевая"></span>
-        </div>
     </div>
 
     <!-- HERO -->
@@ -444,9 +424,363 @@
         <div class="page-hero-content"><h1>Персонал <span class="gradient-text">Global Lens</span></h1><p>Люди, которые делают проект лучше каждый день</p></div>
     </section>
 
-    <!-- Остальные секции (Основатель, Признательность, Администраторы, Кураторы, Заместители, Простой персонал) без изменений -->
-    <!-- Здесь должен быть весь контент, идентичный предыдущему полному коду (секции Основатель ... Технологи) -->
-    <!-- ... -->
+    <!-- Основатель -->
+    <section class="section" style="padding-top:1rem;">
+        <div style="text-align:center;"><span class="section-label">Лидерство</span></div>
+        <h2 class="section-title">👑 Основатель</h2>
+        <div class="staff-grid centered">
+            <div class="staff-card founder">
+                <div class="staff-avatar"><img src="sd" alt="AytacOnan2"></div>
+                <div class="staff-name">AytacOnan2</div>
+                <div class="staff-role">Основатель</div>
+                <div class="staff-desc">Владелец сервера. Создал бота, который делает всю тяжёлую работу. Просто хороший человек, без которого этого проекта не существовало бы.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Признательность -->
+    <section class="section" style="padding-top:1rem;">
+        <div style="text-align:center;"><span class="section-label thanks">Признательность</span></div>
+        <h2 class="section-title">Отдельная благодарность</h2>
+        <p class="section-subtitle">Люди, внёсшие особый вклад в развитие проекта</p>
+        <div class="staff-grid grid-auto">
+            <div class="staff-card thanks">
+                <div class="staff-avatar"><img src="images.jfif" alt="Китаёзик"></div>
+                <div class="staff-name">Китаёзик</div>
+                <div class="staff-role">Администратор</div>
+                <div class="staff-desc">Создатель данного сайта. Сделал всё, что вы сейчас видите — от дизайна до реализации.</div>
+            </div>
+            <div class="staff-card thanks">
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">R</div></div>
+                <div class="staff-name">Riy</div>
+                <div class="staff-role">Совладелец Event Horizon</div>
+                <div class="staff-desc">Совладелец сервера Event Horizon. Придумывал прикольные идеи и помогал делать бота. Партнёрка... хыххыыхы..ы.ы.ы.ыххы4.</div>
+            </div>
+            <div class="staff-card thanks">
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#8b5cf6,#06b6d4);">Y</div></div>
+                <div class="staff-name">Yabl1ch</div>
+                <div class="staff-role">Куратор анкетологов</div>
+                <div class="staff-desc">Самый лучший куратор анкетологов, и ещё и самый лучший анкетолог, и по совместительству заслуженный человек в политологии.</div>
+            </div>
+            <div class="staff-card thanks">
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#22c55e,#0ea5e9);">L</div></div>
+                <div class="staff-name">LayBay</div>
+                <div class="staff-role">Специалист по технике</div>
+                <div class="staff-desc">Реализовал процесс по созданию, оценке и принятию техники. Также является заместителем куратора картографии и заместителем куратора технологов.</div>
+            </div>
+            <div class="staff-card thanks">
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#22c55e,#0ea5e9);">L</div></div>
+                <div class="staff-name">[ВНК] Феникс Единорогович</div>
+                <div class="staff-role">Бывший Администратор</div>
+                <div class="staff-desc">Единорожка. Да, просто единорожка. 🦄✨</div>
+            </div>
+            <div class="staff-card thanks" id="qwertxCard">
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#ef4444);">Q</div></div>
+                <div class="staff-name">QWERTX</div>
+                <div class="staff-role">Куратор политологов</div>
+                <div class="staff-desc">Прошёл полную карьерную лестницу от простого игрока до заместителя. За время работы на шампур пытались насадить минимум 5 раз (включая AytacOnan2 и прочих неравнодушных), но он выжил. Легенда сервера.</div>
+                <div class="crime-badge" id="crimeBtn" onclick="toggleCrime()">Обвиняется в: <svg width="12" height="12" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+                <div class="crime-list" id="crimeList">
+                    <ol>
+                        <li>Массовое убийство</li><li>Принужденный каннибализм</li><li>Преступления против человечества</li><li>Вандализм</li><li>Каннибализм</li><li>Геноцид</li><li>Похищение</li><li>Незаконный оборот оружия</li><li>Кража</li><li>Мошенничество</li>
+                        <li>Изготовление и сбыт поддельных документов</li><li>Незаконный оборот наркотиков</li><li>Пиратство</li><li>Коррупция</li><li>Ловушка на дороге</li><li>Грабеж</li><li>Вымогательство</li><li>Политическая угроза</li><li>Угон транспортного средства</li><li>Изнасилование</li>
+                        <li>Торговля людьми промышленной</li><li>Нарушение авторского права</li><li>Киберпреступления</li><li>Сексуальное насилие</li><li>Нарушение законов о защите окружающей среды</li><li>Организация органов поддельной власти</li><li>Военное преступление</li><li>Утеря или уничтожение доказательств</li><li>Неуплата налогов</li><li>Организация или участие в мятеже</li>
+                        <li>Содействие террористической деятельности</li><li>Следование расистским или ксенофобским взглядам</li><li>Сотрудничество с преступной организацией</li><li>Нарушение прав человека</li><li>Неисполнение профессиональных обязанностей</li><li>Уклонение от армейской службы</li><li>Незаконное получение конфиденциальной информации</li><li>Неправомерные действия в сфере финансов</li><li>Саботаж или умышленное повреждение имущества</li><li>Использование нарушенных законов для личной выгоды</li><li>Нарушение законов о безопасности</li>
+                    </ol>
+                    <div class="img-list"><span class="img-list-title">Дополнительно:</span>
+                        <ul><li>Жестокое обращение с животными</li><li>Браконьерство</li><li>Массовое убийство животных</li><li>Побег из тюрьмы</li><li>Сопротивление аресту</li><li>Нападение и побои</li><li>Обвинение в коррупции</li><li>Преследование</li><li>Заговор</li><li>Контрабанда</li><li>Незаконное пересечение границы</li><li>Проникновение на чужую территорию</li><li>Рабство</li><li>Опасное вождение</li><li>Создание опасной ситуации для жизни и здоровья</li><li>Порча имущества</li><li>Убийство</li><li>Незаконная охота</li></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Администраторы -->
+    <section class="section" style="padding-top:1rem;">
+        <div style="text-align:center;"><span class="section-label">Управление</span></div>
+        <h2 class="section-title">Администраторы</h2>
+        <div class="staff-grid grid-3">
+            <div class="staff-card">
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:var(--gradient-1);">F</div></div>
+                <div class="staff-name">Flowy</div>
+                <div class="staff-role">Администратор</div>
+                <div class="staff-desc">Самый добрый и лучший человек в мире с большим сердцем. Всегда поможет, всегда поддержит.</div>
+            </div>
+            <div class="staff-card">
+                <div class="staff-avatar"><img src="images.jfif" alt="Китаёзик"></div>
+                <div class="staff-name">Китаёзик</div>
+                <div class="staff-role">Администратор</div>
+                <div class="staff-desc">Создатель данного сайта. Сделал всё, что вы сейчас видите.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Кураторы -->
+    <section class="section" style="padding-top:1rem;">
+        <div style="text-align:center;"><span class="section-label">Направления</span></div>
+        <h2 class="section-title">Кураторы</h2>
+        <div class="staff-grid grid-2">
+            <div class="staff-card" id="ponzcCard">
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#06b6d4,#3b82f6);">p</div></div>
+                <div class="staff-name">ponzc</div>
+                <div class="staff-role">Куратор картографов</div>
+                <div class="staff-desc">Смог восстановить и сделать стабильную работу картографии.</div>
+                <div class="award-badge" id="awardBtn" onclick="toggleAwards()">🏅 Награды <svg width="12" height="12" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg></div>
+                <div class="award-list" id="awardList">
+                    <ol>
+                        <li>🏅 Орден «Волчья тропа» I степени — за скрытное перемещение по тылам врага без карты и фонарика</li>
+                        <li>🏅 Медаль «За взятие блокпоста без очереди» — за проезд через КПП по звонку старшему</li>
+                        <li>🏅 Знак отличия «Мастер горного эха» — за успешную дезинформацию противника криками «Аллах Акбар» с разных сторон</li>
+                        <li>🏅 Орден «Сломанный КПП» — за физическое уничтожение шлагбаума лбом или бампером</li>
+                        <li>🏅 Медаль «За отстрел тепловизора из рогатки» — за ювелирную точность попадания галькой в дорогую оптику</li>
+                        <li>🏅 Крест «Ночной абрек» — за 10+ успешных ночных рейдов в тапочках, чтоб не шуметь</li>
+                        <li>🏅 Медаль «За бой в тапочках» — за внезапное боестолкновение прямо во время омовения</li>
+                        <li>🏅 Знак «Ветеран битвы за урожай конопли» — за оборону стратегического сырья от чужих рук</li>
+                        <li>🏅 Орден «Скрытый Шамиль» — за партизанскую хитрость, достойную имама</li>
+                        <li>🏅 Медаль «За меткий плевок в глаз БТРу» — за временное ослепление механика-водителя подручными средствами</li>
+                        <li>🏅 Почетный знак «Горец-невидимка» — за умение раствориться в буковом лесу за секунду до обыска</li>
+                        <li>🏅 Орден «Бородатый джигит» — за ношение бороды в условиях отсутствия воды и бритвы более 40 дней</li>
+                        <li>🏅 Медаль «Снайпер-хлеборез» — за точное попадание из СВД в ящик с сухпайком противника</li>
+                        <li>🏅 Знак «За взятие языка глухонемого» — за бесполезный, но героический захват пленного, который ничего не рассказал</li>
+                        <li>🏅 Орден «Аллаху Акбар Бар» I степени — за самый громкий тактический крик, поднявший боевой дух роты</li>
+                        <li>🏅 Медаль «За угон БТР-80 с охраняемой стоянки» — за наглость и знание где ключи оставляет механик</li>
+                        <li>🏅 Знак «Повелитель "Зелёнки"» — за умение ориентироваться в лесу с точностью GPS</li>
+                        <li>🏅 Орден «Волчья сыть» — за употребление просроченной тушенки 1985 года без последствий для желудка</li>
+                        <li>🏅 Медаль «За форсирование Сунжи вброд в минус 20» — за ледяное мужество и отсутствие резиновых сапог</li>
+                        <li>🏅 Знак «Тень Аргуна» — за бесшумное перемещение по Аргунскому ущелью</li>
+                        <li>🏅 Орден «Золотой кнопочный телефон» — за решение всех вопросов одним звонком нужному человеку</li>
+                        <li>🏅 Медаль «За взятие бюджета» — за успешное освоение выделенных средств без остатка в казне</li>
+                        <li>🏅 Знак «Почетный тамада Военно-Полевого Совета» — за умение вести заседание и тосты одновременно</li>
+                        <li>🏅 Орден «Ватсап-Дипломат» — за урегулирование конфликта через голосовые сообщения в мессенджере</li>
+                        <li>🏅 Медаль «За отжатие гуманитарки у своих» — за перераспределение помощи в пользу своего подразделения</li>
+                        <li>🏅 Знак «Главный по печенькам ЮНИСЕФ» — за контроль над сладким гуманитарным грузом</li>
+                        <li>🏅 Орден «Друг детей и сирот» — за раздачу конфет перед объективами камер</li>
+                        <li>🏅 Медаль «За отважную коррупцию» — за взятие отката в особо крупном размере под носом у проверки</li>
+                        <li>🏅 Знак «Хранитель общака» I степени с бриллиантами — за сохранность общей кассы при отступлении</li>
+                        <li>🏅 Орден «Свой в доску» — за умение договориться с кем угодно на любом уровне</li>
+                        <li>🏅 Медаль «За вклад в черный рынок Грозного» — за налаживание поставок дефицитных товаров</li>
+                        <li>🏅 Знак «Почетный смотрящий за нефтяной скважиной» — за контроль кустарного нефтепромысла</li>
+                        <li>🏅 Орден «Ковровая дорожка Шали» — за умение красиво встретить высокого гостя в полевых условиях</li>
+                        <li>🏅 Медаль «За дипломатическое решение вопроса с помощью ПЗРК» — за убеждение оппонента силой аргументов на плече</li>
+                        <li>🏅 Знак «Спикер Совета Старейшин» — за способность говорить три часа и ничего не сказать по делу</li>
+                        <li>🏅 Орден «Мирный атом» — за хранение ртути и прочих полезных веществ в гараже</li>
+                        <li>🏅 Медаль «За вхождение в положение» — за умение войти в любую ситуацию и не выйти без выгоды</li>
+                        <li>🏅 Знак «Ветеран Кадыровско-Масхадовских разборок» — за выживание при любом режиме и власти</li>
+                        <li>🏅 Орден «Примиритель кровников» — за примирение двух враждующих родов путем устранения обоих</li>
+                        <li>🏅 Медаль «За отстаивание суверенитета кухни» — за недопуск женщин к приготовлению плова</li>
+                        <li>🏅 Медаль «За варку хинкала в полевых условиях» — за кулинарный подвиг под обстрелом</li>
+                        <li>🏅 Орден «Золотой Газырь» — за эталонное ношение кавказской формы с газырями</li>
+                        <li>🏅 Знак «Чеченский йог» — за способность выспаться на голых камнях за час</li>
+                        <li>🏅 Медаль «За рекордное количество нашивок на форме» — за превращение камуфляжа в иконостас</li>
+                        <li>🏅 Орден «Почетный пастух боевых баранов» — за успешную эвакуацию отары из зоны боевых действий</li>
+                        <li>🏅 Медаль «За отлов волка голыми руками» — на самом деле соседская овчарка, но звучит грозно</li>
+                        <li>🏅 Знак «Самый быстрый разбор-сбор АК под пловом» — за рекордное время обслуживания автомата в перерыве между блюдами</li>
+                        <li>🏅 Орден «Скала Кавказа» — за богатырское телосложение и вес свыше центнера</li>
+                        <li>🏅 Медаль «За спасение папахи из огня» — за риск жизнью ради головного убора</li>
+                        <li>🏅 Знак «Чтец Корана на бис» — за красивое чтение сур под аплодисменты моджахедов</li>
+                        <li>🏅 Орден «Лучший водитель "Девятки" по серпантину» — за дрифт по горной дороге с полным салоном бойцов</li>
+                        <li>🏅 Медаль «За поднятие тоста стоя на бруствере» — за ораторское искусство под свистом пуль</li>
+                        <li>🏅 Знак «Хранитель традиций» — за постоянное ношение кинжала даже в бане</li>
+                        <li>🏅 Орден «Самогонщик Веденского района» — за обеспечение фронта стратегическим напитком</li>
+                        <li>🏅 Медаль «За лезгинку на броне» — за исполнение национального танца на движущемся БТРе</li>
+                        <li>🏅 Знак «Гроза ГАИ» — за езду без прав и номеров с 1994 года без единого штрафа</li>
+                        <li>🏅 Орден «Кунак Доку Умарова» — за близкое знакомство с одиозным полевым командиром</li>
+                        <li>🏅 Медаль «За сохранение чеченского языка в нецензурной форме» — за виртуозное владение родной обсценной лексикой</li>
+                        <li>🏅 Знак «Золотая бормашина» — за стоматологическую помощь бойцам в полевом лазарете</li>
+                        <li>🏅 Медаль «За изобретение тушенки из барана» — за кулинарный прорыв в полевой кухне</li>
+                        <li>🏅 Орден «Страж Вайнахской этики» — за соблюдение кодекса чести даже при дележе добычи</li>
+                        <li>🏅 Медаль «За 1000 и одну историю про первую войну» — за неиссякаемый запас баек у костра</li>
+                        <li>🏅 Знак «Повелитель УАЗика» — за умение починить «буханку» молотком и матом</li>
+                        <li>🏅 Медаль «За усмирение коня во время салюта» — за удержание скакуна при автоматной очереди в воздух</li>
+                        <li>🏅 Орден «Золотой чеченский акцент» — за речь, которую понимают только земляки</li>
+                        <li>🏅 Медаль «За пробитие брони взглядом» — за фирменный тяжелый взгляд исподлобья</li>
+                        <li>🏅 Орден «Альфа-самец блокпоста» — за доминирование над всеми на КПП</li>
+                        <li>🏅 Знак «Почетный ныряльщик в Каспийское море за патронами» — за подъем утопленного боезапаса</li>
+                        <li>🏅 Медаль «За вынос мозга пленному ФСБшнику» — за успешную дезинформацию вражеского агента</li>
+                        <li>🏅 Орден «Спин-офф Кавказской пленницы» — за похищение невесты с элементами экшена</li>
+                        <li>🏅 Медаль «За взятие языка жестов» — за допрос глухонемого пленного из награды №14</li>
+                        <li>🏅 Знак «Обладатель госномера "КРА 001"» — за езду с картонным блатным номером</li>
+                        <li>🏅 Орден «За разминирование минёта» — за исправление опечатки в боевом приказе ценой здоровья</li>
+                        <li>🏅 Медаль «За оскорбление чувств верующих соседнего вилаята» — за излишне громкий такбир не в том месте</li>
+                        <li>🏅 Знак «Ветеран форумной войны в разделе "Чечня.ру"» — за тысячи постов в интернет-баталиях</li>
+                        <li>🏅 Орден «Золотой свисток» — за сотрудничество со всеми сторонами конфликта одновременно</li>
+                        <li>🏅 Медаль «За утилизацию стратегического запаса вермишели "Роллтон"» — за съедение НЗ в мирное время</li>
+                        <li>🏅 Знак «Почетный наблюдатель за спутниками НАТО» — за высматривание вражеских аппаратов в небе</li>
+                        <li>🏅 Орден «За победу в тендере на откат» — за предложение лучшего процента нужному чиновнику</li>
+                        <li>🏅 Медаль «За художественный свист пули над ухом» — за виртуозное уклонение от выстрела</li>
+                        <li>🏅 Знак «Крестный отец Центороя» — за неформальное влияние в родовом селе Кадырова</li>
+                        <li>🏅 Медаль «За подрыв доверия» — за успешное внедрение дезинформации в ряды противника</li>
+                        <li>🏅 Орден «Черная вдова» — за переживание четырех жен и поиск пятой</li>
+                        <li>🏅 Медаль «За взятие высоты 776.0 в компьютерной игре» — за виртуальный реванш в шутере</li>
+                        <li>🏅 Знак «Мастер спорта по спортивному минированию» — за установку растяжек с олимпийским спокойствием</li>
+                        <li>🏅 Орден «Святой Георгий Победоносец» — за победу в рукопашной схватке с более сильным противником</li>
+                        <li>🏅 Медаль «Ветеран Чеченской Республики Ичкерия» — за выслугу лет при любом режиме</li>
+                        <li>🏅 Знак «Гвардия Дудаева» — за службу еще при первом президенте ЧРИ</li>
+                        <li>🏅 Орден «Рука Кремля» — за умение получать финансирование с обеих сторон конфликта</li>
+                        <li>🏅 Медаль «За взятие Грозного» — за успешную навигацию по городу без карты и навигатора</li>
+                        <li>🏅 Знак «Участник Бородинского сражения» — за то, что перепутал эпохи, но сражался достойно</li>
+                        <li>🏅 Орден «Асса» — за самый громкий и протяжный боевой клич в истории подразделения</li>
+                        <li>🏅 Медаль «За поимку шпиона» — за нейтрализацию соседского кота, воровавшего рыбу</li>
+                        <li>🏅 Знак «Хранитель Зелимхана» — за подражание легендарному абреку Зелимхану Харачоевскому</li>
+                        <li>🏅 Орден «Ичкерийский Суворов» — за науку отступать без потерь личного состава</li>
+                        <li>🏅 Медаль «За оборону подвала собственного дома» — за героическое удержание личного погреба</li>
+                        <li>🏅 Знак «Друг Арби Бараева» — за знакомство с известным полевым командиром</li>
+                        <li>🏅 Орден «Красная звезда» — за найденный в горах советский орден, покрашенный в зеленый</li>
+                        <li>🏅 Медаль «За отвагу на диване» — за стратегическое планирование операций не вставая с лежанки</li>
+                        <li>🏅 Знак «Герой Чеченской Республики Ичкерия» — за самопровозглашенный подвиг перед зеркалом</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="staff-card">
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#f97316,#ef4444);">Q</div></div>
+                <div class="staff-name">QWERTX</div>
+                <div class="staff-role">Куратор политологии</div>
+                <div class="staff-desc">Тот самый единственный человек, которого заставлял работать [ARIMA] Yagami. Ненавидит nefusad.</div>
+            </div>
+            <div class="staff-card">
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#8b5cf6,#06b6d4);">Y</div></div>
+                <div class="staff-name">Yabl1ch</div>
+                <div class="staff-role">Куратор анкетологов</div>
+                <div class="staff-desc">Самый лучший куратор анкетологов, и ещё и самый лучший политолог.</div>
+            </div>
+            <div class="staff-card">
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#2563eb);">!</div></div>
+                <div class="staff-name">! ксайлеz</div>
+                <div class="staff-role">Куратор модераторов</div>
+                <div class="staff-desc">В прошлом устроил революцию против владельца... 10/10, рекомендую.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Заместители -->
+    <section class="section" style="padding-top:1rem;">
+        <div style="text-align:center;"><span class="section-label deputy">Заместители</span></div>
+        <h2 class="section-title">Замы кураторов</h2>
+        <div class="staff-grid grid-deputies">
+            <div class="staff-card deputy">
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#22c55e,#0ea5e9);">L</div></div>
+                <div class="staff-name">LayBay</div>
+                <div class="staff-role">Зам технологов</div>
+                <div class="staff-desc">Следит за всей принятой техникой.</div>
+            </div>
+            <div class="staff-card deputy">
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#ef4444);">D</div></div>
+                <div class="staff-name">Dina</div>
+                <div class="staff-role">Зам модераторов</div>
+                <div class="staff-desc">Настоящий хранитель порядка. Разбирается в людях и правилах так же хорошо, как в сортах чая. Может одновременно успокоить спорщика и найти идеальный рецепт сырников.</div>
+            </div>
+            <div class="staff-card deputy">
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#7c3aed,#06b6d4);">M</div></div>
+                <div class="staff-name">Maksim</div>
+                <div class="staff-role">Зам анкетологии</div>
+                <div class="staff-desc">Самый лучший анкетолог, после Yabl1ch, конечно же.</div>
+            </div>
+            <div class="staff-card deputy">
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#ef4444,#7c3aed);">Y</div></div>
+                <div class="staff-name">Yabl1ch</div>
+                <div class="staff-role">Зам политологов</div>
+                <div class="staff-desc">Отличный человек, работает так же, как и в анкетологии.</div>
+            </div>
+            <div class="staff-card deputy">
+                <div class="staff-avatar"><div class="staff-avatar-placeholder" style="background:linear-gradient(135deg,#ef4444,#7c3aed);">n</div></div>
+                <div class="staff-name">nefusad</div>
+                <div class="staff-role">Зам куратора воен. ведущих</div>
+                <div class="staff-desc">Отличный человек. Любит спорить. Ненавидит QWERTX.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Простой персонал -->
+    <section class="section" style="padding-top:1rem;">
+        <div style="text-align:center;"><span class="section-label personnel">Сотрудники</span></div>
+        <h2 class="section-title">Простой персонал</h2>
+        <p class="section-subtitle">Люди, которые работают каждый день</p>
+        <hr class="section-divider">
+        <h3 style="color:var(--text-primary);text-align:center;margin-bottom:0.5rem;">🏛️ Политологи</h3>
+        <p class="section-subtitle-small">Отвечают за политическую деятельность на сервере</p>
+        <div class="personnel-grid">
+            <div class="personnel-card">
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#f97316,#ef4444);">C</div></div>
+                <div class="personnel-card-info"><div class="personnel-card-name">Cesare</div><div class="personnel-card-tag">Политолог</div><div class="personnel-card-desc">Искусный стратег, который просчитывает политические ходы на десять шагов вперёд. Его прогнозы редко ошибаются, а советы ценятся на вес золота.</div></div>
+            </div>
+            <div class="personnel-card">
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#0ea5e9,#06b6d4);">г</div></div>
+                <div class="personnel-card-info"><div class="personnel-card-name">гипоальбуминемия</div><div class="personnel-card-tag">Политолог</div><div class="personnel-card-desc">Истинный мастер слова, способный найти дипломатический путь даже в самые тёмные времена.</div></div>
+            </div>
+            <div class="personnel-card">
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#1a1a1a,#f59e0b);">_</div></div>
+                <div class="personnel-card-info"><div class="personnel-card-name">_ilovevodka</div><div class="personnel-card-tag">Политолог</div><div class="personnel-card-desc">Горящий факел политики, который зажигает сердца и умы.</div></div>
+            </div>
+            <div class="personnel-card">
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#6b7280,#9ca3af);">G</div></div>
+                <div class="personnel-card-info"><div class="personnel-card-name">Gleipø</div><div class="personnel-card-tag">Политолог</div><div class="personnel-card-desc">Невозмутимый аналитик, способный найти логику даже в самом хаотичном международном кризисе. Мастер компромиссов и тайных переговоров.</div></div>
+            </div>
+        </div>
+        <hr class="section-divider">
+        <h3 style="color:var(--text-primary);text-align:center;margin-bottom:0.5rem;">🗺️ Картографы</h3>
+        <p class="section-subtitle-small">Создают и поддерживают карты сервера</p>
+        <div class="personnel-grid">
+            <div class="personnel-card">
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#06b6d4,#3b82f6);">p</div></div>
+                <div class="personnel-card-info"><div class="personnel-card-name">ponzc</div><div class="personnel-card-tag">Картограф</div><div class="personnel-card-desc">Восстановил работу картографии.</div></div>
+            </div>
+        </div>
+        <hr class="section-divider">
+        <h3 style="color:var(--text-primary);text-align:center;margin-bottom:0.5rem;">📋 Анкетологи</h3>
+        <p class="section-subtitle-small">Проверяют и одобряют анкеты новых участников</p>
+        <div class="personnel-grid">
+            <div class="personnel-card">
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#64748b,#475569);">D</div></div>
+                <div class="personnel-card-info"><div class="personnel-card-name">Dima</div><div class="personnel-card-tag">Анкетолог</div><div class="personnel-card-desc">Активный участник команды.</div></div>
+            </div>
+            <div class="personnel-card">
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">Q</div></div>
+                <div class="personnel-card-info"><div class="personnel-card-name">QWERTX</div><div class="personnel-card-tag">Анкетолог</div><div class="personnel-card-desc">Проверяет анкеты.</div></div>
+            </div>
+        </div>
+        <hr class="section-divider">
+        <h3 style="color:var(--text-primary);text-align:center;margin-bottom:0.5rem;">⚔️ Модераторы</h3>
+        <p class="section-subtitle-small">Следят за порядком на сервере</p>
+        <div class="personnel-grid">
+            <div class="personnel-card">
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#8b5cf6,#3b82f6);">G</div></div>
+                <div class="personnel-card-info"><div class="personnel-card-name">Gleipø</div><div class="personnel-card-tag">Модератор</div><div class="personnel-card-desc">Следит за порядком.</div></div>
+            </div>
+            <div class="personnel-card">
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#6366f1,#8b5cf6);">Y</div></div>
+                <div class="personnel-card-info"><div class="personnel-card-name">[ARIMA] Yagami</div><div class="personnel-card-tag">Модератор</div><div class="personnel-card-desc">Следит за порядком.</div></div>
+            </div>
+            <div class="personnel-card">
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#3b82f6,#06b6d4);">D</div></div>
+                <div class="personnel-card-info"><div class="personnel-card-name">Dena</div><div class="personnel-card-tag">Модератор</div><div class="personnel-card-desc">Следит за порядком.</div></div>
+            </div>
+            <div class="personnel-card">
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#22c55e,#0ea5e9);">C</div></div>
+                <div class="personnel-card-info"><div class="personnel-card-name">🇧🇬Cortez🇲🇩</div><div class="personnel-card-tag">Модератор</div><div class="personnel-card-desc">Пидорас. Не работает. Совсем. Пустая трата слота.</div></div>
+            </div>
+        </div>
+        <hr class="section-divider">
+        <h3 style="color:var(--text-primary);text-align:center;margin-bottom:0.5rem;">🔧 Технологи</h3>
+        <p class="section-subtitle-small">Принимают технику на сервере</p>
+        <div class="personnel-grid">
+            <div class="personnel-card">
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#64748b,#475569);">B</div></div>
+                <div class="personnel-card-info"><div class="personnel-card-name">BeeZymEaS</div><div class="personnel-card-tag">Технолог</div><div class="personnel-card-desc">Принимают технику.</div></div>
+            </div>
+            <div class="personnel-card">
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#f97316,#ef4444);">A</div></div>
+                <div class="personnel-card-info"><div class="personnel-card-name">Adolf_Hit</div><div class="personnel-card-tag">Технолог</div><div class="personnel-card-desc">Был куратором модерации и благополучно просрал свой пост, наверное, потому что из-за него 3 человека покинуло сервер, а один перестал играть.</div></div>
+            </div>
+            <div class="personnel-card">
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">D</div></div>
+                <div class="personnel-card-info"><div class="personnel-card-name">Dina</div><div class="personnel-card-tag">Технолог</div><div class="personnel-card-desc">Принимают технику.</div></div>
+            </div>
+            <div class="personnel-card">
+                <div class="personnel-card-avatar"><div class="personnel-card-avatar-placeholder" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">ф</div></div>
+                <div class="personnel-card-info"><div class="personnel-card-name">фанклаб</div><div class="personnel-card-tag">Технолог</div><div class="personnel-card-desc">Принимают технику.</div></div>
+            </div>
+        </div>
+    </section>
 
     <footer class="footer">
         <div class="footer-content">
@@ -538,4 +872,4 @@
         });
     </script>
 </body>
-</html>
+                            </html>
