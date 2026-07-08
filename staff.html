@@ -121,7 +121,7 @@
         .nav-btn.telegram:hover{background:rgba(var(--primary-rgb),0.25)}
         .nav-btn svg{width:16px;height:16px;flex-shrink:0}
 
-        /* переключатель тем */
+        /* переключатель тем (десктоп) */
         .theme-toggle{
             background: rgba(var(--primary-rgb),0.25);
             cursor:pointer;
@@ -151,6 +151,20 @@
             transition:border-color 0.2s;
         }
         .theme-option:hover{border-color:white}
+
+        /* мобильное меню: переключатель тем */
+        .mobile-theme-switcher{
+            display:flex;
+            justify-content:center;
+            gap:0.6rem;
+            margin-top:1rem;
+            padding-top:1rem;
+            border-top:1px solid var(--border);
+        }
+        .mobile-theme-switcher .theme-option{
+            width:32px;
+            height:32px;
+        }
 
         .hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;padding:5px;flex-shrink:0;z-index:1101}
         .hamburger span{width:22px;height:2px;background:var(--text-primary);transition:all 0.3s ease;border-radius:1px}
@@ -214,7 +228,7 @@
         }
         .section-label.thanks{
             background:rgba(245,158,11,0.1);
-            color:#f59e0b; /* фиксированный цвет */
+            color:#f59e0b;
             border-color:rgba(245,158,11,0.2);
         }
         .section-label.deputy{
@@ -250,7 +264,7 @@
             background:linear-gradient(135deg,rgba(var(--primary-rgb),0.08),var(--bg-card));
         }
         .staff-card.thanks{
-            border-color:rgba(245,158,11,0.3); /* фиксированный цвет */
+            border-color:rgba(245,158,11,0.3);
             background:linear-gradient(135deg,rgba(245,158,11,0.05),var(--bg-card));
         }
         .staff-avatar{
@@ -264,7 +278,7 @@
             width:90px;height:90px;
         }
         .staff-card.thanks .staff-avatar{
-            border-color:#f59e0b; /* фиксированный цвет */
+            border-color:#f59e0b;
         }
         .staff-avatar img{width:100%;height:100%;object-fit:cover}
         .staff-avatar-placeholder{
@@ -282,7 +296,7 @@
             border-radius:50px;display:inline-block;
         }
         .staff-card.thanks .staff-role{
-            color:#f59e0b; /* фиксированный цвет */
+            color:#f59e0b;
             background:rgba(245,158,11,0.1);
         }
         .staff-card.deputy .staff-role{
@@ -415,6 +429,12 @@
         <div class="mobile-buttons">
             <a href="https://discord.gg/edPpSRmRNu" target="_blank" class="discord">Discord</a>
             <a href="https://t.me/+5DaqxYO3H6VlMzhi" target="_blank" class="telegram">Telegram</a>
+        </div>
+        <!-- Переключатель тем для мобильного меню -->
+        <div class="mobile-theme-switcher">
+            <span class="theme-option" data-theme="green" style="background: #43b639;" onclick="setTheme('green')" title="Зелёная"></span>
+            <span class="theme-option" data-theme="blue" style="background: #3b82f6;" onclick="setTheme('blue')" title="Синяя"></span>
+            <span class="theme-option" data-theme="orange" style="background: #f97316;" onclick="setTheme('orange')" title="Оранжевая"></span>
         </div>
     </div>
 
@@ -872,4 +892,4 @@
         });
     </script>
 </body>
-                            </html>
+</html>
