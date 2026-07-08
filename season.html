@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -9,12 +10,28 @@
     <style>
         /* === СБРОС И ПЕРЕМЕННЫЕ === */
         *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-        :root{--primary:#43b639;--primary-dark:#2e8a27;--primary-light:#5dd454;--accent:#f59e0b;--bg-dark:#0a0a0f;--bg-card:#12121a;--text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;--border:#1e1e2e;--gradient-1:linear-gradient(135deg,#43b639,#7ed957);--shadow:0 25px 50px -12px rgba(0,0,0,0.7)}
+        :root{
+            --primary:#43b639;--primary-dark:#2e8a27;--primary-light:#5dd454;--primary-rgb:67,182,57;
+            --accent:#f59e0b;--bg-dark:#0a0a0f;--bg-card:#12121a;
+            --text-primary:#f1f5f9;--text-secondary:#94a3b8;--text-muted:#64748b;
+            --border:#1e1e2e;--gradient-1:linear-gradient(135deg,#43b639,#7ed957);
+            --shadow:0 25px 50px -12px rgba(0,0,0,0.7)
+        }
+        /* Синяя тема */
+        body.theme-blue{
+            --primary:#3b82f6;--primary-dark:#2563eb;--primary-light:#60a5fa;--primary-rgb:59,130,246;
+            --accent:#f59e0b;--gradient-1:linear-gradient(135deg,#3b82f6,#60a5fa)
+        }
+        /* Оранжевая тема */
+        body.theme-orange{
+            --primary:#f97316;--primary-dark:#ea580c;--primary-light:#fb923c;--primary-rgb:249,115,22;
+            --accent:#3b82f6;--gradient-1:linear-gradient(135deg,#f97316,#fb923c)
+        }
         html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--primary) var(--bg-dark)}
         body{font-family:'Inter',sans-serif;background:var(--bg-dark);color:var(--text-primary);line-height:1.7;overflow-x:hidden}
         ::-webkit-scrollbar{width:8px}::-webkit-scrollbar-track{background:var(--bg-dark)}::-webkit-scrollbar-thumb{background:var(--primary-dark);border-radius:4px}
 
-        /* === НАВБАР (как в обновлённом staff.html) === */
+        /* === НАВБАР (обновлённый) === */
         .navbar{
             position:fixed;top:0;left:0;right:0;z-index:1000;
             padding:1rem 2rem;transition:all 0.4s ease;height:auto;
@@ -43,7 +60,7 @@
         .nav-links .nav-dropdown-trigger:hover,
         .nav-links a:not(.nav-btn):not(.nav-dropdown-trigger).active,
         .nav-links .nav-dropdown-trigger.active{
-            color:var(--text-primary);background:rgba(67,182,57,0.1);
+            color:var(--text-primary);background:rgba(var(--primary-rgb),0.1);
         }
         .nav-links a:not(.nav-btn):not(.nav-dropdown-trigger).active::after{
             content:'';position:absolute;bottom:4px;left:50%;
@@ -72,7 +89,7 @@
             transition:all 0.2s ease;font-family:inherit;
         }
         .nav-dropdown-menu .nav-dropdown-trigger:hover{
-            color:var(--text-primary);background:rgba(67,182,57,0.05);
+            color:var(--text-primary);background:rgba(var(--primary-rgb),0.05);
         }
         .nav-dropdown-menu .nav-dropdown-trigger .arrow{margin-left:auto;font-size:0.6rem}
         .nav-dropdown-menu .nav-dropdown-menu{
@@ -82,10 +99,10 @@
             display:block;padding:0.5rem 1rem;color:var(--text-secondary);
             text-decoration:none;font-size:0.85rem;transition:all 0.2s ease;
         }
-        .nav-dropdown-menu a:hover{color:var(--text-primary);background:rgba(67,182,57,0.05)}
+        .nav-dropdown-menu a:hover{color:var(--text-primary);background:rgba(var(--primary-rgb),0.05)}
 
         /* кнопки Discord / Telegram */
-        .nav-buttons{display:flex;gap:0.5rem;align-items:center}
+        .nav-buttons{display:flex;gap:0.5rem;align-items:center;position:relative}
         .nav-btn{
             padding:0.4rem 0.8rem;color:white;border:none;border-radius:8px;
             font-size:0.85rem;font-weight:600;text-decoration:none;
@@ -93,10 +110,62 @@
             display:inline-flex;align-items:center;gap:0.4rem;
         }
         .nav-btn:hover{transform:translateY(-1px)}
-        .nav-btn.discord{background:var(--gradient-1);box-shadow:0 4px 15px rgba(67,182,57,0.3)}
-        .nav-btn.telegram{background:rgba(67,182,57,0.15);color:var(--primary-light);box-shadow:0 4px 15px rgba(67,182,57,0.1)}
-        .nav-btn.telegram:hover{background:rgba(67,182,57,0.25)}
+        .nav-btn.discord{
+            background:var(--gradient-1);
+            box-shadow:0 4px 15px rgba(var(--primary-rgb),0.3);
+        }
+        .nav-btn.telegram{
+            background:rgba(var(--primary-rgb),0.15);
+            color:var(--primary-light);
+            box-shadow:0 4px 15px rgba(var(--primary-rgb),0.1);
+        }
+        .nav-btn.telegram:hover{background:rgba(var(--primary-rgb),0.25)}
         .nav-btn svg{width:16px;height:16px;flex-shrink:0}
+
+        /* переключатель тем (десктоп) */
+        .theme-toggle{
+            background: rgba(var(--primary-rgb),0.25);
+            cursor:pointer;
+        }
+        .theme-toggle:hover{
+            background: rgba(var(--primary-rgb),0.4);
+        }
+        .theme-menu{
+            display:none;
+            position:absolute;
+            top:100%;right:0;
+            background:var(--bg-card);
+            border:1px solid var(--border);
+            border-radius:8px;
+            padding:0.4rem;
+            gap:0.4rem;
+            z-index:3000;
+            flex-direction:row;
+            margin-top:0.5rem;
+        }
+        .theme-menu.open{display:flex}
+        .theme-option{
+            width:24px;height:24px;
+            border-radius:50%;
+            cursor:pointer;
+            border:2px solid transparent;
+            transition:border-color 0.2s;
+        }
+        .theme-option:hover{border-color:white}
+
+        /* мобильное меню: переключатель тем */
+        .mobile-theme-switcher{
+            display:flex;
+            justify-content:center;
+            gap:0.6rem;
+            margin-top:1rem;
+            padding-top:1rem;
+            border-top:1px solid var(--border);
+        }
+        .mobile-theme-switcher .theme-option{
+            width:32px;
+            height:32px;
+        }
 
         .hamburger{display:none;flex-direction:column;cursor:pointer;gap:5px;padding:5px;flex-shrink:0;z-index:1101}
         .hamburger span{width:22px;height:2px;background:var(--text-primary);transition:all 0.3s ease;border-radius:1px}
@@ -134,7 +203,7 @@
         .mobile-buttons{display:flex;gap:0.5rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
         .mobile-buttons a{flex:1;text-align:center;font-weight:600;justify-content:center;padding:0.6rem;border-radius:8px;font-size:0.9rem}
         .mobile-buttons a.discord{background:var(--gradient-1);color:white}
-        .mobile-buttons a.telegram{background:rgba(67,182,57,0.15);color:var(--primary-light)}
+        .mobile-buttons a.telegram{background:rgba(var(--primary-rgb),0.15);color:var(--primary-light)}
 
         /* === HERO и ОСТАЛЬНОЕ (сохранены из season.html) === */
         .page-hero{min-height:40vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:clamp(5rem,10vw,8rem) 2rem 3rem;background:linear-gradient(135deg,#0a0a0f 0%,#0a120a 50%,#0a0a0f 100%)}
@@ -152,12 +221,12 @@
         .season-desc p{color:var(--text-secondary);font-size:clamp(1rem,2vw,1.15rem);max-width:700px;margin:0 auto}
         .season-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-bottom:2rem}
         .season-stat{text-align:center;padding:clamp(1.2rem,3vw,1.8rem) 1rem;background:var(--bg-card);border:1px solid var(--border);border-radius:16px;transition:all 0.3s ease}
-        .season-stat:hover{border-color:rgba(67,182,57,0.3);transform:translateY(-3px)}
+        .season-stat:hover{border-color:rgba(var(--primary-rgb),0.3);transform:translateY(-3px)}
         .season-stat-value{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;background:var(--gradient-1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
         .season-stat-label{font-size:clamp(0.8rem,1.5vw,0.95rem);color:var(--text-muted);margin-top:0.3rem}
         .cta-section{text-align:center;padding:clamp(2rem,5vw,3rem) 2rem}
-        .cta-btn{display:inline-flex;align-items:center;gap:0.6rem;padding:1rem 2rem;background:var(--gradient-1);color:white;border:none;border-radius:14px;font-size:clamp(0.9rem,2vw,1.1rem);font-weight:700;text-decoration:none;transition:all 0.3s ease;font-family:inherit;box-shadow:0 4px 20px rgba(67,182,57,0.4)}
-        .cta-btn:hover{transform:translateY(-3px);box-shadow:0 8px 35px rgba(67,182,57,0.6)}
+        .cta-btn{display:inline-flex;align-items:center;gap:0.6rem;padding:1rem 2rem;background:var(--gradient-1);color:white;border:none;border-radius:14px;font-size:clamp(0.9rem,2vw,1.1rem);font-weight:700;text-decoration:none;transition:all 0.3s ease;font-family:inherit;box-shadow:0 4px 20px rgba(var(--primary-rgb),0.4)}
+        .cta-btn:hover{transform:translateY(-3px);box-shadow:0 8px 35px rgba(var(--primary-rgb),0.6)}
         .footer{border-top:1px solid var(--border);padding:clamp(1.5rem,3vw,2.5rem) 2rem;text-align:center}
         .footer-content{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
         .footer-brand{display:flex;align-items:center;gap:0.5rem}
@@ -217,12 +286,20 @@
                     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
                     Telegram
                 </a>
+                <button class="nav-btn theme-toggle" id="themeToggle" aria-label="Сменить тему" onclick="toggleThemeMenu()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                </button>
+                <div class="theme-menu" id="themeMenu">
+                    <span class="theme-option" data-theme="green" style="background: #43b639;" onclick="setTheme('green')" title="Зелёная"></span>
+                    <span class="theme-option" data-theme="blue" style="background: #3b82f6;" onclick="setTheme('blue')" title="Синяя"></span>
+                    <span class="theme-option" data-theme="orange" style="background: #f97316;" onclick="setTheme('orange')" title="Оранжевая"></span>
+                </div>
             </div>
             <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()"><span></span><span></span><span></span></div>
         </div>
     </nav>
 
-    <!-- Мобильное меню (сохранено из season.html, оно уже соответствует) -->
+    <!-- Мобильное меню (обновлено) -->
     <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
     <div class="mobile-menu" id="mobileMenu">
         <a href="index.html">Главная</a>
@@ -239,6 +316,12 @@
         <div class="mobile-buttons">
             <a href="https://discord.gg/edPpSRmRNu" target="_blank" class="discord">Discord</a>
             <a href="https://t.me/+5DaqxYO3H6VlMzhi" target="_blank" class="telegram">Telegram</a>
+        </div>
+        <!-- Переключатель тем для мобильного меню -->
+        <div class="mobile-theme-switcher">
+            <span class="theme-option" data-theme="green" style="background: #43b639;" onclick="setTheme('green')" title="Зелёная"></span>
+            <span class="theme-option" data-theme="blue" style="background: #3b82f6;" onclick="setTheme('blue')" title="Синяя"></span>
+            <span class="theme-option" data-theme="orange" style="background: #f97316;" onclick="setTheme('orange')" title="Оранжевая"></span>
         </div>
     </div>
 
@@ -327,6 +410,28 @@
             btn.classList.toggle('open');
             content.classList.toggle('open');
         }
+
+        // Переключатель тем
+        function toggleThemeMenu() {
+            document.getElementById('themeMenu').classList.toggle('open');
+        }
+        function setTheme(theme) {
+            document.body.className = document.body.className.replace(/theme-\w+/g, '');
+            if (theme !== 'green') {
+                document.body.classList.add('theme-' + theme);
+            }
+            localStorage.setItem('theme', theme);
+            document.getElementById('themeMenu').classList.remove('open');
+        }
+        (function() {
+            const saved = localStorage.getItem('theme');
+            if (saved) setTheme(saved);
+        })();
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('#themeToggle') && !e.target.closest('#themeMenu')) {
+                document.getElementById('themeMenu').classList.remove('open');
+            }
+        });
     </script>
 </body>
 </html>
